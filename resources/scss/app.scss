@@ -1,0 +1,89 @@
+@import "colors";
+@import "variables";
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@keyframes gradient {
+    0% {
+        background-position: 0 95%;
+        //background-position: 50% 0;
+    }
+    50% {
+        background-position: 100% 95%;
+        //background-position: 50% 100%;
+    }
+    100% {
+        background-position: 0 95%;
+        //background-position: 50% 0;
+    }
+}
+body {
+    @apply text-gray-100 flex h-screen;
+    background: linear-gradient(178deg, $hotpink, $red, $orange, $yellow, $green, $turquoise, $indigo, $violet);
+    background-size: 200% 100%;
+    animation: gradient 10s ease infinite;
+}
+div {
+    &#app {
+        @apply h-screen flex justify-center flex-wrap content-center w-full;
+        background-image: url(/img/pattern.png);
+    }
+    &#container {
+        @apply w-80 bg-gray-800 rounded-xl pb-4 pt-2 text-center shadow-md border-gray-600 border-4 border-opacity-30;
+    }
+    &#links {
+        @apply px-3;
+    }
+}
+h1 {
+    @apply text-6xl mb-4 border-b-2 border-gray-600 pb-1;
+    font-family: 'Brush Script MT', cursive;
+}
+
+.btn {
+    @apply block text-xl px-5 py-2 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow mb-2;
+    &:last-child {
+        @apply mb-0;
+    }
+    // Todo generate css file after update link model
+    //&.twitch {
+    //    background-color: $twitch-tv;
+    //    &:hover {
+    //        background-color: lighten($twitch-tv, $btn-lighten);
+    //    }
+    //}
+    //&.instagram {
+    //    background-color: $instagram-5;
+    //    &:hover {
+    //        background-color: lighten($instagram-5, $btn-lighten);
+    //    }
+    //}
+    //&.tiktok {
+    //    background-color: $red;
+    //    &:hover {
+    //        background-color: lighten($red, $btn-lighten);
+    //    }
+    //}
+    //&.youtube {
+    //    background-color: $youtube;
+    //    &:hover {
+    //        background-color: lighten($youtube, $btn-lighten);
+    //    }
+    //}
+    //&.only-fans {
+    //    background-color: $onlyfans;
+    //    &:hover {
+    //        background-color: lighten($onlyfans, $btn-lighten);
+    //    }
+    //}
+    //&.misc {
+    //    background-color: $blueviolet;
+    //    &:hover {
+    //        background-color: lighten($blueviolet, $btn-lighten);
+    //    }
+    //}
+}
