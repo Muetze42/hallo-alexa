@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('link_memories', function (Blueprint $table) {
             $table->id();
-            $table->foreign('link_id')->references('id')->on('links')->onDelete('cascade');
+            $table->foreignId('link_id')->references('id')->on('links')->onDelete('cascade');
             $table->text('os');
             $table->text('client');
             $table->text('ip');

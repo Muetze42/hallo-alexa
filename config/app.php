@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\NovaServiceProvider::class,
+        Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
 
         /*
          * Application Service Providers...

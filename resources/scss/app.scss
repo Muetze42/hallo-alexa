@@ -22,7 +22,7 @@
     }
 }
 body {
-    @apply text-gray-100 flex h-screen;
+    @apply text-gray-100 flex h-screen font-sans;
     background: linear-gradient(178deg, $hotpink, $red, $orange, $yellow, $green, $turquoise, $indigo, $violet);
     background-size: 200% 100%;
     animation: gradient 10s ease infinite;
@@ -33,15 +33,15 @@ div {
         background-image: url(/img/pattern.png);
     }
     &#container {
-        @apply w-80 bg-gray-800 rounded-xl pb-4 pt-2 text-center shadow-md border-gray-600 border-4 border-opacity-30;
+        @apply w-96 bg-gray-800 rounded-xl pb-4 pt-2 text-center shadow-md border-gray-600 border-4 border-opacity-30 mx-4;
     }
     &#links {
         @apply px-3;
     }
 }
 h1 {
-    @apply text-6xl mb-4 border-b-2 border-gray-600 pb-1;
-    font-family: 'Brush Script MT', cursive;
+    @apply text-6xl mb-4 border-b-2 border-gray-600 pb-3;
+    //font-family: 'Brush Script MT', cursive;
 }
 
 .btn {
@@ -49,41 +49,4 @@ h1 {
     &:last-child {
         @apply mb-0;
     }
-    // Todo generate css file after update link model
-    //&.twitch {
-    //    background-color: $twitch-tv;
-    //    &:hover {
-    //        background-color: lighten($twitch-tv, $btn-lighten);
-    //    }
-    //}
-    //&.instagram {
-    //    background-color: $instagram-5;
-    //    &:hover {
-    //        background-color: lighten($instagram-5, $btn-lighten);
-    //    }
-    //}
-    //&.tiktok {
-    //    background-color: $red;
-    //    &:hover {
-    //        background-color: lighten($red, $btn-lighten);
-    //    }
-    //}
-    //&.youtube {
-    //    background-color: $youtube;
-    //    &:hover {
-    //        background-color: lighten($youtube, $btn-lighten);
-    //    }
-    //}
-    //&.only-fans {
-    //    background-color: $onlyfans;
-    //    &:hover {
-    //        background-color: lighten($onlyfans, $btn-lighten);
-    //    }
-    //}
-    //&.misc {
-    //    background-color: $blueviolet;
-    //    &:hover {
-    //        background-color: lighten($blueviolet, $btn-lighten);
-    //    }
-    //}
 }

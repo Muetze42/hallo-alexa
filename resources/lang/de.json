@@ -145,7 +145,7 @@
     "Coupon": "Gutschein",
     "Create": "Erstellen",
     "Create & Add Another": "Anlegen & Hinzufügen einer weiteren",
-    "Create :resource": "Anlegen :resource",
+    "Create :resource": ":resource erstellen",
     "Create a new team to collaborate with others on projects.": "Erstellen Sie ein neues Team, um mit anderen an Projekten zusammenzuarbeiten.",
     "Create Account": "Neues Konto registrieren",
     "Create API Token": "API-Token erstellen",

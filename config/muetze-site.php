@@ -10,15 +10,15 @@ return [
     |
     */
     'make-bundle' => [
-        'nova-ressource' => false,
-        'migration'      => true,
+        'nova-ressource' => true,
+        'migration'      => false,
         'policy'         => true,
         'resource'       => true,
         'controller'     => false,
         'api-controller' => false,
 
         'namespaces' => [
-            'controller'     => 'Web/',
+            'controller'     => '',
             'api-controller' => 'Api/',
         ],
     ],
