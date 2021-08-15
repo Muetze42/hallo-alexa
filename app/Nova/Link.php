@@ -11,6 +11,8 @@ use App\Traits\HasSortableRows;
 use Timothyasp\Color\Color;
 use App\Nova\Metrics\LinkCountTrend;
 use App\Nova\Metrics\LinkRealCountTrend;
+use App\Nova\Metrics\LinkCounts;
+use App\Nova\Metrics\LinkRealCounts;
 
 class Link extends Resource
 {
@@ -98,6 +100,8 @@ class Link extends Resource
         return [
             (new LinkCountTrend)->onlyOnDetail(),
             (new LinkRealCountTrend)->onlyOnDetail(),
+            new LinkCounts,
+            new LinkRealCounts,
         ];
     }
 
