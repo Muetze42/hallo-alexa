@@ -3,9 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
-use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use App\Nova\Metrics\LinkCounts;
+use App\Nova\Metrics\LinkRealCounts;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -57,7 +58,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards(): array
     {
         return [
-            new Help,
+            new LinkCounts,
+            new LinkRealCounts,
         ];
     }
 
