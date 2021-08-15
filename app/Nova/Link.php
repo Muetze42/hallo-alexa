@@ -7,7 +7,6 @@ use Bernhardh\NovaIconSelect\NovaIconSelect;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use App\Traits\HasSortableRows;
 use Timothyasp\Color\Color;
 
@@ -45,7 +44,10 @@ class Link extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'name',
+        'target',
+        'icon',
+        'color',
     ];
 
     /**
@@ -72,11 +74,14 @@ class Link extends Resource
             Color::make('Button Color', 'color')
                 ->required()->rules('required'),
 
-            Text::make(__('Count'), 'count')
-                ->exceptOnForms(),
+            Text::make(__('Count'), 'count', function () {
+                return number_format($this->real_count, 0, ',', '.');
+            })
+                ->exceptOnForms()->sortable(),
 
-            Text::make(__('Real Count'), 'real_count')
-                ->exceptOnForms(),
+            Text::make(__('Real Count'), 'real_count', function () {
+                return number_format($this->real_count, 0, ',', '.');
+            })->exceptOnForms()->sortable(),
         ];
     }
 

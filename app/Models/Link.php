@@ -82,4 +82,20 @@ class Link extends Model implements Sortable
             gerateAdditionalStylesheet();
         });
     }
+
+    /**
+     * Get the counts for the link.
+     */
+    public function counts(): HasMany
+    {
+        return $this->hasMany(LinkCount::class);
+    }
+
+    /**
+     * Get the counts for the link.
+     */
+    public function realCounts(): HasMany
+    {
+        return $this->hasMany(LinkRealCount::class);
+    }
 }

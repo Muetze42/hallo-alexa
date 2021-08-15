@@ -1,6 +1,9 @@
 <?php
 
 if (!function_exists('gerateAdditionalStylesheet')) {
+    /**
+     * @throws \ScssPhp\ScssPhp\Exception\SassException
+     */
     function gerateAdditionalStylesheet()
     {
         $buttons = \App\Models\Link::where('active', true)->get();
