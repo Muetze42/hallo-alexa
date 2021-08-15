@@ -11,11 +11,14 @@ class LinkRealCount extends Model
     use HasFactory;
 
     /**
-     * The attributes that aren't mass assignable.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'os',
+        'client',
+    ];
 
     /**
      * Get the link that owns the count.
