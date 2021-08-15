@@ -29,18 +29,18 @@ body {
 }
 div {
     &#app {
-        @apply h-screen flex justify-center flex-wrap content-center w-full;
+        @apply h-screen flex justify-center flex-wrap content-center w-full pb-12 md:pb-0;
         background-image: url(/img/pattern.png);
     }
     &#container {
-        @apply w-96 bg-gray-800 rounded-xl pb-4 pt-2 text-center shadow-md border-gray-600 border-4 border-opacity-30 mx-4;
+        @apply w-96 bg-gray-800 rounded-xl pb-4 text-center shadow-md border-gray-600 border-4 border-opacity-30 mx-4;
     }
     &#links {
         @apply px-3;
     }
 }
 h1 {
-    @apply text-6xl mb-4 border-b-2 border-gray-600 pb-3;
+    @apply mb-4 border-b-2 border-gray-600 pb-3;
     //font-family: 'Brush Script MT', cursive;
 }
 
