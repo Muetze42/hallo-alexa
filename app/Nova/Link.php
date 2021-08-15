@@ -9,6 +9,8 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Text;
 use App\Traits\HasSortableRows;
 use Timothyasp\Color\Color;
+use App\Nova\Metrics\LinkCountTrend;
+use App\Nova\Metrics\LinkRealCountTrend;
 
 class Link extends Resource
 {
@@ -93,7 +95,10 @@ class Link extends Resource
      */
     public function cards(Request $request): array
     {
-        return [];
+        return [
+            (new LinkCountTrend)->onlyOnDetail(),
+            (new LinkRealCountTrend)->onlyOnDetail(),
+        ];
     }
 
     /**
