@@ -21,9 +21,6 @@ class HomeController extends Controller
      */
     public function index(): Response
     {
-        $Activity = Activity::find(8);
-        dd($Activity->subject);
-
         $links = Link::where('active', true)->orderBy('order')->get();
 
         return Inertia::render('Home/Index', [
