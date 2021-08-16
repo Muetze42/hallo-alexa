@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Resources;
 
-use App\Nova\Activity;
 use Bernhardh\NovaIconSelect\IconProviders\FontAwesomeIconProvider;
 use Bernhardh\NovaIconSelect\NovaIconSelect;
 use Illuminate\Http\Request;

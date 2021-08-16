@@ -74,6 +74,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     }
 
     /**
+     * Register the application's Nova resources.
+     *
+     * @return void
+     */
+    protected function resources(): void
+    {
+        Nova::resourcesIn(app_path('Nova/Resources'));
+    }
+
+    /**
      * Get the tools that should be listed in the Nova sidebar.
      *
      * @return array
