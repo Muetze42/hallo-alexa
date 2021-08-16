@@ -4,14 +4,21 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Code;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use SpiritSaint\CodeDifference\CodeDifference;
+use Titasgailius\SearchRelations\SearchesRelations;
 
 class Activity extends Resource
 {
+    use SearchesRelations;
+
+    /**
+     * Custom priority level of the resource.
+     *
+     * @var int
+     */
+    public static int $priority = 100;
+
     /**
      * Indicates if the resource should be displayed in the sidebar.
      *
@@ -27,6 +34,26 @@ class Activity extends Resource
     public static string $model = \App\Models\Activity::class;
 
     /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label(): string
+    {
+        return __('Activities');
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    public static function singularLabel(): string
+    {
+        return __('Activity');
+    }
+
+    /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
@@ -34,12 +61,61 @@ class Activity extends Resource
     public static $title = 'id';
 
     /**
+     * Get the value that should be displayed to represent the resource.
+     *
+     * @return string
+     */
+    public function title(): string
+    {
+        return __('Activity').' '.$this->id;
+    }
+
+    /**
+     * Get the search result subtitle for the resource.
+     *
+     * @return string|null
+     */
+    public function subtitle(): ?string
+    {
+        if (!empty($this->subject) && !empty($this->causer)) {
+
+            return __(class_basename($this->subject_type)).' „'.$this->subject->name.'“ '.__($this->description.' by :user', ['user' => $this->causer->name]);
+        }
+
+        if (!empty($this->subject)) {
+            return __(class_basename($this->subject_type)).' „'.$this->subject->name.'“ '.__($this->description);
+        }
+
+        return null;
+    }
+
+    /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
-        'id',
+        'properties',
+    ];
+
+    /**
+     * The relationship columns that should be searched globally.
+     *
+     * @var array
+     */
+    public static array $globalSearchRelations = [
+        'causer' => ['name', 'email'],
+        'subject' => ['name', 'target'],
+    ];
+
+    /**
+     * The relationship columns that should be searched.
+     *
+     * @var array
+     */
+    public static array $searchRelations = [
+        'causer' => ['name', 'email'],
+        'subject' => ['name', 'target'],
     ];
 
     /**
@@ -60,7 +136,9 @@ class Activity extends Resource
 
             Code::make(__('Old Properties'), 'properties->old')
                 ->json(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-                ->onlyOnDetail(),
+                ->onlyOnDetail()->canSee(function () {
+                    return $this->event != 'created';
+                }),
             Code::make(__('New Properties'), 'properties->attributes')
                 ->json(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
                 ->onlyOnDetail(),

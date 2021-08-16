@@ -48,6 +48,7 @@ class GlobalSearch
      * Get the search results for the resources.
      *
      * @return \Generator
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function getSearchResults()
     {
