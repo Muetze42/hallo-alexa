@@ -79,7 +79,7 @@ class Link extends Resource
                 ->required()->rules('required'),
 
             Text::make(__('Count'), 'count', function () {
-                return number_format($this->real_count, 0, ',', '.');
+                return number_format($this->count, 0, ',', '.');
             })
                 ->exceptOnForms()->sortable(),
 
