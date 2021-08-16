@@ -55,7 +55,7 @@ class HomeController extends Controller
                 'link_id' => $link->id,
                 'os'      => getClientOS(),
                 'client'  => request()->userAgent(),
-                'ip'      => getClientIp(),
+                'ip'      => md5(getClientIp()),
             ];
 
             $link->realCounts()->create($data);
