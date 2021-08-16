@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Link extends Model implements Sortable
 {
-    use HasFactory, SoftDeletes, SortableTrait;
+    use LogsActivity, HasFactory, SoftDeletes, SortableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +53,24 @@ class Link extends Model implements Sortable
     protected $appends = [
         'redirect_route',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs()
+            ->dontLogIfAttributesChangedOnly([
+                'count',
+                'real_count',
+            ])->logOnly([
+                'active',
+                'name',
+                'target',
+                'icon',
+                'color',
+                'order',
+            ]);
+    }
 
     /**
      * Get the redirect route of this link
