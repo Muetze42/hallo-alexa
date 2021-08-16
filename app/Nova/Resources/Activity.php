@@ -67,7 +67,7 @@ class Activity extends Resource
      */
     public function title(): string
     {
-        return __('Activity').' '.$this->id;
+        return __('Activity').' '.$this->created_at->format('m.d.Y H:i:s');
     }
 
     /**

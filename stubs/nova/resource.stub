@@ -3,9 +3,7 @@
 namespace {{ namespace }};
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Illuminate\Http\Request;
 
 class {{ class }} extends Resource
 {
@@ -40,9 +38,7 @@ class {{ class }} extends Resource
      */
     public function fields(Request $request): array
     {
-        return [
-            ID::make(__('ID'), 'id')->sortable(),
-        ];
+        return [];
     }
 
     /**
