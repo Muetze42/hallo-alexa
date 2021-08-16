@@ -17,7 +17,8 @@ class LinkCountTrend extends Trend
      */
     public function calculate(NovaRequest $request): TrendResult
     {
-        return $this->countByDays($request, LinkCount::where('link_id', $request->resourceId));
+        return $this->countByDays($request, LinkCount::where('link_id', $request->resourceId), 'created_at')
+            ->showSumValue();
     }
 
     /**
@@ -29,17 +30,12 @@ class LinkCountTrend extends Trend
     {
         return [
             7 => __(':days Days', ['days' => 7]),
-            'TODAY' => __('Today'),
             2 => __(':days Days', ['days' => 2]),
             3 => __(':days Days', ['days' => 3]),
             4 => __(':days Days', ['days' => 4]),
             5 => __(':days Days', ['days' => 5]),
             30 => __(':days Days', ['days' => 30]),
             60 => __(':days Days', ['days' => 60]),
-            365 => __(':days Days', ['days' => 365]),
-            'MTD' => __('Month To Date'),
-            'QTD' => __('Quarter To Date'),
-            'YTD' => __('Year To Date'),
         ];
     }
 
