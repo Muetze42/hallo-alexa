@@ -2,10 +2,12 @@
 
 namespace App\Nova;
 
+use App\Nova\Activity;
 use Bernhardh\NovaIconSelect\IconProviders\FontAwesomeIconProvider;
 use Bernhardh\NovaIconSelect\NovaIconSelect;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Text;
 use App\Traits\HasSortableRows;
 use Timothyasp\Color\Color;
@@ -86,6 +88,8 @@ class Link extends Resource
             Text::make(__('Real Count'), 'real_count', function () {
                 return number_format($this->real_count, 0, ',', '.');
             })->exceptOnForms()->sortable(),
+
+            MorphMany::make(__('Activities'), 'activities', Activity::class),
         ];
     }
 
