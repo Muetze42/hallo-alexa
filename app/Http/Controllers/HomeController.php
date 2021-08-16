@@ -44,6 +44,12 @@ class HomeController extends Controller
         return redirect($link->target);
     }
 
+    /**
+     * Handle the count stat for a link
+     *
+     * @param Link $link
+     * @param Request $request
+     */
     private function countClicks(Link $link, Request $request)
     {
         try {
@@ -63,7 +69,6 @@ class HomeController extends Controller
             $count = $link->counts()->where($data)->where('created_at', '>', now()->subMinutes($delay))->first();
 
             if (!$count) {
-//                dd();
                 $link->update(['count' => DB::raw('count+1')]);
 
                 $link->counts()->create($data);
