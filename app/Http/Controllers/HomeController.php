@@ -60,9 +60,10 @@ class HomeController extends Controller
 
             $link->realCounts()->create($data);
 
-            $count = $link->counts()->where('created_at', '>', now()->subMinutes($delay))->first();
+            $count = $link->counts()->where($data)->where('created_at', '>', now()->subMinutes($delay))->first();
 
             if (!$count) {
+//                dd();
                 $link->update(['count' => DB::raw('count+1')]);
 
                 $link->counts()->create($data);
