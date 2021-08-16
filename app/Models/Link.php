@@ -63,14 +63,6 @@ class Link extends Model implements Sortable
     }
 
     /**
-     * Get the memories for the link.
-     */
-    public function memories(): HasMany
-    {
-        return $this->hasMany(LinkMemory::class);
-    }
-
-    /**
      * Bootstrap the model and its traits.
      *
      * @return void
@@ -78,7 +70,7 @@ class Link extends Model implements Sortable
     public static function boot(): void
     {
         parent::boot();
-        static::saved(function ($link) {
+        static::saved(function () {
             gerateAdditionalStylesheet();
         });
     }

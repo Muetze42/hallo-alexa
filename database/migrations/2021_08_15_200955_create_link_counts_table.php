@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('link_id')->references('id')->on('links')->onDelete('cascade');
             $table->text('os');
             $table->text('client');
-            $table->text('ip');
-            $table->timestamps();
+            $table->string('ip')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
