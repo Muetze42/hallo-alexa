@@ -1,6 +1,15 @@
 {
     ":days Days": ":days Tage",
     "1 Day": "1 Tag",
+    "Activity": "Aktivität",
+    "Activities": "Aktivitäten",
     "Differences": "Unterschiede",
-    "New Properties": "Neue Eigenschaften"
+    "New Properties": "Neue Eigenschaften",
+    "Old Properties": "Alte Eigenschaften",
+    "updated by :user": "aktualisiert von :user",
+    "created by :user": "erstellt von :user",
+    "deleted by :user": "gelöscht von :user",
+    "created": "erstellt",
+    "updated": "aktualisiert",
+    "deleted": "gelöscht"
 }

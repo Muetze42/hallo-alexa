@@ -1,37 +1,55 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Resources;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\MorphTo;
+use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use SpiritSaint\CodeDifference\CodeDifference;
 
-class Activity extends Resource
+class User extends Resource
 {
     /**
-     * Indicates if the resource should be displayed in the sidebar.
+     * Custom priority level of the resource.
      *
-     * @var bool
+     * @var int
      */
-    public static $displayInNavigation = false;
+    public static int $priority = 50;
 
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static string $model = \App\Models\Activity::class;
+    public static string $model = \App\Models\User::class;
+
+    /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label(): string
+    {
+        return __('Users');
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    public static function singularLabel(): string
+    {
+        return __('User');
+    }
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -40,6 +58,8 @@ class Activity extends Resource
      */
     public static $search = [
         'id',
+        'name',
+        'email',
     ];
 
     /**
@@ -51,19 +71,24 @@ class Activity extends Resource
     public function fields(Request $request): array
     {
         return [
-            Text::make(__('Event'), 'event')->sortable(),
+            ID::make()->sortable(),
 
-            Text::make(__('Causer Type'), 'causer_type')
-                ->sortable(),
+            Gravatar::make()->maxWidth(50),
 
-            MorphTo::make(__('Causer'), 'causer'),
+            Text::make('Name')
+                ->sortable()
+                ->rules('required', 'max:255'),
 
-            Code::make(__('Old Properties'), 'properties->old')
-                ->json(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-                ->onlyOnDetail(),
-            Code::make(__('New Properties'), 'properties->attributes')
-                ->json(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-                ->onlyOnDetail(),
+            Text::make('Email')
+                ->sortable()
+                ->rules('required', 'email', 'max:254')
+                ->creationRules('unique:users,email')
+                ->updateRules('unique:users,email,{{resourceId}}'),
+
+            Password::make('Password')
+                ->onlyOnForms()
+                ->creationRules('required', 'string', 'min:8')
+                ->updateRules('nullable', 'string', 'min:8'),
         ];
     }
 

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Resources;
 
-use App\Nova\Activity;
 use Bernhardh\NovaIconSelect\IconProviders\FontAwesomeIconProvider;
 use Bernhardh\NovaIconSelect\NovaIconSelect;
 use Illuminate\Http\Request;
@@ -21,11 +20,38 @@ class Link extends Resource
     use HasSortableRows;
 
     /**
+     * Custom priority level of the resource.
+     *
+     * @var int
+     */
+    public static int $priority = 10;
+
+    /**
      * The model the resource corresponds to.
      *
      * @var string
      */
     public static string $model = \App\Models\Link::class;
+
+    /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label(): string
+    {
+        return __('Links');
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    public static function singularLabel(): string
+    {
+        return __('Link');
+    }
 
     /**
      * The single value that should be used to represent the resource when being displayed.
