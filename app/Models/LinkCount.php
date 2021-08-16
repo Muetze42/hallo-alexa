@@ -10,6 +10,8 @@ class LinkCount extends Model
 {
     use HasFactory;
 
+    const UPDATED_AT = null;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,6 +20,7 @@ class LinkCount extends Model
     protected $fillable = [
         'os',
         'client',
+        'ip',
     ];
 
     /**

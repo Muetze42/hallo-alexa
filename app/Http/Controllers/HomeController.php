@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Link;
-use App\Models\LinkMemory;
 
 class HomeController extends Controller
 {
@@ -60,12 +59,10 @@ class HomeController extends Controller
 
             $link->realCounts()->create($data);
 
-            $memory = LinkMemory::where($data)->where('updated_at', '>', now()->subMinutes($delay))->first();
+            $count = $link->counts()->where('created_at', '>', now()->subMinutes($delay))->first();
 
-            if (!$memory) {
+            if (!$count) {
                 $link->update(['count' => DB::raw('count+1')]);
-                $memory = $link->memories()->updateOrCreate($data);
-                $memory->touch();
 
                 $link->counts()->create($data);
             }
