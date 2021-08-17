@@ -15,6 +15,13 @@ __webpack_require__.r(__webpack_exports__);
   name: "Index",
   props: {
     links: Object
+  },
+  methods: {
+    count: function count(id) {
+      axios.post('/api/link/' + id, {
+        api: true
+      });
+    }
   }
 });
 
@@ -43,13 +50,17 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_3 = {
   id: "links"
 };
-var _hoisted_4 = ["href"];
+var _hoisted_4 = ["href", "onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.links, function (link) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-      href: link.redirect_route,
+      href: link.target,
       target: "_blank",
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn", 'btn-' + link.id])
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn", 'btn-' + link.id]),
+      rel: "noopener",
+      onClick: function onClick($event) {
+        return $options.count(link.id);
+      }
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fw-fw", link.icon])
     }, null, 2
