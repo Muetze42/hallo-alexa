@@ -45,15 +45,6 @@ class Link extends Model implements Sortable
         'active' => true,
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'redirect_route',
-    ];
-
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -70,16 +61,6 @@ class Link extends Model implements Sortable
                 'color',
                 'order',
             ]);
-    }
-
-    /**
-     * Get the redirect route of this link
-     *
-     * @return string
-     */
-    public function getRedirectRouteAttribute(): string
-    {
-        return route('link.redirect', $this->id);
     }
 
     /**

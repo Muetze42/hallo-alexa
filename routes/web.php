@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/go/{link}', [HomeController::class, 'redirect'])->name('link.redirect');
+//Route::get('/go/{link}', [HomeController::class, 'redirect'])->name('link.redirect');
 
 if (config('app.env') === 'local' || request()->getClientIp() === request()->ip()) {
     Route::resource('/test', \App\Http\Controllers\DevelopmentController::class);
