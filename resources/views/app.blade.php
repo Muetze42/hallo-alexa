@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<--
+
+Website 2021 by Norman Huth
+https://huth.it/
+
+-->
 <html lang="en">
 <head>
     <meta charset="utf-8" />
