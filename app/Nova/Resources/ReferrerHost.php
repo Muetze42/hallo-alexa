@@ -70,11 +70,13 @@ class ReferrerHost extends Resource
     public function fields(Request $request): array
     {
         return [
-            Text::make(__('Name'), 'name')
-                ->sortable(),
+            Text::make(__('Name'), 'name', function () {
+                return '<a href="https://'.e($this->name).'" class="'.config('muetze-site.nova.external_link_class').'" rel="nofollow" target="_blank">'.e($this->name).'</a><i class="'.config('muetze-site.nova.external_link_icon').'"></i>';
+            })->sortable()->asHtml(),
 
-            Number::make(__('Referrers'), 'referrer_count')
-                ->sortable(),
+            Text::make(__('Referrers'), 'referrer_count', function () {
+                return '<a href="'.config('nova.path').'/resources/referrer-hosts/'.$this->id.'" class="'.config('muetze-site.nova.external_link_class').' font-bold">'.$this->referrer_count.'</a>';
+            })->sortable()->asHtml()->onlyOnIndex(),
 
             HasMany::make(__('Referrers'), 'referrers', Referrer::class),
         ];
