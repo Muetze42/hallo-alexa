@@ -4,6 +4,7 @@ namespace App\Nova\Resources;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Titasgailius\SearchRelations\SearchesRelations;
 
@@ -70,6 +71,9 @@ class ReferrerHost extends Resource
     {
         return [
             Text::make(__('Name'), 'name')
+                ->sortable(),
+
+            Number::make(__('Referrers'), 'referrer_count')
                 ->sortable(),
 
             HasMany::make(__('Referrers'), 'referrers', Referrer::class),

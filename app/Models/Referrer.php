@@ -24,6 +24,19 @@ class Referrer extends Model
     ];
 
     /**
+     * Bootstrap the model and its traits.
+     *
+     * @return void
+     */
+    public static function boot(): void
+    {
+        parent::boot();
+        static::created(function ($referrer) {
+            $referrer->host->update(['referrer_count' => $referrer->host->referrers->count()]);
+        });
+    }
+
+    /**
      * Get the host that owns the referrer.
      */
     public function host(): BelongsTo
