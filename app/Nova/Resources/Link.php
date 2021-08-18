@@ -91,17 +91,16 @@ class Link extends Resource
     public function fields(Request $request): array
     {
         return [
-            Boolean::make(__('Active'), 'active')
-                ->sortable(),
+            Boolean::make(__('Active'), 'active'),
 
             NovaIconSelect::make('Icon')
                 ->setIconProvider(new FontAwesomeIconProvider(['solid', 'regular', 'brands']))->nullable(),
 
             Text::make(__('Name'), 'name')
-                ->sortable()->required()->rules('required', 'max:50'),
+                ->required()->rules('required', 'max:50'),
 
             Text::make(__('Link'), 'target')
-                ->sortable()->required()->rules('required', 'url'),
+                ->required()->rules('required', 'url'),
 
             Color::make('Button Color', 'color')
                 ->required()->rules('required'),
@@ -109,11 +108,11 @@ class Link extends Resource
             Text::make(__('Count'), 'count', function () {
                 return number_format($this->count, 0, ',', '.');
             })
-                ->exceptOnForms()->sortable(),
+                ->exceptOnForms(),
 
             Text::make(__('Real Count'), 'real_count', function () {
                 return number_format($this->real_count, 0, ',', '.');
-            })->exceptOnForms()->sortable(),
+            })->exceptOnForms(),
 
             MorphMany::make(__('Activities'), 'activities', Activity::class),
         ];
