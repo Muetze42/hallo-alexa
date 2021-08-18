@@ -72,8 +72,9 @@ class Referrer extends Resource
     public function fields(Request $request): array
     {
         return [
-            Text::make(__('Url'), 'url')
-                ->sortable(),
+            Text::make(__('Url'), 'url', function () {
+                return '<a href="'.e($this->url).'" class="'.config('muetze-site.nova.external_link_class').'" rel="nofollow" target="_blank">'.e($this->url).'</a><i class="'.config('muetze-site.nova.external_link_icon').'"></i>';
+            })->sortable()->asHtml(),
 
             BelongsTo::make(__('Host'), 'host', ReferrerHost::class)
         ];
