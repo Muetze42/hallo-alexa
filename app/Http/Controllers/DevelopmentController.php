@@ -11,8 +11,6 @@ class DevelopmentController extends Controller
 {
     public function index()
     {
-        $ref = ReferrerHost::find(4);
-
-        dd($ref->referrers->count());
+        //
     }
 }
