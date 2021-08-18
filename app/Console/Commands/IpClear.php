@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\LinkCount;
+use App\Models\Referrer;
 
 class IpClear extends Command
 {
@@ -30,6 +31,7 @@ class IpClear extends Command
     {
         $delay = config('muetze-site.count_delay', 240)+1440;
         LinkCount::where('created_at', '<', now()->subMinutes($delay))->update(['ip' => null]);
+        Referrer::where('created_at', '<', now()->subHour())->update(['ip' => null]);
 
         return 0;
     }
