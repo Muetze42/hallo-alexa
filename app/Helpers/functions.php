@@ -26,3 +26,34 @@ if (!function_exists('gerateAdditionalStylesheet')) {
 
     }
 }
+
+if (!function_exists('systemLog')) {
+    function systemLog(mixed $message, string $severity = 'error')
+    {
+        $severity = severityCheck($severity);
+
+        if (is_array($message) || is_object($message)) {
+            $message = print_r($message, true);
+        }
+
+        \Illuminate\Support\Facades\Log::$severity($message);
+    }
+}
+
+if(!function_exists('severityCheck')) {
+    function severityCheck($severity): string
+    {
+        $severities = [
+            'emergency',
+            'alert',
+            'critical',
+            'error',
+            'warning',
+            'notice',
+            'info',
+            'debug',
+        ];
+
+        return in_array($severity, $severities) ? $severity : 'error';
+    }
+}
