@@ -10,10 +10,10 @@ use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Text;
 use App\Traits\HasSortableRows;
 use Timothyasp\Color\Color;
-use App\Nova\Metrics\LinkCountTrend;
-use App\Nova\Metrics\LinkRealCountTrend;
-use App\Nova\Metrics\LinkCounts;
-use App\Nova\Metrics\LinkRealCounts;
+use App\Nova\Metrics\Link\LinkCountTrend;
+use App\Nova\Metrics\Link\LinkRealCountTrend;
+use App\Nova\Metrics\Link\LinkCounts;
+use App\Nova\Metrics\Link\LinkRealCounts;
 
 class Link extends Resource
 {

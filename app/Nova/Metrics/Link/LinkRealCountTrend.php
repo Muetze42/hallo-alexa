@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Nova\Metrics;
+namespace App\Nova\Metrics\Link;
 
 use App\Models\LinkRealCount;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Metrics\Trend;
 use Laravel\Nova\Metrics\TrendResult;
 
 class LinkRealCountTrend extends LinkCountTrend

@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Nova\Metrics;
+namespace App\Nova\Metrics\Browser;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
-use App\Models\LinkCount;
-use App\Models\Link;
 use Laravel\Nova\Metrics\PartitionResult;
+use App\Models\Browser;
 
-class LinkCounts extends Partition
+class PlatformName extends Partition
 {
     /**
      * Calculate the value of the metric.
@@ -18,9 +17,11 @@ class LinkCounts extends Partition
      */
     public function calculate(NovaRequest $request): PartitionResult
     {
-        return $this->count($request, LinkCount::class, 'link_id')->label(function ($id) {
-            return Link::withTrashed()->find($id)->name;
-        });
+        $result = $this->count($request, Browser::class, 'platform_name');
+
+        arsort($result->value);
+
+        return $result;
     }
 
     /**
@@ -40,6 +41,6 @@ class LinkCounts extends Partition
      */
     public function uriKey(): string
     {
-        return 'link-count';
+        return 'browser-platform-name';
     }
 }

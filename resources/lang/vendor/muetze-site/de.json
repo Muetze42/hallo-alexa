@@ -11,5 +11,7 @@
     "deleted by :user": "gelöscht von :user",
     "created": "erstellt",
     "updated": "aktualisiert",
-    "deleted": "gelöscht"
+    "deleted": "gelöscht",
+    "Device Type": "Gerätetyp",
+    "Unknown": "Unbekannt"
 }
