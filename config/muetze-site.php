@@ -13,7 +13,7 @@ return [
         'nova-ressource' => true,
         'migration'      => true,
         'policy'         => true,
-        'resource'       => true,
+        'resource'       => false,
         'controller'     => false,
         'api-controller' => false,
 
