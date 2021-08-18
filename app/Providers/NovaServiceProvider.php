@@ -5,8 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
-use App\Nova\Metrics\LinkCounts;
-use App\Nova\Metrics\LinkRealCounts;
+use App\Nova\Metrics\Browser\BrowserFamily;
+use App\Nova\Metrics\Browser\DeviceType;
+use App\Nova\Metrics\Browser\PlatformFamily;
+use App\Nova\Metrics\Browser\PlatformName;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -58,8 +60,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards(): array
     {
         return [
-            new LinkCounts,
-            new LinkRealCounts,
+            new DeviceType,
+            new BrowserFamily,
+            new PlatformFamily,
+            new PlatformName,
         ];
     }
 

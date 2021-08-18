@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Nova\Metrics;
+namespace App\Nova\Metrics\Link;
 
+use App\Traits\Nova\TrendMetric;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Trend;
 use Laravel\Nova\Metrics\TrendResult;
@@ -9,6 +10,8 @@ use App\Models\LinkCount;
 
 class LinkCountTrend extends Trend
 {
+    use TrendMetric;
+
     /**
      * Calculate the value of the metric.
      *
@@ -19,24 +22,6 @@ class LinkCountTrend extends Trend
     {
         return $this->countByDays($request, LinkCount::where('link_id', $request->resourceId), 'created_at')
             ->showSumValue();
-    }
-
-    /**
-     * Get the ranges available for the metric.
-     *
-     * @return array
-     */
-    public function ranges(): array
-    {
-        return [
-            7 => __(':days Days', ['days' => 7]),
-            2 => __(':days Days', ['days' => 2]),
-            3 => __(':days Days', ['days' => 3]),
-            4 => __(':days Days', ['days' => 4]),
-            5 => __(':days Days', ['days' => 5]),
-            30 => __(':days Days', ['days' => 30]),
-            60 => __(':days Days', ['days' => 60]),
-        ];
     }
 
     /**

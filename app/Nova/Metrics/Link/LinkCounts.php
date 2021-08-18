@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Nova\Metrics;
+namespace App\Nova\Metrics\Link;
 
-use App\Models\Link;
-use App\Models\LinkRealCount;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
+use App\Models\LinkCount;
+use App\Models\Link;
 use Laravel\Nova\Metrics\PartitionResult;
 
-class LinkRealCounts extends Partition
+class LinkCounts extends Partition
 {
     /**
      * Calculate the value of the metric.
@@ -18,9 +18,13 @@ class LinkRealCounts extends Partition
      */
     public function calculate(NovaRequest $request): PartitionResult
     {
-        return $this->count($request, LinkRealCount::class, 'link_id')->label(function ($id) {
+        $result = $this->count($request, LinkCount::class, 'link_id')->label(function ($id) {
             return Link::withTrashed()->find($id)->name;
         });
+
+        arsort($result->value);
+
+        return $result;
     }
 
     /**
@@ -40,6 +44,6 @@ class LinkRealCounts extends Partition
      */
     public function uriKey(): string
     {
-        return 'link-real-counts';
+        return 'link-count';
     }
 }
