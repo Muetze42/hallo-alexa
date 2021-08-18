@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<--
+<!--
 
-Website 2021 by Norman Huth
-https://huth.it/
+    |------------------------------------------------------------
+    | Website created by Norman Huth                            |
+    |------------------------------------------------------------
+    |                                                           |
+    | Website Developer: Norman Huth                            |
+    | Website Support: Norman Huth                              |
+    | Server Hosting: Norman Huth                               |
+    |                                                           |
+    | For inquiries and requests visit https://huth.it/         |
+    |                                                           |
+    |------------------------------------------------------------
 
 -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
