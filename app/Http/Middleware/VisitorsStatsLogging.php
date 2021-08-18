@@ -26,7 +26,7 @@ class VisitorsStatsLogging
 
             if ($referer && $domain != $request->server('SERVER_NAME')) {
 
-                $host = ReferrerHost::firstOrCreate(['host' => $domain]);
+                $host = ReferrerHost::firstOrCreate(['name' => $domain]);
 
                 $data = [
                     'url' => $referer,
@@ -41,9 +41,9 @@ class VisitorsStatsLogging
             }
         } catch (\Exception $exception) {
             try {
-                systemLog('App\Http\Middleware\VisitorsStatsLogging:'.$exception);
+                systemLog('App\Http\Middleware\VisitorsStatsLogging:'. $exception->__toString());
             } catch (\Exception $exception) {
-
+                Log::error($exception);
             }
         }
 

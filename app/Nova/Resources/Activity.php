@@ -54,13 +54,6 @@ class Activity extends Resource
     }
 
     /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = 'id';
-
-    /**
      * Get the value that should be displayed to represent the resource.
      *
      * @return string
