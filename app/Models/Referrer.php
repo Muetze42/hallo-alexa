@@ -28,6 +28,6 @@ class Referrer extends Model
      */
     public function host(): BelongsTo
     {
-        return $this->belongsTo(ReferrerHost::class);
+        return $this->belongsTo(ReferrerHost::class, 'referrer_host_id');
     }
 }

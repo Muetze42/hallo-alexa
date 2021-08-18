@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\LinkMemory;
+use App\Models\LinkCount;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class LinkMemoryPolicy
+class LinkCountPolicy
 {
     use HandlesAuthorization;
 
@@ -25,12 +25,12 @@ class LinkMemoryPolicy
      * Determine whether the user can view the model.
      *
      * @param User $user
-     * @param LinkMemory $linkMemory
+     * @param LinkCount $linkCount
      * @return bool
      */
-    public function view(User $user, LinkMemory $linkMemory): bool
+    public function view(User $user, LinkCount $linkCount): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -48,10 +48,10 @@ class LinkMemoryPolicy
      * Determine whether the user can update the model.
      *
      * @param User $user
-     * @param LinkMemory $linkMemory
+     * @param LinkCount $linkCount
      * @return bool
      */
-    public function update(User $user, LinkMemory $linkMemory): bool
+    public function update(User $user, LinkCount $linkCount): bool
     {
         return false;
     }
@@ -60,10 +60,10 @@ class LinkMemoryPolicy
      * Determine whether the user can delete the model.
      *
      * @param User $user
-     * @param LinkMemory $linkMemory
+     * @param LinkCount $linkCount
      * @return bool
      */
-    public function delete(User $user, LinkMemory $linkMemory): bool
+    public function delete(User $user, LinkCount $linkCount): bool
     {
         return false;
     }
@@ -72,10 +72,10 @@ class LinkMemoryPolicy
      * Determine whether the user can restore the model.
      *
      * @param User $user
-     * @param LinkMemory $linkMemory
+     * @param LinkCount $linkCount
      * @return bool
      */
-    public function restore(User $user, LinkMemory $linkMemory): bool
+    public function restore(User $user, LinkCount $linkCount): bool
     {
         return false;
     }
@@ -84,10 +84,10 @@ class LinkMemoryPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param User $user
-     * @param LinkMemory $linkMemory
+     * @param LinkCount $linkCount
      * @return bool
      */
-    public function forceDelete(User $user, LinkMemory $linkMemory): bool
+    public function forceDelete(User $user, LinkCount $linkCount): bool
     {
         return false;
     }

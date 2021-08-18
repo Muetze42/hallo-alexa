@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('referrer_hosts', function (Blueprint $table) {
             $table->id();
-            $table->string('host');
+            $table->string('name');
             $table->timestamp('created_at')->nullable();
             $table->softDeletes();
         });
