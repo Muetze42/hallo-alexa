@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /.vscode
 *.vscode
+/public/css/buttons.css
+/public/css/buttons.map
