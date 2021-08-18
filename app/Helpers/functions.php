@@ -21,7 +21,7 @@ if (!function_exists('gerateAdditionalStylesheet')) {
 
         $result = $compiler->compileString($source);
 
-//        file_put_contents(public_path('css/buttons.map'), $result->getSourceMap());
+        file_put_contents(public_path('css/buttons.map'), $result->getSourceMap());
         file_put_contents(public_path('css/buttons.css'), $result->getCss());
 
     }
