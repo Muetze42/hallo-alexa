@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <link href="{{ _asset('/css/app.css') }}" rel="stylesheet">
-    <link href="{{ _asset('/css/buttons.css') }}" rel="stylesheet">
+{{--    <link href="{{ _asset('/css/buttons.css') }}" rel="stylesheet">--}}
+    <style>{!! File::get(public_path('css/buttons.css')) !!}</style>
     <script src="{{ _asset('/js/app.js') }}" defer></script>
     <title>hallo_alexa_</title>
     <meta name="description" content="Hi! Mein Name ist Alexa, komme aus Frankfurt am Main und streame seit dem 12. April 2020 auf Twitch. Meine Community ist aufgeschlossen, freundlich und familiär!">
