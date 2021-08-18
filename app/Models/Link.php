@@ -74,6 +74,9 @@ class Link extends Model implements Sortable
         static::saved(function () {
             gerateAdditionalStylesheet();
         });
+        static::created(function () {
+            gerateAdditionalStylesheet();
+        });
     }
 
     /**
