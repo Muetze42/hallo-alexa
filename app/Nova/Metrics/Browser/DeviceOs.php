@@ -7,8 +7,18 @@ use Laravel\Nova\Metrics\Partition;
 use Laravel\Nova\Metrics\PartitionResult;
 use App\Models\Browser;
 
-class DeviceType extends Partition
+class DeviceOs extends Partition
 {
+    /**
+     * Get the displayable name of the metric.
+     *
+     * @return string
+     */
+    public function name(): string
+    {
+        return __('Device OS');
+    }
+
     /**
      * Calculate the value of the metric.
      *
@@ -17,14 +27,16 @@ class DeviceType extends Partition
      */
     public function calculate(NovaRequest $request): PartitionResult
     {
-        $result = $this->count($request, Browser::class, 'device_type')->label(function ($type) {
-            switch ($type) {
-                case Browser::DEVICE_TYPE_MOBILE:
-                    return 'Mobile';
-                case Browser::DEVICE_TYPE_TABLET:
-                    return 'Tablet';
-                case Browser::DEVICE_TYPE_DESKTOP:
-                    return 'Desktop';
+        $result = $this->count($request, Browser::class, 'os')->label(function ($os) {
+            switch ($os) {
+                case Browser::OS_WINDOWS:
+                    return 'Windows';
+                case Browser::OS_LINUX:
+                    return 'Linux';
+                case Browser::OS_MAC:
+                    return 'Mac';
+                case Browser::OS_ANDROID:
+                    return 'Android';
             };
             return __('Unknown');
         });
@@ -37,7 +49,7 @@ class DeviceType extends Partition
     /**
      * Determine for how many minutes the metric should be cached.
      *
-     * @return  void
+     * @return void
      */
     public function cacheFor(): void
     {
@@ -51,6 +63,6 @@ class DeviceType extends Partition
      */
     public function uriKey(): string
     {
-        return 'browser-device-type';
+        return 'browser-device-os';
     }
 }
