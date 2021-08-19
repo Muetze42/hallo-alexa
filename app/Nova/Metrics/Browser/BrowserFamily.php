@@ -2,7 +2,6 @@
 
 namespace App\Nova\Metrics\Browser;
 
-use App\Traits\Nova\TrendMetric;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
 use Laravel\Nova\Metrics\PartitionResult;
@@ -10,8 +9,6 @@ use App\Models\Browser;
 
 class BrowserFamily extends Partition
 {
-    use TrendMetric;
-
     /**
      * Calculate the value of the metric.
      *

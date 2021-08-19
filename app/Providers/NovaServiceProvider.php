@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use App\Nova\Metrics\Browser\BrowserFamily;
+use App\Nova\Metrics\Browser\DeviceOs;
 use App\Nova\Metrics\Browser\DeviceType;
 use App\Nova\Metrics\Browser\PlatformFamily;
 use App\Nova\Metrics\Browser\PlatformName;
+use App\Nova\Metrics\Referrer\ReferrerDomain;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -61,6 +63,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             new DeviceType,
+            new ReferrerDomain,
+            new DeviceOs,
             new BrowserFamily,
             new PlatformFamily,
             new PlatformName,

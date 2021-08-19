@@ -2,6 +2,7 @@
 
 namespace App\Nova\Resources;
 
+use App\Nova\Metrics\Referrer\ReferrerDomain;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Text;
@@ -88,7 +89,9 @@ class Referrer extends Resource
      */
     public function cards(Request $request): array
     {
-        return [];
+        return [
+            new ReferrerDomain,
+        ];
     }
 
     /**

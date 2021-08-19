@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Nova\Metrics\Browser;
+namespace App\Nova\Metrics\Referrer;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
 use Laravel\Nova\Metrics\PartitionResult;
-use App\Models\Browser;
+use App\Models\Referrer;
+use App\Models\ReferrerHost;
 
-class DeviceType extends Partition
+class ReferrerDomain extends Partition
 {
     /**
      * Calculate the value of the metric.
@@ -17,16 +18,8 @@ class DeviceType extends Partition
      */
     public function calculate(NovaRequest $request): PartitionResult
     {
-        $result = $this->count($request, Browser::class, 'device_type')->label(function ($type) {
-            switch ($type) {
-                case Browser::DEVICE_TYPE_MOBILE:
-                    return 'Mobile';
-                case Browser::DEVICE_TYPE_TABLET:
-                    return 'Tablet';
-                case Browser::DEVICE_TYPE_DESKTOP:
-                    return 'Desktop';
-            };
-            return __('Unknown');
+        $result = $this->count($request, Referrer::class, 'referrer_host_id')->label(function ($id) {
+            return ReferrerHost::withTrashed()->find($id)->name;
         });
 
         arsort($result->value);
@@ -51,6 +44,6 @@ class DeviceType extends Partition
      */
     public function uriKey(): string
     {
-        return 'browser-device-type';
+        return 'referrer-referrer-domain';
     }
 }

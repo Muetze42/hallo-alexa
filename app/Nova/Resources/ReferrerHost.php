@@ -2,6 +2,7 @@
 
 namespace App\Nova\Resources;
 
+use App\Nova\Metrics\Referrer\ReferrerDomain;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
@@ -90,7 +91,9 @@ class ReferrerHost extends Resource
      */
     public function cards(Request $request): array
     {
-        return [];
+        return [
+            new ReferrerDomain,
+        ];
     }
 
     /**
