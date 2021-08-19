@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Nova\Metrics\Link\LinkCounts;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
@@ -66,6 +67,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards(): array
     {
         return [
+            new LinkCounts,
             new ReferrerDomain,
             new DeviceType,
             new DeviceOs,
