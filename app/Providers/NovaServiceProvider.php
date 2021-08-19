@@ -66,16 +66,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards(): array
     {
         return [
-            new DeviceType,
             new ReferrerDomain,
+            new DeviceType,
             new DeviceOs,
             new BrowserFamily,
             new PlatformFamily,
+            new DeviceFamily,
             new BrowserEngine,
             new PlatformName,
-            new DeviceFamily,
-            new MobileGrade,
             new DeviceModel,
+            new MobileGrade,
         ];
     }
 
