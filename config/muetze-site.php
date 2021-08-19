@@ -36,4 +36,7 @@ return [
         'external_link_class' => 'no-underline dim text-primary',
         'external_link_icon' => 'fa-fw fal fa-external-link fa-xs',
     ],
+    'error-report' => [
+        'throttle' => 3600,
+    ],
 ];

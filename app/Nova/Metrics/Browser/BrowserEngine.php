@@ -35,7 +35,7 @@ class BrowserEngine extends Partition
      *
      * @return string
      */
-    public function uriKey()
+    public function uriKey(): string
     {
         return 'browser-browser-engine';
     }
