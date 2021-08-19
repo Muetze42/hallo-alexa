@@ -2,7 +2,7 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   purge: [
-      './resources/**/*.blade.php',
+      './resources/views/public/**/*.blade.php',
       './resources/**/*.js',
       './resources/**/*.vue',
   ],

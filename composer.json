@@ -16,6 +16,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "hisorange/browser-detect": "^4.4",
         "inertiajs/inertia-laravel": "^0.4.4",
+        "laravel-notification-channels/telegram": "^0.5.1",
         "laravel/framework": "^8.54",
         "laravel/nova": "^3.28",
         "laravel/tinker": "^2.5",

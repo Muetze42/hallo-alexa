@@ -44,6 +44,6 @@ class LinkCounts extends Partition
      */
     public function uriKey(): string
     {
-        return 'link-count';
+        return 'link-link-counts';
     }
 }
