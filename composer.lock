@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b98e99f38a90aae5da433c49245a630e",
+    "content-hash": "65f34ff3312720ba6ae364dcc764a45f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1906,7 +1906,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/nova",
-                "reference": "60d1815bf82a9a508489b5f577227dc708a1a9df"
+                "reference": "d8047d4978d807a2b2a7d4ffcc87153def053bfa"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -3316,6 +3316,57 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v4.12.0"
             },
             "time": "2021-07-21T10:44:31+00:00"
+        },
+        {
+            "name": "norman-huth/laravel-trash-mail",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Muetze42/laravel-trash-mail.git",
+                "reference": "169a31ff8cbad763b6ee618a708edfc76262c522"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Muetze42/laravel-trash-mail/zipball/169a31ff8cbad763b6ee618a708edfc76262c522",
+                "reference": "169a31ff8cbad763b6ee618a708edfc76262c522",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^7.0|^8.0",
+                "php": "^7.4|^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NormanHuth\\TrashMail\\DisposableMailServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NormanHuth\\TrashMail\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Propaganistas",
+                    "email": "Propaganistas@users.noreply.github.com"
+                },
+                {
+                    "name": "Norman Huth",
+                    "email": "norman@huth.it"
+                }
+            ],
+            "description": "Disposable email address for Laravel",
+            "support": {
+                "source": "https://github.com/Muetze42/laravel-trash-mail/tree/main"
+            },
+            "time": "2021-08-21T22:30:30+00:00"
         },
         {
             "name": "norman-huth/muetze-site",
@@ -10142,11 +10193,14 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "norman-huth/laravel-trash-mail": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "ext-pdo": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"

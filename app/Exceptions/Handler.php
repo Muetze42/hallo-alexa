@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
 
     protected function errorReport(Throwable $exception)
     {
-        if (!$this->shouldntReport($exception) && /*config('app.env', 'production') == 'production' &&*/
+        if (!$this->shouldntReport($exception) && config('app.env', 'production') == 'production' &&
             !str_starts_with(trim($exception), 'Symfony\Component\Console\Exception\CommandNotFoundException') &&
             !str_starts_with(trim($exception), 'Symfony\Component\Console\Exception\NamespaceNotFoundException')) {
 
