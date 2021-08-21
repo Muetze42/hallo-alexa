@@ -19,7 +19,7 @@ class ReferrerHost extends Model
      * @var array
      */
     protected $fillable = [
-        'host',
+        'name',
         'referrer_count',
     ];
 

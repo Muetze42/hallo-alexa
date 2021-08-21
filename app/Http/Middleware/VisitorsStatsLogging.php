@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Traits\ErrorExceptionNotify;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -11,8 +10,6 @@ use App\Models\ReferrerHost;
 
 class VisitorsStatsLogging
 {
-    use ErrorExceptionNotify;
-
     /**
      * Handle an incoming request.
      *
@@ -28,12 +25,6 @@ class VisitorsStatsLogging
             $domain = $this->getDomain($referer);
 
             if ($referer && $referer!='null' && $domain != $request->server('SERVER_NAME')) {
-
-                if (!$domain) {
-                    Log::debug('Missing Domain of this referrer: '.print_r($referer));
-
-                    return $next($request);
-                }
 
                 $host = ReferrerHost::firstOrCreate(['name' => $domain]);
 
@@ -51,10 +42,8 @@ class VisitorsStatsLogging
         } catch (\Exception $exception) {
             try {
                 systemLog('App\Http\Middleware\VisitorsStatsLogging:'. $exception->__toString());
-                $this->sendTelegramMessage($exception);
             } catch (\Exception $exception) {
                 Log::error($exception);
-                $this->sendTelegramMessage($exception);
             }
         }
 
