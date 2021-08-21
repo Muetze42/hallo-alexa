@@ -26,6 +26,12 @@ class VisitorsStatsLogging
 
             if ($referer && $referer!='null' && $domain != $request->server('SERVER_NAME')) {
 
+                if (!$domain) {
+                    Log::debug('Missing Domain of this referrer: '.print_r($referer));
+
+                    return $next($request);
+                }
+
                 $host = ReferrerHost::firstOrCreate(['name' => $domain]);
 
                 $data = [
