@@ -19,7 +19,7 @@ class Authenticate extends BaseAuthenticationMiddleware
      *
      * @throws \Illuminate\Auth\AuthenticationException
      */
-    public function handle($request, Closure $next, ...$guards)
+    public function handle($request, Closure $next, ...$guards): mixed
     {
         try {
             $guard = config('nova.guard');

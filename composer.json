@@ -8,10 +8,15 @@
         {
             "type": "path",
             "url": "./packages/nova"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Muetze42/laravel-trash-mail"
         }
     ],
     "require": {
         "php": "^8.0",
+        "ext-pdo": "*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "hisorange/browser-detect": "^4.4",
@@ -22,6 +27,7 @@
         "laravel/tinker": "^2.5",
         "laravelwebdev/responsive": "^1.0",
         "muetze/nova-icon-select": "^1.0",
+        "norman-huth/laravel-trash-mail": "dev-main",
         "norman-huth/muetze-site": "^0.0.6",
         "optimistdigital/nova-sortable": "^2.4",
         "scssphp/scssphp": "^1.6",

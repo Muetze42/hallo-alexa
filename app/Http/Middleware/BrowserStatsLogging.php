@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\ErrorExceptionNotify;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -10,6 +11,8 @@ use App\Models\Browser;
 
 class BrowserStatsLogging
 {
+    use ErrorExceptionNotify;
+
     /**
      * Handle an incoming request.
      *
@@ -76,8 +79,10 @@ class BrowserStatsLogging
         } catch (\Exception $exception) {
             try {
                 systemLog('App\Http\Middleware\BrowserStatsLogging:'. $exception->__toString());
+                $this->sendTelegramMessage($exception);
             } catch (\Exception $exception) {
                 Log::error($exception);
+                $this->sendTelegramMessage($exception);
             }
         }
 
