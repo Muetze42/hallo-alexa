@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\ErrorExceptionNotify;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -10,6 +11,8 @@ use App\Models\ReferrerHost;
 
 class VisitorsStatsLogging
 {
+    use ErrorExceptionNotify;
+
     /**
      * Handle an incoming request.
      *
@@ -48,8 +51,10 @@ class VisitorsStatsLogging
         } catch (\Exception $exception) {
             try {
                 systemLog('App\Http\Middleware\VisitorsStatsLogging:'. $exception->__toString());
+                $this->sendTelegramMessage($exception);
             } catch (\Exception $exception) {
                 Log::error($exception);
+                $this->sendTelegramMessage($exception);
             }
         }
 

@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Link;
+use App\Traits\ErrorExceptionNotify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class LinkController extends Controller
 {
+    use ErrorExceptionNotify;
+
     /**
      * Handle the count stat for a link
      *
@@ -42,6 +45,7 @@ class LinkController extends Controller
                 }
             } catch (\Exception $exception) {
                 Log::error($exception);
+                $this->sendTelegramMessage($exception);
             }
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Notifications\Telegram\ErrorReport;
+use App\Traits\ErrorExceptionNotify;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -11,6 +12,8 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use ErrorExceptionNotify;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -32,13 +35,6 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Get the URI key for the notification remember cache.
-     *
-     * @var string
-     */
-    protected string $cacheNotificationKey = 'error-report-notification';
-
-    /**
      * Report or log an exception.
      *
      * @param  Throwable  $e
@@ -54,19 +50,11 @@ class Handler extends ExceptionHandler
 
     protected function errorReport(Throwable $exception)
     {
-        if (!$this->shouldntReport($exception) && config('app.env', 'production') == 'production' &&
+        if (!$this->shouldntReport($exception) && /*config('app.env', 'production') == 'production' &&*/
             !str_starts_with(trim($exception), 'Symfony\Component\Console\Exception\CommandNotFoundException') &&
             !str_starts_with(trim($exception), 'Symfony\Component\Console\Exception\NamespaceNotFoundException')) {
 
-             $status = Cache::get($this->cacheNotificationKey);
-
-            if ($status != 'send') {
-                Notification::send(681791255, new ErrorReport($exception));
-
-                if(!$status) {
-                    Cache::add($this->cacheNotificationKey, 'send', config('muetze-site.error-report.throttle', 3600));
-                }
-            }
+            $this->sendTelegramMessage($exception);
         }
     }
 
