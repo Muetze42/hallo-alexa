@@ -46,6 +46,10 @@ class BrowserStatsLogging
 
             $deviceFamily = $browser->deviceFamily();
 
+            if (!$oSystem) {
+                return $next($request);
+            }
+
             Browser::firstOrCreate([
                 'device_type'             => $deviceType,
                 'is_bot'                  => $browser->isBot(),
