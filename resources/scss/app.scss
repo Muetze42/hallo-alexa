@@ -1,11 +1,14 @@
 @import "colors";
 @import "variables";
+@import "mixins";
 
 @tailwind base;
 
 @tailwind components;
 
 @tailwind utilities;
+
+@import "navigation";
 
 @keyframes gradient {
     0% {
@@ -21,32 +24,43 @@
         //background-position: 50% 0;
     }
 }
+
+//@keyframes fadein {
+//    from { opacity: 0; }
+//    to   { opacity: 1; }
+//}
+
 body {
     @apply text-gray-100 flex h-screen font-sans;
     background: linear-gradient(178deg, $hotpink, $red, $orange, $yellow, $green, $turquoise, $indigo, $violet);
     background-size: 200% 100%;
     animation: gradient 10s ease infinite;
 }
+main {
+    //@apply z-50;
+}
 div {
     &#app {
-        @apply h-screen flex justify-center flex-wrap content-center w-full pb-12 md:pb-0;
-        background-image: url(/img/pattern.png);
+        @apply h-screen flex justify-center flex-wrap content-center w-full pb-12 md:pb-0 z-50;
+        @include bg-pattern;
     }
     &#container {
-        @apply w-96 bg-gray-800 rounded-xl pb-4 text-center shadow-md border-gray-600 border-4 border-opacity-30 mx-4;
+        @apply w-96 bg-gray-800 rounded-xl pb-4 shadow-md border-gray-600 border-4 border-opacity-30 mx-4 z-50;
     }
     &#links {
         @apply px-3;
     }
 }
 h1 {
-    @apply mb-4 border-b-2 border-gray-600 pb-3;
+    @apply mb-4 border-b-2 border-gray-600 pb-3 text-center;
     //font-family: 'Brush Script MT', cursive;
 }
 
 .btn {
-    @apply block text-xl px-5 py-2 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow mb-2;
+    @apply block text-xl px-5 py-2 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow mb-2 text-center;
     &:last-child {
         @apply mb-0;
     }
 }
+
+@import "forms";

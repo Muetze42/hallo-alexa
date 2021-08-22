@@ -21,8 +21,7 @@
     <link href="{{ _asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ _asset('/css/buttons.css') }}" rel="stylesheet">
     <script src="{{ _asset('/js/app.js') }}" defer></script>
-    <title>hallo_alexa_</title>
-    <meta name="description" content="Hi! Mein Name ist Alexa, komme aus Frankfurt am Main und streame seit dem 12. April 2020 auf Twitch. Meine Community ist aufgeschlossen, freundlich und familiär!">
+    @if(!empty($desc))<meta name="description" content="{{ $desc }}">@endif
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -35,6 +34,7 @@
     <script src="https://kit.fontawesome.com/d96ba313b0.js" crossorigin="anonymous"></script>
 </head>
 <body>
+@routes
 @inertia
 </body>
 </html>
