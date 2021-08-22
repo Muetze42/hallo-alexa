@@ -24,7 +24,7 @@ class VisitorsStatsLogging
         try {
             $domain = $this->getDomain($referer);
 
-            if ($referer && $referer!='null' && $domain != $request->server('SERVER_NAME')) {
+            if ($referer && $referer!='null' && $domain != $request->server('SERVER_NAME') && $domain != 't.co') {
 
                 $host = ReferrerHost::firstOrCreate(['name' => $domain]);
 
@@ -61,6 +61,6 @@ class VisitorsStatsLogging
         if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
             return $regs['domain'];
         }
-        return $url;
+        return $domain;
     }
 }
