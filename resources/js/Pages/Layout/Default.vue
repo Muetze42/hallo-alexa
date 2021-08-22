@@ -12,10 +12,10 @@
             >
             <!--<font-awesome-icon :icon="['fas', open ? 'times' : 'bars']" />-->
                 <span v-if="open">
-                    <i class="fas fa-times"></i>
+                    <i class="fas fa-times fa-2x"></i>
                 </span>
                 <span v-else>
-                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-bars fa-2x"></i>
                 </span>
                 <span class="sr-only">Open Menu</span>
             </button>
