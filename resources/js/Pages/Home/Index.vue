@@ -1,5 +1,4 @@
 <template>
-    <div id="container">
         <h1>hallo_alexa_</h1>
         <div id="links">
         <template v-for="link in links">
@@ -9,11 +8,13 @@
             </a>
         </template>
         </div>
-    </div>
 </template>
 
 <script>
+import Default from '../Layout/Default'
+
 export default {
+    layout: Default,
     name: "Index",
     props: {
         links: Object,
