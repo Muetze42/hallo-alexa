@@ -71,7 +71,7 @@ var _hoisted_2 = {
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-times fa-lg"
+  "class": "fas fa-times menu-switch"
 }, null, -1
 /* HOISTED */
 );
@@ -81,7 +81,7 @@ var _hoisted_4 = {
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "fas fa-bars fa-lg"
+  "class": "fas fa-bars menu-switch"
 }, null, -1
 /* HOISTED */
 );
@@ -179,7 +179,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["href"]))]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), _hoisted_8], 2
+  ))]), _hoisted_8]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div id=\"copyright\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <a href=\"https://huth.it\" target=\"_blank\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        Website <i class=\"far fa-copyright\"></i> 2021"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <span>Norman Huth</span>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>")], 2
   /* CLASS */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
     name: "fade"

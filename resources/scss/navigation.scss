@@ -14,7 +14,8 @@
     @apply absolute flex top-0 h-screen z-20 left-0 flex-row-reverse;
 }
 #sidebar-content {
-    @apply transition-all duration-700 bg-gray-600 overflow-hidden flex flex-col h-screen justify-between;
+    //@apply transition-all duration-700 bg-gray-600 overflow-hidden flex flex-col h-screen justify-between;
+    @apply transition-all duration-700 bg-indigo-900 overflow-hidden flex items-start justify-start;
     @include bg-pattern;
 
     nav {
@@ -22,7 +23,8 @@
     }
 
     #copyright {
-        @apply text-xs whitespace-pre text-center px-2 pb-2;
+        //@apply text-xs whitespace-pre text-center px-2 pb-2;
+        @apply text-xs whitespace-pre text-center p-32;
         div {
             @apply border border-gray-600 p-1 shadow-lg;
         }
@@ -66,4 +68,8 @@ nav {
             }
         }
     }
+}
+
+.menu-switch {
+    @apply text-3xl md:text-2xl;
 }
