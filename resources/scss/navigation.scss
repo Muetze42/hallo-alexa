@@ -14,19 +14,19 @@
     @include bg-pattern;
 
     #copyright {
-        //@apply text-xs whitespace-pre text-center px-2 pb-2;
         @apply text-xs whitespace-pre text-center p-4;
-        div {
-            @apply border border-gray-600 p-1 shadow-lg;
-        }
         a {
-            //@apply w-full block text-blue-300 hover:text-blue-200 text-sm;
-            @apply block text-xs whitespace-pre border border-gray-500 hover:bg-gray-500 hover:bg-opacity-30;
+            @apply block text-xs whitespace-pre border border-gray-500 hover:bg-gray-500 hover:bg-opacity-30 p-1;
             span {
                 @apply block text-sm;
+                .fa-external-link {
+                    @apply -mb-0.5;
+                    font-size: 0.5rem;
+                    vertical-align: super
+                }
             }
             &:hover {
-                span {
+                u {
                     @apply text-blue-300;
                 }
             }

@@ -31,7 +31,7 @@
                 <div id="copyright">
                     <a href="https://huth.it" target="_blank">
                         Website <i class="far fa-copyright"></i> 2021
-                        <span>Norman Huth</span>
+                        <span><u>Norman Huth</u><i class="fa-fw fas fa-external-link"></i></span>
                     </a>
                 </div>
             </div>
