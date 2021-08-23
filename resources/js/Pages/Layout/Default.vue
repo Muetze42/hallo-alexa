@@ -28,6 +28,12 @@
                         </li>
                     </ul>
                 </nav>
+                <div id="copyright">
+                    <a href="https://huth.it" target="_blank">
+                        Website <i class="far fa-copyright"></i> 2021
+                        <span>Norman Huth</span>
+                    </a>
+                </div>
             </div>
         </div>
 
