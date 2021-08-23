@@ -41,6 +41,7 @@ class ContactController extends Controller
         $message = $request->input('message');
         $email = $request->input('email');
         $email2 = $request->input('confirm');
+        $name = $request->input('name');
         $confirmation = $request->input('confirmation');
 
         if ($confirmation) {
@@ -65,9 +66,10 @@ class ContactController extends Controller
             'subject' => $subject,
             'message' => $message,
             'email'   => $email,
+            'name'    => $name,
         ]);
 
-        Notification::send(681791255, new ErrorReport('Neue E-Mail'));  // Todo: Mail Notification
+//        Notification::send(681791255, new ErrorReport('Neue E-Mail'));  // Todo: Mail Notification
 
         return response('created', ResponseAlias::HTTP_CREATED);
     }

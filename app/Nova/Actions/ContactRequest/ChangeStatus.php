@@ -44,8 +44,7 @@ class ChangeStatus extends Action
             $model->update(['status' => $status]);
             if ($status == ContactRequest::STATUS_SENT) {
                 Mail::raw($model->message, function ($message) use ($model) {
-//                    $message->subject($model->subject)->from(config('mail.from.address'), $model->name)->to('norman@huth.it', 'Norman')->replyTo($model->email, $model->name);
-                    $message->subject($model->subject)->from(config('mail.from.address'), $model->name)->to('kontakt@hallo-alexa.de', 'Alexa')->replyTo($model->email); // Todo Missing Name and E-Mail not Plain
+                    $message->subject($model->subject)->from(config('mail.from.address'), $model->name)->to('kontakt@hallo-alexa.de', 'Alexa')->replyTo($model->email, $model->name);
                 });
             }
         }

@@ -18,6 +18,43 @@ class ContactRequest extends Resource
     public static string $model = \App\Models\ContactRequest::class;
 
     /**
+     * Custom priority level of the resource.
+     *
+     * @var int
+     */
+    public static int $priority = 20;
+
+    /**
+     * Get the logical group associated with the resource.
+     *
+     * @return string
+     */
+    public static function group(): string
+    {
+        return __('System');
+    }
+
+    /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label(): string
+    {
+        return __('Kontaktanfragen');
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    public static function singularLabel(): string
+    {
+        return __('Kontaktanfrag');
+    }
+
+    /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
@@ -49,6 +86,8 @@ class ContactRequest extends Resource
             Textarea::make(__('Message'), 'message')
                 ->alwaysShow()->onlyOnDetail(),
             Text::make(__('Email'), 'email')
+                ->sortable(),
+            Text::make(__('Name'), 'name')
                 ->sortable(),
             Text::make(__('Status'), 'status', function () {
                 return '<i class="'.static::$model::STATUS_COLORS[$this->status].' fas '.static::$model::STATUS_ICONS[$this->status].' fa-lg"></i>';

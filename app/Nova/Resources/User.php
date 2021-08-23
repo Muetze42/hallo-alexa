@@ -11,11 +11,21 @@ use Laravel\Nova\Fields\Text;
 class User extends Resource
 {
     /**
+     * Get the logical group associated with the resource.
+     *
+     * @return string
+     */
+    public static function group(): string
+    {
+        return __('System');
+    }
+
+    /**
      * Custom priority level of the resource.
      *
      * @var int
      */
-    public static int $priority = 50;
+    public static int $priority = 90;
 
     /**
      * The model the resource corresponds to.

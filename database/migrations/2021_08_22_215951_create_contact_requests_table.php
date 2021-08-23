@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('subject');
             $table->text('message');
             $table->string('email');
+            $table->string('name');
             $table->boolean('status')->default(ContactRequest::STATUS_OPEN);
             $table->timestamps();
             $table->softDeletes();

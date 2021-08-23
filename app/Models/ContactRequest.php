@@ -35,6 +35,7 @@ class ContactRequest extends Model
         'subject',
         'message',
         'email',
+        'name',
         'status',
     ];
 }

@@ -26,6 +26,9 @@
                             <inertia-link v-if="route().current(item.route)" :href="route(item.route)" aria-current="page">{{ item.name }}</inertia-link>
                             <inertia-link v-else :href="route(item.route)">{{ item.name }}</inertia-link>
                         </li>
+                        <li v-if="authed">
+                            <a href="/admin">Administration</a>
+                        </li>
                     </ul>
                 </nav>
                 <div id="copyright">
