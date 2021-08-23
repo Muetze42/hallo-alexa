@@ -51,3 +51,10 @@
 .contact-success {
     @apply text-center bg-green-200 relative text-green-700 p-3 rounded-lg mx-2;
 }
+
+.btn {
+    @apply block text-xl px-5 py-2 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow mb-2 text-center;
+    &:last-child {
+        @apply mb-0;
+    }
+}

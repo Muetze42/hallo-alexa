@@ -10,14 +10,13 @@
                 id="sidebar-button"
                 class="transition-color"
             >
-            <!--<font-awesome-icon :icon="['fas', open ? 'times' : 'bars']" />-->
                 <span v-if="open">
                     <i class="fas fa-times menu-switch"></i>
                 </span>
                 <span v-else>
                     <i class="fas fa-bars menu-switch"></i>
                 </span>
-                <span class="sr-only">Open Menu</span>
+                <span class="sr-only">Menü</span>
             </button>
 
             <div id="sidebar-content" :class="[open ? 'max-w-lg' : 'max-w-0']">
@@ -28,19 +27,7 @@
                             <inertia-link v-else :href="route(item.route)">{{ item.name }}</inertia-link>
                         </li>
                     </ul>
-<!--                    <div id="copyright">-->
-<!--                        <a href="https://huth.it" target="_blank">-->
-<!--                            Website <i class="far fa-copyright"></i> 2021-->
-<!--                            <span>Norman Huth</span>-->
-<!--                        </a>-->
-<!--                    </div>-->
                 </nav>
-<!--                <div id="copyright">-->
-<!--                    <a href="https://huth.it" target="_blank">-->
-<!--                        Website <i class="far fa-copyright"></i> 2021-->
-<!--                        <span>Norman Huth</span>-->
-<!--                    </a>-->
-<!--                </div>-->
             </div>
         </div>
 
@@ -53,10 +40,8 @@
             />
         </transition>
     </div>
-    <main :class="{ 'z-40': !open}">
-        <div id="container">
-            <slot />
-        </div>
+    <main>
+        <slot />
     </main>
 </template>
 
@@ -87,15 +72,12 @@ export default {
     methods: {
         toggle() {
             this.open = !this.open;
-        },
-        dd() {
-            alert(this.route("home"))
-        },
+        }
     },
     mounted() {
         Inertia.on("navigate", (event) => {
             this.toggle()
         });
-    },
+    }
 };
 </script>

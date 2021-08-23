@@ -1,12 +1,11 @@
 @import "colors";
-@import "variables";
 @import "mixins";
-
 @tailwind base;
 
-@tailwind components;
-
-@tailwind utilities;
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 
 @import "navigation";
 
@@ -24,43 +23,100 @@
         //background-position: 50% 0;
     }
 }
-
-//@keyframes fadein {
-//    from { opacity: 0; }
-//    to   { opacity: 1; }
-//}
-
 body {
-    @apply text-gray-100 flex h-screen font-sans;
+    @apply text-gray-100;
+    //background: linear-gradient(-45deg, $teal, $indigo, $pink, $cyan);
+    //background-size: 400% 400%;
+    //animation: gradient 15s ease infinite;
     background: linear-gradient(178deg, $hotpink, $red, $orange, $yellow, $green, $turquoise, $indigo, $violet);
     background-size: 200% 100%;
     animation: gradient 10s ease infinite;
 }
+div#app {
+    @include bg-pattern;
+}
 main {
-    //@apply z-50;
+    @apply h-screen flex justify-center flex-wrap content-center z-50;
 }
-div {
-    &#app {
-        @apply h-screen flex justify-center flex-wrap content-center w-full pb-12 md:pb-0 z-50;
-        @include bg-pattern;
-    }
-    &#container {
-        @apply w-96 bg-gray-800 rounded-xl pb-4 shadow-md border-gray-600 border-4 border-opacity-30 mx-4 z-50;
-    }
-    &#links {
-        @apply px-3;
-    }
+img.avatar {
+    @apply rounded-full border border-gray-400 mx-auto mt-4;
 }
-h1 {
-    @apply mb-4 border-b-2 border-gray-600 pb-3 text-center;
-    //font-family: 'Brush Script MT', cursive;
+.card {
+    @apply relative flex flex-col min-w-0 rounded-md break-words border bg-gray-800 border-gray-600 shadow-md w-96;
+    .header {
+        //@apply py-3 px-6 mb-0 bg-gray-700 border-gray-600 text-gray-100;
+        @apply py-3 px-6 mb-0 border-gray-600 text-gray-100 border-b-2 border-gray-400;
+    }
+    .body {
+        @apply flex-auto p-6;
+    }
+    .footer {
+        @apply py-3 px-6 mb-0 border-gray-600 text-gray-100;
+    }
+    div {
+        &:first-child {
+            @apply rounded-t-md;
+        }
+        &:last-child {
+            @apply rounded-b-md;
+        }
+    }
 }
 
-.btn {
-    @apply block text-xl px-5 py-2 text-indigo-100 transition-colors duration-150 rounded-lg focus:shadow mb-2 text-center;
-    &:last-child {
-        @apply mb-0;
+.group {
+    @apply inline-flex border border-gray-400 rounded-l-md rounded-r-md;
+    a {
+        @apply flex items-center px-4 py-2 transition-colors duration-200 transform bg-gray-700 text-gray-200 border-r border-gray-500;
+        &:first-child {
+            @apply rounded-l-md;
+        }
+        &:last-child {
+            @apply rounded-r-md border-r-0;
+        }
+        &.instagram {
+            &:hover {
+                background-color: $instagram-5;
+            }
+        }
+        &.github {
+            &:hover {
+                background-color: $github;
+            }
+        }
+        &.linkedin {
+            &:hover {
+                background-color: $linkedin;
+            }
+        }
+        &.steam {
+            &:hover {
+                background-color: $steam;
+            }
+        }
+        &.twitch {
+            &:hover {
+                background-color: $twitch-tv;
+            }
+        }
     }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 1s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+
+h1 {
+    @apply text-center;
 }
 
 @import "forms";
+
+@tailwind components;
+
+@tailwind utilities;

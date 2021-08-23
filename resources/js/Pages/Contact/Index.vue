@@ -1,66 +1,72 @@
 <template>
-    <h1>Kontakt</h1>
-    <div v-if="sent" class="contact-success">
-        <p>Vielen Dank für Deine Nachricht.</p>
-        <p></p>
-        <i class="far fa-envelope fa-5x"></i>
-    </div>
-    <form @keyup="isDisabled()" @submit.prevent="submit" v-if="!sent">
-        <div class="form-row">
-            <label for="subject">
-                Betreff
-            </label>
-            <input id="subject" type="text" placeholder="Betreff" v-model="subject" maxlength="50" required>
+    <card :title="'Kontakt'">
+        <div v-if="sent" class="contact-success">
+            <p>Vielen Dank für Deine Nachricht.</p>
+            <p></p>
+            <i class="far fa-envelope fa-5x"></i>
         </div>
-        <div class="form-row">
-            <label for="message">
-                Nachricht
-            </label>
-            <textarea id="message" v-model="message" required>Nachricht</textarea>
-        </div>
-        <div class="form-row">
-            <label for="email">
-                E-Mail-Adresse
-            </label>
-            <input id="email" type="email" placeholder="E-Mail-Adresse" autocomplete="email" v-model="email" @keyup="mailConfirmed()" required>
-        </div>
-        <div class="form-row">
-            <label for="confirm">
-                E-Mail-Adresse bestätigen
-            </label>
-            <input id="confirm" type="email" placeholder="E-Mail-Adresse bestätigen" v-model="confirm" @keyup="mailConfirmed()" required>
-            <p v-if="!confirmed">Die eingegebenen E-Mail-Adressen stimmen nicht überein.</p>
-        </div>
-        <div class="confirmations">
-            <label for="confirmation">Datenschutzbestimmungen bestätigen</label>
-            <input id="confirmation" type="checkbox" v-model="confirmation">
-        </div>
-        <div class="form-row submit-row">
-            <span class="ping-container">
-                <button type="submit" :disabled='disabled'>
-                    Nachricht senden
-                </button>
-                <span class="ping-1" v-if='sending'>
-                    <span class="ping-2"></span>
-                    <span class="ping-3"></span>
+        <form @keyup="isDisabled()" @submit.prevent="submit" v-if="!sent">
+            <div class="form-row">
+                <label for="subject">
+                    Betreff
+                </label>
+                <input id="subject" type="text" placeholder="Betreff" v-model="subject" maxlength="50" required>
+            </div>
+            <div class="form-row">
+                <label for="message">
+                    Nachricht
+                </label>
+                <textarea id="message" v-model="message" required>Nachricht</textarea>
+            </div>
+            <div class="form-row">
+                <label for="email">
+                    E-Mail-Adresse
+                </label>
+                <input id="email" type="email" placeholder="E-Mail-Adresse" autocomplete="email" v-model="email" @keyup="mailConfirmed()" required>
+            </div>
+            <div class="form-row">
+                <label for="confirm">
+                    E-Mail-Adresse bestätigen
+                </label>
+                <input id="confirm" type="email" placeholder="E-Mail-Adresse bestätigen" v-model="confirm" @keyup="mailConfirmed()" required>
+                <p v-if="!confirmed">Die eingegebenen E-Mail-Adressen stimmen nicht überein.</p>
+            </div>
+            <div class="confirmations">
+                <label for="confirmation">Datenschutzbestimmungen bestätigen</label>
+                <input id="confirmation" type="checkbox" v-model="confirmation">
+            </div>
+            <div class="form-row submit-row">
+                <span class="ping-container">
+                    <button type="submit" :disabled='disabled'>
+                        Nachricht senden
+                    </button>
+                    <span class="ping-1" v-if='sending'>
+                        <span class="ping-2"></span>
+                        <span class="ping-3"></span>
+                    </span>
                 </span>
-            </span>
-        </div>
-    </form>
+            </div>
+        </form>
+    </card>
 </template>
 
 <script>
 import Default from '../Layout/Default'
+import Card from '../Components/Card'
 
 export default {
     layout: Default,
     name: "Index",
     props: {
+        links: Object,
         subject: String,
         message: String,
         email: String,
         confirm: String,
         confirmation: Boolean,
+    },
+    components: {
+        Card
     },
     data: () => ({
         confirmed: true,
