@@ -69,7 +69,7 @@ class ContactController extends Controller
             'name'    => $name,
         ]);
 
-//        Notification::send(681791255, new ErrorReport('Neue E-Mail'));  // Todo: Mail Notification
+        Notification::send(681791255, new ErrorReport('Neue E-Mail'));  // Todo: Mail Notification
 
         return response('created', ResponseAlias::HTTP_CREATED);
     }
