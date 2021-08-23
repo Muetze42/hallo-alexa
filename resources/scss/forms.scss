@@ -1,5 +1,5 @@
 .form-row {
-    @apply px-2 mb-3;
+    @apply px-2;
 
     label {
         @apply block text-gray-400;
@@ -13,6 +13,27 @@
         }
     }
 
+    &:last-of-type {
+        @apply mb-0;
+    }
+
+    p {
+        @apply text-red-500 text-xs italic text-center;
+    }
+}
+
+.form-body {
+    div {
+        @apply mb-3;
+
+        &:last-child {
+            @apply mb-0;
+        }
+    }
+}
+
+
+.submit-row {
     button {
         @apply bg-purple-500 text-white font-bold py-2 px-4 rounded;
 
@@ -23,13 +44,6 @@
             @apply bg-gray-500;
         }
     }
-
-    p {
-        @apply text-red-500 text-xs italic text-center;
-    }
-}
-
-.submit-row {
     @apply flex justify-around;
     .ping-container {
         @apply relative inline-flex rounded-md shadow-sm;
@@ -38,15 +52,15 @@
         @apply flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1;
     }
     .ping-2 {
-        @apply animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75;
+        @apply animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75;
     }
     .ping-3 {
-        @apply relative inline-flex rounded-full h-3 w-3 bg-green-500;
+        @apply relative inline-flex rounded-full h-3 w-3 bg-green-400;
     }
 }
 
 .confirmations {
-    @apply invisible;
+    @apply hidden;
 }
 .contact-success {
     @apply text-center bg-green-200 relative text-green-700 p-3 rounded-lg mx-2;

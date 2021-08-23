@@ -3,7 +3,7 @@
         <div class="header">
             <h1>{{ title }}</h1>
         </div>
-        <div class="body">
+        <div class="body" :class="bodyClass">
             <slot></slot>
         </div>
         <div class="footer" v-if="$slots.footer">
@@ -14,7 +14,8 @@
 <script>
 export default {
     props: {
-        title: String
+        title: String,
+        bodyClass: String,
     },
     name: "Card",
     methods: {

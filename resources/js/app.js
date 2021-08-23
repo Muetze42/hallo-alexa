@@ -24,7 +24,8 @@ createApp({
         props: {
             language: Object,
             locale: String,
-            _token: String
+            _token: String,
+            authed: Boolean,
         },
         methods: {
             route: (name, params, absolute) => route(name, params, absolute, Ziggy),
