@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d45e2cea4cc2e044c590c8e2ffb20f1",
+    "content-hash": "50af0b132f6cd6502d5dd97522feaf41",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2969,6 +2969,50 @@
                 "source": "https://github.com/Muetze42/nova-icon-select/tree/1.0.0"
             },
             "time": "2021-05-29T00:37:05+00:00"
+        },
+        {
+            "name": "muetze42/nova-charcounted-fields",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Muetze42/nova-charcounted-fields.git",
+                "reference": "21fbdb64ace58d2bbcee06496f88087e24626e9b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Muetze42/nova-charcounted-fields/zipball/21fbdb64ace58d2bbcee06496f88087e24626e9b",
+                "reference": "21fbdb64ace58d2bbcee06496f88087e24626e9b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ElevateDigital\\CharcountedFields\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ElevateDigital\\CharcountedFields\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Text and textarea fields with a character counter.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "source": "https://github.com/Muetze42/nova-charcounted-fields/tree/1.0.0"
+            },
+            "time": "2021-03-10T01:13:28+00:00"
         },
         {
             "name": "mustangostang/spyc",

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use App\Notifications\Telegram\ErrorReport;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Illuminate\Contracts\Foundation\Application;
@@ -25,11 +26,15 @@ class ContactController extends Controller
      */
     public function index(): Response
     {
+        $meta = Page::where('route', 'contact')->first();
+
         return Inertia::render('Contact/Index', [
-            'title' => 'hallo_alexa_ Kontakt',
-            'desc'  => 'Hier kannst Kontakt mit Alexa von `hallo_alexa_` aufnehmen.',
+            'metaTitle' => $meta->title,
+            'metaDesc'  => $meta->description,
         ])->withViewData([
-            'desc'  => 'Hier kannst Kontakt mit Alexa von `hallo_alexa_` aufnehmen.',
+            'metaTitle'  => $meta->title,
+            'metaDesc'   => $meta->description,
+            'metaRobots' => Page::ROBOTS[$meta->robots],
         ]);
     }
 

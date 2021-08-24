@@ -1,7 +1,6 @@
 <template>
     <inertia-head>
-        <title>{{ title }}</title>
-        <meta head-key="description" name="description" :content="desc">
+        <meta head-key="description" name="description" :content="metaDesc">
     </inertia-head>
     <div id="sidebar" :class="{ 'z-40': open}">
         <div id="sidebar-draw">
@@ -59,8 +58,8 @@ import { Inertia } from '@inertiajs/inertia';
 
 export default {
     props: {
-        title: String,
-        desc: String,
+        metaTitle: String,
+        metaDesc: String,
     },
     data() {
         return {
@@ -82,6 +81,9 @@ export default {
         toggle() {
             this.open = !this.open;
         }
+    },
+    updated() {
+        document.title = this.metaTitle
     },
     mounted() {
         Inertia.on("navigate", (event) => {

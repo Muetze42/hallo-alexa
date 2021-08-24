@@ -20,8 +20,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <link href="{{ _asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ _asset('/css/buttons.css') }}" rel="stylesheet">
+    <title>@if(!empty($metaTitle)){{ $metaTitle }}@else{{ config('app.name') }}@endif</title>
     <script src="{{ _asset('/js/app.js') }}" defer></script>
-    @if(!empty($desc))<meta name="description" content="{{ $desc }}">@endif
+    @if(!empty($metaDesc))<meta name="description" content="{{ $metaDesc }}">@endif
+    @if(!empty($metaRobots))
+        <meta name="robots" content="{{$metaRobots}}" />
+    @endif
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">

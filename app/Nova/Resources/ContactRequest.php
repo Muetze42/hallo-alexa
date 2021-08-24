@@ -51,7 +51,7 @@ class ContactRequest extends Resource
      */
     public static function singularLabel(): string
     {
-        return __('Kontaktanfrag');
+        return __('Kontaktanfrage');
     }
 
     /**
