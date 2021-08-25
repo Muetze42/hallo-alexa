@@ -40,7 +40,8 @@ class TrashNotification extends Command
         $content = null;
 
         $categories = DateCategory::whereHas('dates', function ($query) {
-            $query->where('date', $this->tomorrow)->where('notified', false);
+            $query->where('date', $this->tomorrow)
+                ->where('notified', false);
         })->get()->pluck('name')->implode(', ');
 
         if ($categories) {
@@ -48,7 +49,8 @@ class TrashNotification extends Command
         }
 
         $categories = DateCategory::whereHas('dates', function ($query) {
-            $query->where('date', $this->dayAfterTomorrow)->where('notified', false);
+            $query->where('date', $this->dayAfterTomorrow)
+                ->where('notified', false);
         })->get()->pluck('name')->implode(', ');
 
         if ($categories) {
