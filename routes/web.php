@@ -18,6 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('/kontakt', ContactController::class, ['names' => 'contact'])->only(['index', 'store']);
 
-if (config('app.env') === 'local' || request()->getClientIp() === request()->ip()) {
+if (config('app.env') === 'local' && request()->getClientIp() === request()->ip()) {
     Route::resource('/test', \App\Http\Controllers\DevelopmentController::class);
 }

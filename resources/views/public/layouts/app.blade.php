@@ -23,9 +23,7 @@
     <title>@if(!empty($metaTitle)){{ $metaTitle }}@else{{ config('app.name') }}@endif</title>
     <script src="{{ _asset('/js/app.js') }}" defer></script>
     @if(!empty($metaDesc))<meta name="description" content="{{ $metaDesc }}">@endif
-    @if(!empty($metaRobots))
-        <meta name="robots" content="{{$metaRobots}}" />
-    @endif
+    @if(!empty($metaRobots))<meta name="robots" content="{{$metaRobots}}" />@endif
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -36,6 +34,8 @@
     <meta name="msapplication-config" content="/favicon/browserconfig.xml">
     <meta name="theme-color" content="#0071bc">
     <script src="https://kit.fontawesome.com/d96ba313b0.js" crossorigin="anonymous"></script>
+    @mobile<style>.card {margin-bottom: 3rem;}</style>@endmobile
+    @tablet<style>.card{margin-bottom:8rem;}</style>@endtablet
 </head>
 <body>
 @routes

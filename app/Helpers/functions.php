@@ -57,3 +57,11 @@ if(!function_exists('severityCheck')) {
         return in_array($severity, $severities) ? $severity : 'error';
     }
 }
+
+function lastAnd(string $string, string $word = 'und', string $glue = ','): string
+{
+    if (!preg_match('/,/', $string)) {
+        return $string;
+    }
+    return substr_replace($string, ' '.$word, strrpos($string, $glue), 1);
+}

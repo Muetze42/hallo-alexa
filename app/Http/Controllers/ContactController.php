@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Page;
-use App\Notifications\Telegram\ErrorReport;
+use App\Notifications\Telegram\HtmlText;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -74,7 +74,7 @@ class ContactController extends Controller
             'name'    => $name,
         ]);
 
-        Notification::send(681791255, new ErrorReport('Neue E-Mail'));  // Todo: Mail Notification
+        Notification::send(681791255, new HtmlText('Neue E-Mail'));
 
         return response('created', ResponseAlias::HTTP_CREATED);
     }

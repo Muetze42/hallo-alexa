@@ -46,7 +46,8 @@ main {
 
 .card {
     animation: fadein 1s;
-    @apply relative flex flex-col min-w-0 rounded-md break-words border bg-gray-800 border-gray-600 shadow-md w-96 mb-12 md:mb-0;
+    //@apply relative flex flex-col min-w-0 rounded-md break-words border bg-gray-800 border-gray-600 shadow-md w-96 mb-12 md:mb-0;
+    @apply relative flex flex-col min-w-0 rounded-md break-words border bg-gray-800 border-gray-600 shadow-md w-96;
     .header {
         //@apply py-3 px-6 mb-0 bg-gray-700 border-gray-600 text-gray-100;
         @apply py-3 px-4 mb-0 border-gray-600 text-gray-100 border-b border-gray-400;

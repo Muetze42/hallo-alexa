@@ -23,9 +23,30 @@ class Browser extends Model
     const OS_ANDROID = 4;
 
     /**
-     * The attributes that aren't mass assignable.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'device_type',
+        'is_bot',
+        'os',
+        'browser_name',
+        'browser_family',
+        'browser_version',
+        'browser_version_major',
+        'browser_version_minor',
+        'browser_version_patch',
+        'browser_engine',
+        'platform_name',
+        'platform_family',
+        'platform_version',
+        'plattform_version_major',
+        'plattform_version_minor',
+        'plattform_version_patch',
+        'device_family',
+        'device_model',
+        'mobile_grade',
+        'ip',
+    ];
 }
