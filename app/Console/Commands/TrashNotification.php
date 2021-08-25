@@ -45,7 +45,7 @@ class TrashNotification extends Command
         })->get()->pluck('name')->implode(', ');
 
         if ($categories) {
-            $content = 'Morgen wird '.lastAnd($categories).' abgeholt';
+            $content = 'Morgen wird '.lastAnd($categories).' abgeholt.';
         }
 
         $categories = DateCategory::whereHas('dates', function ($query) {
@@ -55,13 +55,13 @@ class TrashNotification extends Command
 
         if ($categories) {
             if ($content) {
-                $content.="\n";
+                $content.="\n\n";
             }
-            $content.= 'Übermorgen wird '.lastAnd($categories).' abgeholt';
+            $content.= 'Übermorgen wird '.lastAnd($categories).' abgeholt.';
         }
 
         if ($content) {
-            Notification::send(681791255, new HtmlText($content));
+            Notification::send(-1001544317562, new HtmlText($content));
         }
 
         Date::where('date', $this->tomorrow)
