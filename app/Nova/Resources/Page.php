@@ -26,7 +26,7 @@ class Page extends Resource
      *
      * @var string
      */
-    public static $title = 'title';
+    public static $title = 'route';
 
     /**
      * Get the displayable label of the resource.
