@@ -87,6 +87,8 @@ class Page extends Resource
     public function fields(Request $request): array
     {
         return [
+            Text::make(__('Page'), 'route')->exceptOnForms(),
+
             TextCounted::make('Meta title', 'title')
                 ->maxChars(60)
                 ->warningAt(50)
