@@ -21,16 +21,7 @@ class PageMeta
         $page = null;
         if ($route) {
             $route = explode('.', $route)[0];
-            $page = Page::where('route', $route)->first([
-                'title',
-                'description',
-                'og_title',
-                'og_title',
-                'og_description',
-                'robots',
-            ]);
-
-
+            $page = Page::where('route', $route)->first();
 
             if ($page) {
                 $page['imageUrl'] = $page->getFirstMediaUrl('og', 'og');
