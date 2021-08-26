@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('date_category_id')->references('id')->on('date_categories')->onDelete('cascade');
             $table->boolean('notified')->default(false);
+            $table->boolean('notified2')->default(false);
             $table->date('date');
             $table->timestamps();
             $table->softDeletes();

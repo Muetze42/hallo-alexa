@@ -33,9 +33,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('trash-mail:update')
             ->weeklyOn(1, '5:00');
         $schedule->command('trash:notification')
-            ->everyTwoMinutes()
-            ->between('18:00', '18:10');
-        // $schedule->command('queue:work --stop-when-empty --timeout=0')->everyMinute()->withoutOverlapping();
+            ->everyFiveMinutes()
+            ->between('18:00', '18:30');
+//         $schedule->command('queue:work --stop-when-empty --timeout=0')->everyMinute()->withoutOverlapping();
     }
 
     /**

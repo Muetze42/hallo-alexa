@@ -25,6 +25,7 @@ class Date extends Model
      */
     protected $fillable = [
         'notified',
+        'notified2',
         'date',
     ];
 
