@@ -148,7 +148,9 @@ class Page extends Resource
                         GeneratedConversions::make('Conversions')
                             ->withTooltips(),
                     ];
-                })->single()->help(__('Die optimale Größe für ein OpenGraph Image beträgt 1200 x 600 Pixel')),
+                })->single()
+                ->help(__('Die optimale Größe für ein OpenGraph Image beträgt 1200 x 600 Pixel'))
+                ->autouploading(),
         ];
     }
 
