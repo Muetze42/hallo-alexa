@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Helpers\Sitemap;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Artisan;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -68,14 +70,20 @@ class Link extends Model implements Sortable
      *
      * @return void
      */
-    public static function boot(): void
+    public static function booted(): void
     {
-        parent::boot();
         static::saved(function () {
             gerateAdditionalStylesheet();
         });
         static::created(function () {
             gerateAdditionalStylesheet();
+            Artisan::call('sitemap');
+        });
+        static::updated(function ($link) {
+            if ($link->name != $link->getOriginal('name') || $link->target != $link->getOriginal('target')) {
+                Page::find(1)->touch();
+                Artisan::call('sitemap');
+            }
         });
     }
 

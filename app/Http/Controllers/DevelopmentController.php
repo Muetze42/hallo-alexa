@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\iCal;
+use App\Helpers\Sitemap;
 use App\Models\Date;
 use App\Models\DateCategory;
 use App\Notifications\Telegram\ErrorReport;
@@ -10,6 +11,8 @@ use App\Nova\Metrics\Referrer\ReferrerDomain;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\View;
 
 
 class DevelopmentController extends Controller
@@ -19,6 +22,8 @@ class DevelopmentController extends Controller
 
     public function index()
     {
+        (new Sitemap)->create();
+
         $page = Page::find(2);
 
         $media = $page->getFirstMediaPath('og', 'og');

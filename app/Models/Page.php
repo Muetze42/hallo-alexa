@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use App\Helpers\Sitemap;
+use App\Traits\ErrorExceptionNotify;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -11,7 +15,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Page extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, ErrorExceptionNotify;
 
     const ROBOTS = [
         0 => 'noindex,nofollow',
@@ -60,5 +64,24 @@ class Page extends Model implements HasMedia
             ->singleFile()
             ->useFallbackUrl(url('img/fallback.jpg'))
             ->useFallbackPath(public_path('/img/fallback.jpg'));
+    }
+
+    /**
+     * Bootstrap the model and its traits.
+     *
+     * @return void
+     */
+    public static function booted(): void
+    {
+        static::updated(function ($site) {
+            try {
+                if (count(array_diff($site->getOriginal(), $site->getAttributes()))) {
+                    Artisan::call('sitemap');
+                }
+            } catch (\Exception $exception) {
+                Log::error($exception);
+                $this->sendTelegramMessage($exception);
+            }
+        });
     }
 }
