@@ -2,6 +2,8 @@
 
 namespace App\Nova\Resources;
 
+use DmitryBubyakin\NovaMedialibraryField\Fields\GeneratedConversions;
+use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use ElevateDigital\CharcountedFields\TextareaCounted;
 use ElevateDigital\CharcountedFields\TextCounted;
 use Illuminate\Http\Request;
@@ -112,19 +114,39 @@ class Page extends Resource
                 2 => __(static::$model::ROBOTS[2]),
                 1 => __(static::$model::ROBOTS[1]),
                 0 => __(static::$model::ROBOTS[0]),
-            ])->displayUsingLabels(),
+            ])->displayUsingLabels()->required()->rules('required'),
 
             Heading::make(__('OpenGraph <small>(Aussehen, wenn die Seite geteilt wird)</small>'))->asHtml(),
 
-            TextareaCounted::make('Meta Description', 'description')
+            TextCounted::make('OpenGraph Title', 'og_title')
+                ->help(__('Optional. Wenn leer, dann wird „Meta Title“ genutzt.'))
+                ->maxChars(60)
+                ->warningAt(50)
+                ->hideFromIndex()
+                ->withMeta(['extraAttributes' => ['maxlength' => '65']]),
+
+            TextareaCounted::make('OpenGraph Description', 'og_description')
                 ->maxChars(300)
                 ->warningAt(100)
                 ->withMeta(['extraAttributes' => [
                     'maxlength' => '300',
                     'rows' => 2,
                 ]])
-                ->help(__('Optional. Es das Feld leer bleibt wird die Meta Description genutzt. Dieser Text kann ruhig länger sein. Dieser wird in Kommentare bei 110- & als Post bei 300 Zeichen abgeschnitten.'))
-                ->onlyOnForms(),
+                ->help(__('Optional. (Wenn leer, dann wird „Meta Description“ genutzt)<br>Es das Feld leer bleibt wird die Meta Description genutzt. Dieser Text kann ruhig länger sein. Dieser wird in Kommentare bei 110- & als Post bei 300 Zeichen abgeschnitten.'))
+                ->hideFromIndex(),
+
+            Medialibrary::make(__('OpenGraph Image'), 'og')
+                ->previewUsing('og')->croppable('conversionName', [
+                    'viewMode' => 3,
+                    'width' => 1200,
+                    'height' => 630,
+                    'aspectRatio' => 1200/630,
+                ])->fields(function () {
+                    return [
+                        GeneratedConversions::make('Conversions')
+                            ->withTooltips(),
+                    ];
+                })->single()->help(__('Die optimale Größe für ein OpenGraph Image beträgt 1200 x 600 Pixel')),
         ];
     }
 

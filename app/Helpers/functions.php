@@ -65,3 +65,52 @@ function lastAnd(string $string, string $word = 'und', string $glue = ','): stri
     }
     return substr_replace($string, ' '.$word, strrpos($string, $glue), 1);
 }
+
+if (!function_exists('MinifyHtml')) {
+    /**
+     * https://stackoverflow.com/questions/27878158/php-bufffer-output-minify-not-textarea-pre
+     *
+     * @param $buffer
+     * @return mixed
+     */
+    function MinifyHtml($buffer): mixed
+    {
+        preg_match_all('#<textarea.*>.*</textarea>#Uis', $buffer, $foundTxt);
+        preg_match_all('#<pre.*>.*</pre>#Uis', $buffer, $foundPre);
+
+        $buffer = str_replace($foundTxt[0], array_map(function ($elm) {
+            return '<textarea>'.$elm.'</textarea>';
+        }, array_keys($foundTxt[0])), $buffer);
+        $buffer = str_replace($foundPre[0], array_map(function ($elm) {
+            return '<pre>'.$elm.'</pre>';
+        }, array_keys($foundPre[0])), $buffer);
+
+        // your stuff
+        $search = array(
+            '/\>[^\S ]+/s',  // strip whitespaces after tags, except space
+            '/[^\S ]+\</s',  // strip whitespaces before tags, except space
+            '/(\s)+/s',      // shorten multiple whitespace sequences
+        );
+
+        $replace = array(
+            '>',
+            '<',
+            '\\1',
+        );
+
+        $buffer = preg_replace($search, $replace, $buffer);
+
+        // Replacing back with content
+        $buffer = str_replace(array_map(function ($elm) {
+            return '<textarea>'.$elm.'</textarea>';
+        }, array_keys($foundTxt[0])), $foundTxt[0], $buffer);
+        $buffer = str_replace(array_map(function ($elm) {
+            return '<pre>'.$elm.'</pre>';
+        }, array_keys($foundPre[0])), $foundPre[0], $buffer);
+
+        $buffer = str_replace('> <', '><', $buffer);
+        $buffer = str_replace('<script type="text/javascript">', '<script>', $buffer);
+
+        return preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?daysndaze\.(test|net))[^"]+")>/is', '\\1 target="_blank">', $buffer);
+    }
+}

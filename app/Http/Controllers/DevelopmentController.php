@@ -19,34 +19,11 @@ class DevelopmentController extends Controller
 
     public function index()
     {
-        $this->tomorrow = now()->addDay()->toDateString();
-        $this->dayAfterTomorrow = now()->addDays(2)->toDateString();
-        $content = null;
+        $page = Page::find(2);
 
-        $categories = DateCategory::whereHas('dates', function ($query) {
-            $query->where('date', $this->tomorrow);
-        })->get()->pluck('name')->implode(', ');
+        $media = $page->getFirstMediaPath('og', 'og');
 
-        dd(lastAnd(($categories)));
-
-        if ($categories) {
-            $content = 'Morgen wird '.lastAnd($categories).' abgeholt';
-        }
-
-        $categories = DateCategory::whereHas('dates', function ($query) {
-            $query->where('date', $this->dayAfterTomorrow);
-        })->get()->pluck('name')->implode(', ');
-
-        dd(lastAnd(($categories)));
-
-//        $categories->dates()->update('notified');
-
-//        Notification::send(681791255, new HtmlText($content));
-
-        Date::where('date', $now)->orWhere('date', $now2)->update(['notified' => true]);
-
-        dd($categories);
-        dd($dates->category);
+        dd($media);
     }
 
     public function getDomain(?string $url): string
