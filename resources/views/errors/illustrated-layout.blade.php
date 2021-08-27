@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>@yield('title')</title>@include('public.layouts.meta')<link href="{{ _asset('/css/error-pages.css') }}" rel="stylesheet">
+        @php $pageMeta['og_title'] = $__env->yieldContent('code').' - '.$__env->yieldContent('title') @endphp
+        <title>@yield('title')</title>@include('public.layouts.meta', $pageMeta)<link href="{{ _asset('/css/error-pages.css') }}" rel="stylesheet">
     </head>
     <body class="antialiased font-sans">
         <div class="md:flex min-h-screen">
