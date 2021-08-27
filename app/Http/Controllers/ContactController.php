@@ -26,8 +26,6 @@ class ContactController extends Controller
      */
     public function index(): Response
     {
-        $meta = Page::where('route', 'contact')->first();
-
         return Inertia::render('Contact/Index');
     }
 
