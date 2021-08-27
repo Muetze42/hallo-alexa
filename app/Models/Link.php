@@ -72,15 +72,13 @@ class Link extends Model implements Sortable
      */
     public static function booted(): void
     {
-        static::saved(function () {
-            gerateAdditionalStylesheet();
-        });
         static::created(function () {
             gerateAdditionalStylesheet();
             Artisan::call('sitemap');
         });
         static::updated(function ($link) {
             if ($link->name != $link->getOriginal('name') || $link->target != $link->getOriginal('target')) {
+                gerateAdditionalStylesheet();
                 Page::find(1)->touch();
                 Artisan::call('sitemap');
             }

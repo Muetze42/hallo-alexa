@@ -23,6 +23,10 @@ class PageMeta
         $page = null;
         if ($route) {
             $route = explode('.', $route)[0];
+            if ($route == 'nova') {
+                return $next($request);
+            }
+
             $page = Page::where('route', $route)->first();
 
             if ($page) {
