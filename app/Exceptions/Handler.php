@@ -84,19 +84,19 @@ class Handler extends ExceptionHandler
      * @param HttpExceptionInterface $e
      * @return Response
      */
-    protected function renderHttpException(HttpExceptionInterface $e): Response
-    {
-        if ($e instanceof NotFoundHttpException) {
-            if (view()->exists($view = $this->getHttpExceptionView($e))) {
-                return response()->view('errors.404', [
-                    'errors' => new ViewErrorBag,
-                    'exception' => $e,
-                ], $e->getStatusCode(), $e->getHeaders());
-            }
-        }
-
-        return parent::renderHttpException($e);
-    }
+//    protected function renderHttpException(HttpExceptionInterface $e): Response
+//    {
+//        if ($e instanceof NotFoundHttpException) {
+//            if (view()->exists($view = $this->getHttpExceptionView($e))) {
+//                return response()->view('errors.404', [
+//                    'errors' => new ViewErrorBag,
+//                    'exception' => $e,
+//                ], $e->getStatusCode(), $e->getHeaders());
+//            }
+//        }
+//
+//        return parent::renderHttpException($e);
+//    }
 
     /**
      * @param string $message
