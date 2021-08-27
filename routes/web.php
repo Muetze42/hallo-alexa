@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\PageMeta;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::resource('/kontakt', ContactController::class, ['names' => 'contact'])->only(['index', 'store']);
+Route::middleware([PageMeta::class, HandleInertiaRequests::class])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::resource('/kontakt', ContactController::class, ['names' => 'contact'])->only(['index', 'store']);
+});
 
 if (config('app.env') === 'local' && request()->getClientIp() === request()->ip()) {
     Route::resource('/test', \App\Http\Controllers\DevelopmentController::class);
