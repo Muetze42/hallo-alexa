@@ -31,6 +31,9 @@ return [
     | Specific settings for this app
     |
     */
+    'open-graph' => [
+        'fallback-image' => 'img/fallback.jpg',
+    ],
     'count_delay' => env('LINK_COUNT_DELAY',240) > 10 ? env('LINK_COUNT_DELAY') : 10,
     'nova' => [
         'external_link_class' => 'no-underline dim text-primary',

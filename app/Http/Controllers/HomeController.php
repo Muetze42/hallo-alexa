@@ -16,16 +16,8 @@ class HomeController extends Controller
     {
         $links = Link::where('active', true)->orderBy('order')->get();
 
-        $meta = Page::where('route', 'home')->first();
-
         return Inertia::render('Home/Index', [
-            'links'     => $links,
-            'metaTitle' => $meta->title,
-            'metaDesc'  => $meta->description,
-        ])->withViewData([
-            'metaTitle'  => $meta->title,
-            'metaDesc'   => $meta->description,
-            'metaRobots' => Page::ROBOTS[$meta->robots],
+            'links' => $links,
         ]);
     }
 }

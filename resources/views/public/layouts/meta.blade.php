@@ -34,4 +34,16 @@
             <meta property="og:image:height" content="{{ $size[1] }}">
         @endif
     @endif
+@else
+    @php $image = config('muetze-site.open-graph.fallback-image', 'img/fallback.jpg') @endphp
+    <meta property="og:image" content="{{ url($image) }}">
+    @if(file_exists($image))
+        @php $size = @getimagesize($image) @endphp
+        @if(!empty($size[0]))
+            <meta property="og:image:width" content="{{ $size[0] }}">
+        @endif
+        @if(!empty($size[1]))
+            <meta property="og:image:height" content="{{ $size[1] }}">
+        @endif
+    @endif
 @endif

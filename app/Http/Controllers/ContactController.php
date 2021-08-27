@@ -28,17 +28,14 @@ class ContactController extends Controller
     {
         $meta = Page::where('route', 'contact')->first();
 
-        return Inertia::render('Contact/Index', [
-            'metaTitle' => $meta->title,
-            'metaDesc'  => $meta->description,
-        ])->withViewData([
-            'metaTitle'  => $meta->title,
-            'metaDesc'   => $meta->description,
-            'metaRobots' => Page::ROBOTS[$meta->robots],
-        ]);
+        return Inertia::render('Contact/Index');
     }
 
-    public function store(Request $request)
+    /**
+     * @param Request $request
+     * @return HttpResponse|Application|ResponseFactory
+     */
+    public function store(Request $request): HttpResponse|Application|ResponseFactory
     {
         // Todo : Create Validator with correct response
 

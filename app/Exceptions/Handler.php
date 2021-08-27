@@ -5,9 +5,14 @@ namespace App\Exceptions;
 use App\Notifications\Telegram\ErrorReport;
 use App\Traits\ErrorExceptionNotify;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\ViewErrorBag;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -65,8 +70,44 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/*')) {
+                return $this->JsonErrorResponse('404', 404);
+            }
+            return null;
         });
+    }
+
+    /**
+     * Render the given HttpException.
+     *
+     * @param HttpExceptionInterface $e
+     * @return Response
+     */
+    protected function renderHttpException(HttpExceptionInterface $e): Response
+    {
+        if ($e instanceof NotFoundHttpException) {
+            if (view()->exists($view = $this->getHttpExceptionView($e))) {
+                return response()->view('errors.404', [
+                    'errors' => new ViewErrorBag,
+                    'exception' => $e,
+                ], $e->getStatusCode(), $e->getHeaders());
+            }
+        }
+
+        return parent::renderHttpException($e);
+    }
+
+    /**
+     * @param string $message
+     * @param int $status
+     * @return JsonResponse
+     */
+    protected function JsonErrorResponse(string $message, int $status): JsonResponse
+    {
+        return response()->json([
+            'error' => true,
+            'message' => $message,
+        ], $status);
     }
 }

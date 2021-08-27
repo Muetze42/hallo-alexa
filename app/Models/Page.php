@@ -62,8 +62,8 @@ class Page extends Model implements HasMedia
     {
         $this->addMediaCollection('og')
             ->singleFile()
-            ->useFallbackUrl(url('img/fallback.jpg'))
-            ->useFallbackPath(public_path('/img/fallback.jpg'));
+            ->useFallbackUrl(url(config('muetze-site.open-graph.fallback-image', 'img/fallback.jpg')))
+            ->useFallbackPath(public_path(config('muetze-site.open-graph.fallback-image', 'img/fallback.jpg')));
     }
 
     /**

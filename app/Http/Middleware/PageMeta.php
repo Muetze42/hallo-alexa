@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use App\Models\Page;
 use Closure;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
 
 class PageMeta
 {
@@ -17,7 +19,7 @@ class PageMeta
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        $route = \Illuminate\Support\Facades\Route::currentRouteName();
+        $route = Route::currentRouteName();
         $page = null;
         if ($route) {
             $route = explode('.', $route)[0];
@@ -30,6 +32,8 @@ class PageMeta
                 $page['robots'] = Page::ROBOTS[$page['robots']];
                 unset($page['media']);
             }
+
+            Inertia::share('metaTitle', $page['title']);
         }
 
         view()->share('pageMeta', $page);
