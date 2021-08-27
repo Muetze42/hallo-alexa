@@ -24,7 +24,7 @@ class VisitorsStatsLogging
         try {
             $domain = $this->getDomain($referer);
 
-            if ($referer && $referer!='null' && $domain != $request->server('SERVER_NAME')) {
+            if ($referer && $referer!='null' && $domain != $request->server('SERVER_NAME') && $domain != $request->server('SERVER_ADDR')) {
 
                 $host = ReferrerHost::firstOrCreate(['name' => $domain]);
 
