@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use ScssPhp\ScssPhp\Exception\SassException;
 
 class AdditionalExists
@@ -20,6 +21,10 @@ class AdditionalExists
     {
         if (!file_exists(public_path('css/buttons.css'))) {
             gerateAdditionalStylesheet();
+        }
+
+        if (!file_exists(public_path('sitemap.xml'))) {
+            Artisan::call('sitemap');
         }
 
         return $next($request);
