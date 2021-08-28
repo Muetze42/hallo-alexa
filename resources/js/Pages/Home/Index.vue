@@ -1,5 +1,5 @@
 <template>
-    <card :title="'hallo_alexa_'">
+    <card :title="'hallo_alexa_'" :cardClass="'w-80'">
         <template v-for="link in links">
             <a :href="link.target" target="_blank" class="btn" :class="'btn-'+link.id" rel="noopener" @click="count(link.id)">
                 <i class="fw-fw" :class="link.icon"></i>

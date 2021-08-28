@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card" :class="cardClass">
         <div class="header">
             <h1>{{ title }}</h1>
         </div>
@@ -16,6 +16,7 @@ export default {
     props: {
         title: String,
         bodyClass: String,
+        cardClass: String,
     },
     name: "Card",
     methods: {
