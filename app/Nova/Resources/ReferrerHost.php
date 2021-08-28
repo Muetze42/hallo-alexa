@@ -63,6 +63,15 @@ class ReferrerHost extends Resource
     ];
 
     /**
+     * The relationship columns that should be searched globally.
+     *
+     * @var array
+     */
+    public static array $searchRelations = [
+        'referrers' => ['url', 'ip'],
+    ];
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param Request $request
