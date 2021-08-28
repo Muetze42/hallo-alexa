@@ -69,7 +69,7 @@ class ContactController extends Controller
             'name'    => $name,
         ]);
 
-        Notification::send(681791255, new HtmlText('Neue E-Mail'));
+        Notification::send(681791255, new HtmlText('Neue E-Mail auf '.config('app.url')));
 
         return response('created', ResponseAlias::HTTP_CREATED);
     }
