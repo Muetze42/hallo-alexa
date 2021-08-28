@@ -157,9 +157,7 @@ class BelongsTo extends Field implements RelatableField
 
         if ($resource->relationLoaded($this->attribute)) {
             $value = $resource->getRelation($this->attribute);
-        }
-
-        if (! $value) {
+        } else {
             $value = $resource->{$this->attribute}()->withoutGlobalScopes()->getResults();
         }
 

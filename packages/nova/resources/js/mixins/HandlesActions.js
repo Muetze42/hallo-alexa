@@ -134,10 +134,8 @@ export default {
       }
 
       if (data.modal) {
-        execute(() => {
-          this.actionResponseData = data
-          this.showActionResponseModal = true
-        })
+        this.actionResponseData = data
+        this.showActionResponseModal = true
       } else if (data.message) {
         execute(() => {
           Nova.success(data.message)

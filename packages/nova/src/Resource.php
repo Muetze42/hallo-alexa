@@ -351,7 +351,7 @@ abstract class Resource implements ArrayAccess, JsonSerializable, UrlRoutable
      *
      * @return string
      */
-    public function title(): string
+    public function title()
     {
         return (string) data_get($this, static::$title);
     }
