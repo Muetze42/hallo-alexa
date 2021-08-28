@@ -20,7 +20,7 @@ mix.js('resources/js/app.js', 'public/js').vue({
         plugins: [
             new webpack.DefinePlugin({
                 __VUE_OPTIONS_API__: true,
-                __VUE_PROD_DEVTOOLS__: true, // Todo: Disable for production
+                __VUE_PROD_DEVTOOLS__: !mix.inProduction(),
             }),
         ],
     };

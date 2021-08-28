@@ -1,5 +1,5 @@
 <template>
-    <form @keyup="isDisabled()" @submit.prevent="submit">
+    <form @input="isDisabled()" @submit.prevent="submit">
         <card :title="'Kontakt'" :bodyClass="'form-body'" :cardClass="'w-80'">
             <div v-if="sent" class="contact-success">
                 <p>Vielen Dank für Deine Nachricht.</p>
