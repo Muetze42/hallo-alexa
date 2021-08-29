@@ -12,7 +12,11 @@ module.exports = {
           // padding: '1rem',
           // center: true,
       },
-    extend: {},
+      extend: {
+          spacing: {
+              '120': '30rem'
+          }
+      },
   },
   variants: {
     extend: {},

@@ -1,6 +1,6 @@
 <template>
     <form @input="isDisabled()" @submit.prevent="submit">
-        <card :title="'Kontakt'" :bodyClass="'form-body'" :cardClass="'w-80'">
+        <card :title="'Kontakt'" :bodyClass="'form-body'" :cardClass="'w-120'">
             <div v-if="sent" class="contact-success">
                 <p>Vielen Dank für Deine Nachricht.</p>
                 <i class="far fa-envelope fa-5x"></i>
@@ -11,30 +11,42 @@
                         Name
                     </label>
                     <input id="name" type="text" placeholder="Name" v-model="name" maxlength="50" required>
+                    <ul v-if="submitErrors.name">
+                        <li v-for="message in submitErrors.name">{{ message }}</li>
+                    </ul>
                 </div>
                 <div class="form-row">
                     <label for="subject">
                         Betreff
                     </label>
                     <input id="subject" type="text" placeholder="Betreff" v-model="subject" maxlength="50" required>
+                    <ul v-if="submitErrors.subject">
+                        <li v-for="message in submitErrors.subject">{{ message }}</li>
+                    </ul>
                 </div>
                 <div class="form-row">
                     <label for="message">
                         Nachricht
                     </label>
                     <textarea id="message" v-model="message" required>Nachricht</textarea>
+                    <ul v-if="submitErrors.message">
+                        <li v-for="message in submitErrors.message">{{ message }}</li>
+                    </ul>
                 </div>
                 <div class="form-row">
                     <label for="email">
                         E-Mail-Adresse
                     </label>
                     <input id="email" type="email" placeholder="E-Mail-Adresse" autocomplete="email" v-model="email" @keyup="mailConfirmed()" required>
+                    <ul v-if="submitErrors.email">
+                        <li v-for="message in submitErrors.email">{{ message }}</li>
+                    </ul>
                 </div>
                 <div class="form-row">
-                    <label for="confirm">
+                    <label for="email_confirmation">
                         E-Mail-Adresse bestätigen
                     </label>
-                    <input id="confirm" type="email" placeholder="E-Mail-Adresse bestätigen" v-model="confirm" @keyup="mailConfirmed()" required>
+                    <input id="email_confirmation" type="email" placeholder="E-Mail-Adresse bestätigen" v-model="email_confirmation" @keyup="mailConfirmed()" required>
                     <p v-if="!confirmed">Die eingegebenen E-Mail-Adressen stimmen nicht überein.</p>
                 </div>
             </template>
@@ -72,7 +84,7 @@ export default {
         name: String,
         message: String,
         email: String,
-        confirm: String,
+        email_confirmation: String,
         confirmation: Boolean,
     },
     components: {
@@ -83,6 +95,7 @@ export default {
         sending: false,
         disabled: true,
         sent: false,
+        submitErrors: [],
     }),
     methods: {
         submit: _.debounce(function () {
@@ -95,31 +108,18 @@ export default {
                 name: this.name,
                 message: this.message,
                 email: this.email,
-                confirm: this.confirm,
+                email_confirmation: this.email_confirmation,
             }) .then(response => {
                 this.sent = true
             }).catch((error) => {
-                if (error.response && error.response.status === 421) {
-                    if (window.confirm(error.response.data)) {
-                        this.sending = false
-                    }
+                if (error.response && error.response.status === 422) {
+                    this.sending = false
+                    this.submitErrors = error.response.data.errors;
                 } else {
-                    if (window.confirm("Ein unbekannter Fehler ist aufgetreten. Bitte versuche es zu einem anderen Zeitpunkt nochmal")) {
+                    if (window.confirm("An unknown error has occurred. Please try again at another time")) {
                         this.sending = false
                     }
                 }
-                /*
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log('Error', error.message);
-                }
-                console.log(error.config);
-                */
             })
         }, 10),
         isDisabled: function() {
@@ -127,14 +127,14 @@ export default {
             if (this.sending) {
                 return this.disabled = true
             }
-            if (this.subject && this.message && this.email && this.confirm && this.confirmed) {
+            if (this.subject && this.message && this.email && this.email_confirmation && this.confirmed) {
                 return this.disabled = false
             }
             return this.disabled = true
         },
         mailConfirmed: function() {
             let email = this.email
-            let confirm = this.confirm
+            let confirm = this.email_confirmation
 
             if (!confirm || !email) {
                 return this.confirmed = true

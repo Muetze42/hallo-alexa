@@ -4,6 +4,7 @@ namespace App\Nova\Resources;
 
 use App\Nova\Actions\ContactRequest\ChangeStatus;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -92,6 +93,10 @@ class ContactRequest extends Resource
             Text::make(__('Status'), 'status', function () {
                 return '<i class="'.static::$model::STATUS_COLORS[$this->status].' fas '.static::$model::STATUS_ICONS[$this->status].' fa-lg"></i>';
             })->sortable()->asHtml(),
+            DateTime::make(__('Created at'), 'created_at')
+                ->sortable(),
+            DateTime::make(__('Updated at'), 'updated_at')
+                ->sortable(),
         ];
     }
 

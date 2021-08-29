@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use App\Notifications\Telegram\HtmlText;
+use App\Rules\Honeypot;
+use App\Rules\NoTrashMail;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -35,41 +37,17 @@ class ContactController extends Controller
      */
     public function store(Request $request): HttpResponse|Application|ResponseFactory
     {
-        // Todo : Create Validator with correct response
-
-        $subject = $request->input('subject');
-        $message = $request->input('message');
-        $email = $request->input('email');
-        $email2 = $request->input('confirm');
-        $name = $request->input('name');
-        $confirmation = $request->input('confirmation');
-
-        if ($confirmation) {
-            return $this->returnError(__('Wer hat denn da am Honigtopf genascht?'));
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $this->returnError(__('Das ist keine gültige E-Mail-Adresse'));
-        }
-        if ($email != $email2) {
-            return $this->returnError(__('Die 2 Mail-Adressen stimmen nicht überein'));
-        }
-        $mailValidator = new EmailValidator();
-        if (!$mailValidator->isValid($email, new DNSCheckValidation())) {
-            return $this->returnError(__('Diese E-Mail ist nicht erreichbar'));
-        }
-        if (TrashMail::where('provider', explode('@', $email)[1])->first()) {
-            return $this->returnError(__('Dieser E-Mail-Anbieter ist nicht zulässig'));
-        }
-
-        ContactRequest::create([
-            'subject' => $subject,
-            'message' => $message,
-            'email'   => $email,
-            'name'    => $name,
+        $request->validate([
+            'name'         => ['string', 'required'],
+            'subject'      => ['string', 'required'],
+            'message'      => ['string', 'required'],
+            'email'        => ['required', 'email', 'confirmed', new NoTrashMail],
+            'confirmation' => [new Honeypot],
         ]);
 
-        Notification::send(681791255, new HtmlText('Neue E-Mail auf '.config('app.url')));
+        ContactRequest::create($request->all());
+
+        Notification::send(config('services.telegram-bot-api.receiver'), new HtmlText(__('New message on :site', ['site' => config('app.url')])));
 
         return response('created', ResponseAlias::HTTP_CREATED);
     }
