@@ -21,6 +21,7 @@ Route::middleware([PageMeta::class, HandleInertiaRequests::class])->group(functi
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('/kontakt', ContactController::class, ['names' => 'contact'])->only(['index', 'store']);
 });
+Route::post('/link/{link}', [HomeController::class, 'count']);
 
 if (config('app.env') === 'local' && request()->getClientIp() === request()->ip()) {
     Route::resource('/test', \App\Http\Controllers\DevelopmentController::class);

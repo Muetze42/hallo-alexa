@@ -10,6 +10,20 @@ use Laravel\Nova\Resource as NovaResource;
 abstract class Resource extends NovaResource
 {
     /**
+     * The column by which to sort as default
+     *
+     * @var string
+     */
+    public static string $defaultSort = '';
+
+    /**
+     * Sort ascending or descending as default
+     *
+     * @var string
+     */
+    public static string $defaultOrder = 'asc';
+    
+    /**
      * Build an "index" query for the given resource.
      *
      * @param NovaRequest $request
@@ -18,6 +32,10 @@ abstract class Resource extends NovaResource
      */
     public static function indexQuery(NovaRequest $request, $query): Builder
     {
+        if (static::$defaultSort && empty($request->get('orderBy'))) {
+            $query->getQuery()->orders = [];
+            return $query->orderBy(static::$defaultSort, static::$defaultOrder);
+        }
         return $query;
     }
 
