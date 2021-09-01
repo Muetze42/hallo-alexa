@@ -33,6 +33,11 @@ class Link extends Model implements Sortable
         'order',
     ];
 
+    /**
+     * The sortable settings
+     *
+     * @var array
+     */
     public array $sortable = [
         'order_column_name' => 'order',
         'sort_when_creating' => true,
@@ -47,6 +52,9 @@ class Link extends Model implements Sortable
         'active' => true,
     ];
 
+    /**
+     * @return LogOptions
+     */
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

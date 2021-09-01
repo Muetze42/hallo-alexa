@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -52,6 +53,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             '_token' => csrf_token(),
             'authed' => auth()->check(),
+            'menuItems' => Menu::where('active', true)->orderBy('order')->get(['external', 'route', 'icon', 'text'])->toArray(),
         ]);
     }
 }

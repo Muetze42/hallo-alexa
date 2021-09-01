@@ -26,12 +26,16 @@ createApp({
             locale: String,
             _token: String,
             authed: Boolean,
+            menuItems: Array,
         },
         methods: {
             route: (name, params, absolute) => route(name, params, absolute, Ziggy),
             setViewHeight: function() {
                 let vh = window.innerHeight * 0.01
                 document.documentElement.style.setProperty('--vh', `${vh}px`)
+            },
+            dd(item) {
+                console.log(item)
             },
         },
         mounted: function() {

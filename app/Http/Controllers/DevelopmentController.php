@@ -22,6 +22,14 @@ class DevelopmentController extends Controller
 
     public function index()
     {
+        $user = User::find(1);
+        Auth::login($user, true);
+        dd($user);
+
+        $items = Menu::where('active', true)->orderBy('order')->get(['route', 'icon', 'text'])->toArray();
+
+        dd($items);
+
         (new Sitemap)->create();
 
         $page = Page::find(2);
