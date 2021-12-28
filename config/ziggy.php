@@ -1,5 +1,10 @@
 <?php
 
 return [
-    'except' => ['ignition.*', 'ignition.*', 'nova.*'],
+    'except' => [
+        'ignition.*',
+        'ignition.*',
+        'nova.*',
+        'api.*',
+    ],
 ];

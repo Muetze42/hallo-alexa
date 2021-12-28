@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\LinkController;
+use App\Http\Controllers\Api\YouTube\PushNotificationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+Route::get('push-notifications/youtube', [PushNotificationsController::class, 'get'])->name('youtube.get');
+Route::post('push-notifications/youtube', [PushNotificationsController::class, 'post'])->name('youtube.post');

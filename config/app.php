@@ -167,6 +167,7 @@ return [
          */
         App\Providers\NovaServiceProvider::class,
         Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...

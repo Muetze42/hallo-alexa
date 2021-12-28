@@ -19,6 +19,7 @@
         "ext-pdo": "*",
         "dmitrybubyakin/nova-medialibrary-field": "^3.2",
         "fruitcake/laravel-cors": "^2.0",
+        "google/apiclient": "^2.12",
         "guzzlehttp/guzzle": "^7.0.1",
         "hisorange/browser-detect": "^4.4",
         "inertiajs/inertia-laravel": "^0.4.4",
@@ -41,6 +42,7 @@
         "titasgailius/search-relations": "^2.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
@@ -68,19 +70,23 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi"
+            "@php artisan helper"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ]
+        ],
+        "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
     },
     "extra": {
         "laravel": {
             "dont-discover": []
-        }
+        },
+        "google/apiclient-services": [
+            "YouTube"
+        ]
     },
     "config": {
         "optimize-autoloader": true,

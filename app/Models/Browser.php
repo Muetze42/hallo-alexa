@@ -5,6 +5,58 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Browser
+ *
+ * @property int $id
+ * @property int $device_type
+ * @property int $is_bot
+ * @property int $os
+ * @property string $browser_name
+ * @property string $browser_family
+ * @property string $browser_version
+ * @property int $browser_version_major
+ * @property int $browser_version_minor
+ * @property int $browser_version_patch
+ * @property string $browser_engine
+ * @property string $platform_name
+ * @property string $platform_family
+ * @property string $platform_version
+ * @property int $plattform_version_major
+ * @property int $plattform_version_minor
+ * @property int $plattform_version_patch
+ * @property string|null $device_family
+ * @property string|null $device_model
+ * @property string|null $mobile_grade
+ * @property string|null $ip
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereBrowserEngine($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereBrowserFamily($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereBrowserName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereBrowserVersion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereBrowserVersionMajor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereBrowserVersionMinor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereBrowserVersionPatch($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereDeviceFamily($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereDeviceModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereDeviceType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereIsBot($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereMobileGrade($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser whereOs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser wherePlatformFamily($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser wherePlatformName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser wherePlatformVersion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser wherePlattformVersionMajor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser wherePlattformVersionMinor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Browser wherePlattformVersionPatch($value)
+ * @mixin \Eloquent
+ */
 class Browser extends Model
 {
     use HasFactory;
