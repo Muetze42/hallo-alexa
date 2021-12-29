@@ -4,7 +4,16 @@ namespace App\Helpers;
 
 use App\Notifications\Telegram\HtmlText;
 use App\Notifications\Telegram\HtmlTextWithImage;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Notification;
+use InstagramScraper\Exception\InstagramAuthException;
+use InstagramScraper\Exception\InstagramChallengeRecaptchaException;
+use InstagramScraper\Exception\InstagramChallengeSubmitPhoneNumberException;
+use InstagramScraper\Exception\InstagramException;
+use InstagramScraper\Exception\InstagramNotFoundException;
+use InstagramScraper\Instagram;
+use Phpfastcache\Helper\Psr16Adapter;
+use Psr\SimpleCache\InvalidArgumentException;
 
 class Social
 {
@@ -35,34 +44,46 @@ class Social
         }
     }
 
+    /**
+     * @throws InstagramChallengeRecaptchaException
+     * @throws InstagramChallengeSubmitPhoneNumberException
+     * @throws InstagramNotFoundException
+     * @throws InstagramAuthException
+     * @throws InstagramException
+     * @throws InvalidArgumentException
+     */
     public static function updateLatestInstagramPost()
     {
-        $url = sprintf(
-            'https://www.instagram.com/%s/?__a=1',
-            config('services.instagram.profile')
+        $instagram = Instagram::withCredentials(
+            new Client(),
+            config('services.instagram.login'),
+            config('services.instagram.password'),
+            new Psr16Adapter('Files')
         );
+        $instagram->login();
+        $instagram->saveSession();
+        $medias = $instagram->getMedias(config('services.instagram.profile'), 1);
 
-        $content = file_get_contents($url);
-        $data = json_decode($content, true);
+        if (!empty($medias[0])) {
+            $shortCode = $medias[0]['shortCode'];
+            $link = $medias[0]['link'];
+            $image = $medias[0]['imageLowResolutionUrl'];
 
-        $latest = !empty($data['graphql']['user']['edge_owner_to_timeline_media']['edges'][0]['node']) ? $data['graphql']['user']['edge_owner_to_timeline_media']['edges'][0]['node'] : '';
-
-        if ($latest) {
             $instagram = \App\Models\Social::where([
                 'provider'    => 'instagram',
-                'provider_id' => $latest['shortcode'],
+                'provider_id' => $shortCode,
             ])->first();
 
             if (!$instagram) {
                 \App\Models\Social::updateOrCreate(
                     ['provider' => 'instagram'],
                     [
-                        'provider_id' => $latest['shortcode'],
-                        'url'         => $latest['display_url'],
+                        'provider_id' => $shortCode,
+                        'url'         => $image,
                     ],
                 );
 
-                Notification::send(config('services.telegram-bot-api.group_id'), new HtmlTextWithImage(__("Neuer Instagram-Beitrag von Alexa\n\nhttps://www.instagram.com/p/".$latest['shortcode']), $latest['display_url']));
+                Notification::send(config('services.telegram-bot-api.group_id'), new HtmlTextWithImage(__("Neuer Instagram-Beitrag von Alexa\n\n".$link), $image));
             }
         } else {
             Notification::send(config('services.telegram-bot-api.receiver'), new HtmlText(__('Instagram scrapp not possible on '.config('app.url'))));

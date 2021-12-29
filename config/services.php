@@ -42,7 +42,9 @@ return [
     ],
 
     'instagram' => [
-        'profile' => env('INSTAGRAM_PROFILE', 'hallo_alexa_'),
+        'profile'  => env('INSTAGRAM_PROFILE', 'hallo_alexa_'),
+        'login'    => env('INSTAGRAM_LOGIN'),
+        'password' => env('INSTAGRAM_PASSWORD')
     ],
 
 ];
