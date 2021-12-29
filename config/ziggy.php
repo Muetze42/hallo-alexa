@@ -3,7 +3,6 @@
 return [
     'except' => [
         'ignition.*',
-        'ignition.*',
         'nova.*',
         'api.*',
     ],

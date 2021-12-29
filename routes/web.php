@@ -34,4 +34,4 @@ Route::middleware('auth')->group(function () {
     })->name('social.instagram.latest-post');
 });
 Route::post('/link/{link}', [HomeController::class, 'count']);
-Route::get('{slug}', [FallbackController::class, 'slug']);
+Route::get('{slug?}', [FallbackController::class, 'slug'])->name('slug')->where('slug', '^((?!ignition|nova|admin).)*$');
