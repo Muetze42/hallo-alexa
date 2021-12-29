@@ -53,8 +53,9 @@ class Shorten extends Resource
                 ->rules('required', function ($attribute, $value, $fail) use ($request) {
                     $id = !empty($this->id) ? $this->id : 0;
                     $realValue = Str::slug(trim($value), '-', 'de');
+                    $routes = json_decode(file_get_contents(storage_path('data/routes.json')));
 
-                    if (app(static::$model)::where($attribute, $realValue)->where('id', '!=', $id)->first()) {
+                    if (in_array($realValue, $routes) || app(static::$model)::where($attribute, $realValue)->where('id', '!=', $id)->first()) {
                         return $fail(__('validation.unique', ['attribute' => __('Uri').' ('.$realValue.')']));
                     }
 
