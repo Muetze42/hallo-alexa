@@ -12,8 +12,13 @@ use InstagramScraper\Exception\InstagramChallengeSubmitPhoneNumberException;
 use InstagramScraper\Exception\InstagramException;
 use InstagramScraper\Exception\InstagramNotFoundException;
 use InstagramScraper\Instagram;
+use Phpfastcache\Exceptions\PhpfastcacheInvalidArgumentException;
+use Phpfastcache\Exceptions\PhpfastcacheInvalidConfigurationException;
+use Phpfastcache\Exceptions\PhpfastcacheInvalidTypeException;
 use Phpfastcache\Helper\Psr16Adapter;
 use Psr\SimpleCache\InvalidArgumentException;
+use Phpfastcache\CacheManager;
+use Phpfastcache\Config\ConfigurationOption;
 
 class Social
 {
@@ -45,15 +50,22 @@ class Social
     }
 
     /**
+     * @throws InstagramAuthException
      * @throws InstagramChallengeRecaptchaException
      * @throws InstagramChallengeSubmitPhoneNumberException
-     * @throws InstagramNotFoundException
-     * @throws InstagramAuthException
      * @throws InstagramException
+     * @throws InstagramNotFoundException
      * @throws InvalidArgumentException
+     * @throws PhpfastcacheInvalidArgumentException
+     * @throws PhpfastcacheInvalidConfigurationException
+     * @throws PhpfastcacheInvalidTypeException
      */
     public static function updateLatestInstagramPost()
     {
+        CacheManager::setDefaultConfig(new ConfigurationOption([
+            'path' => storage_path('temp')
+        ]));
+
         $instagram = Instagram::withCredentials(
             new Client(),
             config('services.instagram.login'),
