@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d16d10a7ec069e792e00eada3c5e1b4",
+    "content-hash": "da309a6cd22d5cdf595c6e0bb6eb5040",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -392,6 +392,60 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.1"
             },
             "time": "2021-08-13T13:06:58+00:00"
+        },
+        {
+            "name": "digital-creative/conditional-container",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dcasia/conditional-container.git",
+                "reference": "fc7ec224095f99ebdbff5e780e5aed3ece6120cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dcasia/conditional-container/zipball/fc7ec224095f99ebdbff5e780e5aed3ece6120cf",
+                "reference": "fc7ec224095f99ebdbff5e780e5aed3ece6120cf",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^3.12.0",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DigitalCreative\\ConditionalContainer\\ConditionalContainerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DigitalCreative\\ConditionalContainer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rafael Milewski"
+                }
+            ],
+            "description": "Provides an easy way to conditionally show and hide fields in your Nova resources.",
+            "keywords": [
+                "conditional",
+                "dependency",
+                "dynamic",
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/dcasia/conditional-container/issues",
+                "source": "https://github.com/dcasia/conditional-container/tree/v1.4.0"
+            },
+            "time": "2021-09-18T15:49:48+00:00"
         },
         {
             "name": "dmitrybubyakin/nova-medialibrary-field",
@@ -4915,7 +4969,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/instagram-php-scraper-master",
-                "reference": "1af8a35697a55ea5bef09b4a71af1035fb348f06"
+                "reference": "ab9a5397dea00991186d95840e09e4314d18cb33"
             },
             "require": {
                 "ext-curl": "*",
@@ -4927,7 +4981,7 @@
             },
             "require-dev": {
                 "guzzlehttp/guzzle": "*",
-                "phpfastcache/phpfastcache": "^7.1",
+                "phpfastcache/phpfastcache": "*",
                 "phpunit/phpunit": "*"
             },
             "type": "library",

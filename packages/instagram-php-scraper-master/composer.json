@@ -24,7 +24,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "*",
-        "phpfastcache/phpfastcache": "^7.1",
+        "phpfastcache/phpfastcache": "*",
         "guzzlehttp/guzzle": "*"
     },
     "autoload": {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FallbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\PageMeta;
@@ -33,3 +34,4 @@ Route::middleware('auth')->group(function () {
     })->name('social.instagram.latest-post');
 });
 Route::post('/link/{link}', [HomeController::class, 'count']);
+Route::get('{slug}', [FallbackController::class, 'slug']);

@@ -23,6 +23,7 @@
         "ext-libxml": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
+        "digital-creative/conditional-container": "^1.4",
         "dmitrybubyakin/nova-medialibrary-field": "^3.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
