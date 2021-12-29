@@ -28,8 +28,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('youtube:subscribe')->weekly();
+
+        $schedule->call(function () {
+            getLatestYouTubeVideo();
+        })->hourly();
+
         $schedule->command('ip:clear')
             ->everyMinute();
+
 //         $schedule->command('queue:work --stop-when-empty --timeout=0')->everyMinute()->withoutOverlapping();
     }
 
