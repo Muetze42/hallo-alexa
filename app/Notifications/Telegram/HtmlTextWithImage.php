@@ -7,20 +7,23 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramChannel;
-use NotificationChannels\Telegram\TelegramMessage;
+use NotificationChannels\Telegram\TelegramFile as TelegramMessage;
 
-class HtmlText extends Notification
+class HtmlTextWithImage extends Notification
 {
     public string $content;
+    public string $imageUrl;
 
     /**
      * Create a new notification instance.
      *
      * @param string $content
+     * @param string $imageUrl
      */
-    public function __construct(string $content)
+    public function __construct(string $content, string $imageUrl)
     {
         $this->content = $content;
+        $this->imageUrl = $imageUrl;
     }
 
     /**
@@ -44,6 +47,7 @@ class HtmlText extends Notification
         return TelegramMessage::create()
             ->to($notifiable)
             ->content($this->content)
+            ->file($this->imageUrl, 'photo')
             ->options(['parse_mode' => 'html']);
     }
 }

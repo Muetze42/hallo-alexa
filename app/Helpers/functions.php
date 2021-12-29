@@ -270,29 +270,6 @@ if (!function_exists('getClientOS')) {
     }
 }
 
-if (!function_exists('getLatestYouTubeVideo')) {
-    /**
-     * Get the latest uploaded Video and save it to the database
-     */
-    function getLatestYouTubeVideo()
-    {
-        $url = sprintf(
-            'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=%s&maxResults=1&order=date&type=video&key=%s',
-            config('services.youtube.channel_id'),
-            config('services.youtube.api_key')
-        );
-
-        $content = file_get_contents($url);
-        $data = json_decode($content, true);
-
-        $videoId = $data['items'][0]['id']['videoId'];
-        \App\Models\Social::updateOrCreate(
-            ['provider' => 'youtube'],
-            ['provider_id' => $videoId],
-        );
-    }
-}
-
 if (!function_exists('errorImage')) {
     function errorImage(int $errorCode): string
     {

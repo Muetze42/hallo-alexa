@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Social whereProviderId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Social whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $url
+ * @method static \Illuminate\Database\Eloquent\Builder|Social whereUrl($value)
  */
 class Social extends Model
 {
@@ -47,5 +49,6 @@ class Social extends Model
     protected $fillable = [
         'provider',
         'provider_id',
+        'url',
     ];
 }

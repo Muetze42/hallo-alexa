@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('socials', function (Blueprint $table) {
             $table->string('provider')->primary();
             $table->string('provider_id');
+            $table->text('url')->nullable();
             $table->timestamps();
         });
     }

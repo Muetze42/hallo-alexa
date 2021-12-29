@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SocialController;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\PageMeta;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +23,13 @@ Route::middleware([PageMeta::class, HandleInertiaRequests::class])->group(functi
 });
 Route::middleware('auth')->group(function () {
     Route::get('update/youtube/latest', function () {
-        getLatestYouTubeVideo();
-
+        \App\Helpers\Social::updateLatestYouTubeVideo();
         return redirect(config('nova.path'));
     })->name('social.youtube.latest-video');
+
+    Route::get('update/instagram/latest', function () {
+        \App\Helpers\Social::updateLatestInstagramPost();
+        return redirect(config('nova.path'));
+    })->name('social.instagram.latest-post');
 });
 Route::post('/link/{link}', [HomeController::class, 'count']);

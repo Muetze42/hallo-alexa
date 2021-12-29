@@ -10,7 +10,7 @@
         ></iframe>
     </div>
     <div class="text-center mt-2">
-        <a href="https://www.youtube.com/watch?v={{ $youtube->provider_id }}" class="no-underline dim text-primary font-bold">https://www.youtube.com/watch?v={{ $youtube->provider_id }}</a>
+        <a href="https://www.youtube.com/watch?v={{ $youtube->provider_id }}" class="no-underline dim text-primary font-bold" target="_blank" rel="noopener">https://www.youtube.com/watch?v={{ $youtube->provider_id }}</a>
     </div>
 @endif
 <div class="text-center mt-4">

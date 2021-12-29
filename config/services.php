@@ -41,4 +41,8 @@ return [
         'api_key'    => env('YOUTUBE_API_KEY'),
     ],
 
+    'instagram' => [
+        'profile' => env('INSTAGRAM_PROFILE', 'hallo_alexa_'),
+    ],
+
 ];
