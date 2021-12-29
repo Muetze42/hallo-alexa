@@ -18,5 +18,5 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::get('push-notifications/youtube', [PushNotificationsController::class, 'get'])->name('youtube.get');
-Route::post('push-notifications/youtube', [PushNotificationsController::class, 'post'])->name('youtube.post');
+Route::get('push-notifications/youtube', [PushNotificationsController::class, 'get'])->name('youtube.subscribe');
+Route::post('push-notifications/youtube', [PushNotificationsController::class, 'post'])->name('youtube.notification');

@@ -3,28 +3,6 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | make:bundle command
-    |--------------------------------------------------------------------------
-    |
-    | What should be generated without option?
-    |
-    */
-    'make-bundle' => [
-        'nova-ressource' => true,
-        'migration'      => true,
-        'policy'         => true,
-        'resource'       => false,
-        'controller'     => false,
-        'api-controller' => false,
-
-        'namespaces' => [
-            'controller'     => '',
-            'api-controller' => 'Api/',
-        ],
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Hallo Alexa Settings
     |--------------------------------------------------------------------------
     |

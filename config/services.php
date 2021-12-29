@@ -33,6 +33,12 @@ return [
     'telegram-bot-api' => [
         'token'    => env('TELEGRAM_BOT_TOKEN'),
         'receiver' => env('TELEGRAM_RECEIVER'),
+        'group_id' => env('TELEGRAM_GROUP_ID'),
+    ],
+
+    'youtube' => [
+        'channel_id' => env('YOUTUBE_CHANNEL_ID'),
+        'api_key'    => env('YOUTUBE_API_KEY'),
     ],
 
 ];

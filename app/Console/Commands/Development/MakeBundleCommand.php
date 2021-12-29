@@ -36,8 +36,8 @@ class MakeBundleCommand extends Command
     {
         $migration = $this->option('m') || config('site.make-bundle.migration', true);
         $policy = $this->option('p') || config('site.make-bundle.policy', true);
-        $resource = $this->option('r') || config('site.make-bundle.resource', true);
-        $nova = $this->option('n') || config('site.make-bundle.nova-ressource', false);
+        $resource = $this->option('r') || config('site.make-bundle.resource', false);
+        $nova = $this->option('n') || config('site.make-bundle.nova-ressource', true);
         $controller = $this->option('c') || config('site.make-bundle.controller', false);
         $apiController = $this->option('a') || config('site.make-bundle.api-controller', false);
 

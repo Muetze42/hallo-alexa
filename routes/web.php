@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SocialController;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\PageMeta;
 use Illuminate\Support\Facades\Route;
@@ -21,8 +22,11 @@ Route::middleware([PageMeta::class, HandleInertiaRequests::class])->group(functi
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('/kontakt', ContactController::class, ['names' => 'contact'])->only(['index', 'store']);
 });
-Route::post('/link/{link}', [HomeController::class, 'count']);
+Route::middleware('auth')->group(function () {
+    Route::get('update/youtube/latest', function () {
+        getLatestYouTubeVideo();
 
-if (config('app.env') === 'local' && request()->getClientIp() === request()->ip()) {
-    Route::resource('/test', \App\Http\Controllers\DevelopmentController::class);
-}
+        return redirect(config('nova.path'));
+    })->name('social.youtube.latest-video');
+});
+Route::post('/link/{link}', [HomeController::class, 'count']);

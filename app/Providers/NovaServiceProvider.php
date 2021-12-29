@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Social;
+use App\Nova\Fields\HtmlCard;
 use App\Nova\Metrics\Link\LinkCounts;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
@@ -27,6 +29,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot(): void
     {
         parent::boot();
+        Nova::script('html-card', 'html-card/card.js');
     }
 
     /**
@@ -67,6 +70,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards(): array
     {
         return [
+            (new HtmlCard)->view('nova.socials', ['youtube' => Social::find('youtube')]),
             new LinkCounts,
             new ReferrerDomain,
             new DeviceType,
