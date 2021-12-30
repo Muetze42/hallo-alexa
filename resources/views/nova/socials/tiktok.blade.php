@@ -4,7 +4,7 @@
     </h3>
     <div class="text-center">
         <a href="https://www.tiktok.com/@{{ config('services.tiktok.user_name')l }}/video/{{ $tiktok->provider_id }}" target="_blank"  rel="noopener">
-            <img src="{{ $tiktok->url }}" alt="{{ $tiktok->provider_id }}">
+            <img src="{{ $tiktok->url }}" alt="{{ $tiktok->provider_id }}" style="max-height: 20rem">
         </a>
     </div>
 @endif
