@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da309a6cd22d5cdf595c6e0bb6eb5040",
+    "content-hash": "d3d2410c9f74f149bf42c08ca4f3ae5a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3777,6 +3777,56 @@
             "time": "2021-11-30T19:35:32+00:00"
         },
         {
+            "name": "norman-huth/laravel-rapidapi-clients",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Muetze42/laravel-rapidapi-clients.git",
+                "reference": "22f951064ed9b893c63879cc1af013a3876c192a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Muetze42/laravel-rapidapi-clients/zipball/22f951064ed9b893c63879cc1af013a3876c192a",
+                "reference": "22f951064ed9b893c63879cc1af013a3876c192a",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": ">=6.0.0",
+                "illuminate/support": "^7.0|^8.0",
+                "php": "^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NormanHuth\\RapidAPI\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NormanHuth\\RapidAPI\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Norman Huth",
+                    "email": "norman@huth.it",
+                    "homepage": "https://huth.it"
+                }
+            ],
+            "description": "Desc",
+            "support": {
+                "source": "https://github.com/Muetze42/laravel-rapidapi-clients/tree/main",
+                "issues": "https://github.com/Muetze42/laravel-rapidapi-clients/issues"
+            },
+            "time": "2021-12-30T20:43:48+00:00"
+        },
+        {
             "name": "norman-huth/laravel-trash-mail",
             "version": "dev-main",
             "source": {
@@ -4114,129 +4164,6 @@
             "time": "2020-10-15T08:29:30+00:00"
         },
         {
-            "name": "phpfastcache/phpfastcache",
-            "version": "9.0.0-beta5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "c9ef97528eb34fe6f5f7f166c7ddcde4478bce62"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/c9ef97528eb34fe6f5f7f166c7ddcde4478bce62",
-                "reference": "c9ef97528eb34fe6f5f7f166c7ddcde4478bce62",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "php": ">=8.0",
-                "psr/cache": "^2.0||^3.0",
-                "psr/simple-cache": "^1.0."
-            },
-            "conflict": {
-                "doctrine/couchdb": "<dev-master#9eeb9e5"
-            },
-            "require-dev": {
-                "ext-gettext": "*",
-                "jetbrains/phpstorm-stubs": "dev-master",
-                "league/climate": "^3.5",
-                "phpmd/phpmd": "@stable",
-                "phpstan/phpstan": "^0.12.98",
-                "squizlabs/php_codesniffer": "~3.0"
-            },
-            "suggest": {
-                "aws/aws-sdk-php": "~3.0",
-                "doctrine/couchdb": "^dev-master#9eeb9e5",
-                "ext-apcu": "*",
-                "ext-couchbase": "*",
-                "ext-couchbase_v3": "*",
-                "ext-intl": "*",
-                "ext-leveldb": "*",
-                "ext-memcache": "*",
-                "ext-memcached": "*",
-                "ext-mongodb": "*",
-                "ext-redis": "*",
-                "ext-sqlite": "*",
-                "ext-wincache": "*",
-                "ext-xcache": "*",
-                "google/cloud-firestore": "^1.20",
-                "mongodb/mongodb": "^1.9",
-                "phpfastcache/phpssdb": "~1.1.0",
-                "predis/predis": "^1.1",
-                "triagens/arangodb": "^3.8"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phpfastcache\\": "lib/Phpfastcache/",
-                    "Phpfastcache\\Tests\\": "tests/lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Georges.L",
-                    "email": "contact@geolim4.com",
-                    "homepage": "https://github.com/Geolim4",
-                    "role": "Actual Project Manager/Developer"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/PHPSocialNetwork/phpfastcache/graphs/contributors"
-                }
-            ],
-            "description": "PHP Abstract Cache Class - Reduce your database call using cache system. Phpfastcache handles a lot of drivers such as Apc(u), Cassandra, CouchBase, Couchdb, Mongodb, Files, (P)redis, Leveldb, Memcache(d), Ssdb, Sqlite, Wincache, Xcache, Zend Data Cache.",
-            "homepage": "https://www.phpfastcache.com",
-            "keywords": [
-                "ArangoDb",
-                "LevelDb",
-                "abstract",
-                "apc",
-                "apcu",
-                "cache",
-                "cache class",
-                "caching",
-                "cassandra",
-                "cookie",
-                "couchbase",
-                "couchdb",
-                "dynamodb",
-                "files cache",
-                "memcache",
-                "memcached",
-                "mongodb",
-                "mysql cache",
-                "pdo cache",
-                "php cache",
-                "predis",
-                "redis",
-                "ssdb",
-                "wincache",
-                "xcache",
-                "zend",
-                "zend data cache",
-                "zend disk cache",
-                "zend memory cache",
-                "zend server"
-            ],
-            "support": {
-                "issues": "https://github.com/PHPSocialNetwork/phpfastcache/issues",
-                "source": "https://github.com/PHPSocialNetwork/phpfastcache",
-                "wiki": "https://github.com/PHPSocialNetwork/phpfastcache/wiki"
-            },
-            "funding": [
-                {
-                    "url": "https://www.patreon.com/geolim4",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2021-09-29T21:57:10+00:00"
-        },
-        {
             "name": "phpoption/phpoption",
             "version": "1.8.1",
             "source": {
@@ -4479,55 +4406,6 @@
                 }
             ],
             "time": "2021-11-28T23:46:03+00:00"
-        },
-        {
-            "name": "psr/cache",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/cache.git",
-                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
-                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Cache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for caching libraries",
-            "keywords": [
-                "cache",
-                "psr",
-                "psr-6"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/cache/tree/3.0.0"
-            },
-            "time": "2021-02-03T23:26:27+00:00"
         },
         {
             "name": "psr/container",
@@ -4962,60 +4840,6 @@
                 "source": "https://github.com/bobthecow/psysh/tree/v0.10.12"
             },
             "time": "2021-11-30T14:05:36+00:00"
-        },
-        {
-            "name": "raiym/instagram-php-scraper",
-            "version": "dev-development",
-            "dist": {
-                "type": "path",
-                "url": "./packages/instagram-php-scraper-master",
-                "reference": "ab9a5397dea00991186d95840e09e4314d18cb33"
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "guzzlehttp/psr7": "*",
-                "php": "^8.0",
-                "psr/http-client": "~1.0",
-                "psr/simple-cache": "~1.0"
-            },
-            "require-dev": {
-                "guzzlehttp/guzzle": "*",
-                "phpfastcache/phpfastcache": "*",
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "InstagramScraper\\": "src/InstagramScraper/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "InstagramScraper\\Tests\\": "tests/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "raiym",
-                    "email": "r.kapishev@gmail.com"
-                }
-            ],
-            "description": "Instagram PHP Scraper. Get account information, photos and videos without any authorization",
-            "homepage": "https://github.com/raiym/instagram-php-scraper",
-            "keywords": [
-                "instagram",
-                "scraper"
-            ],
-            "support": {
-                "email": "r.kapishev@gmail.com"
-            },
-            "transport-options": {
-                "relative": true
-            }
         },
         {
             "name": "ralouphie/getallheaders",
@@ -5956,16 +5780,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.4.1",
+            "version": "v5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "9130e1a0fc93cb0faadca4ee917171bd2ca9e5f4"
+                "reference": "a2c6b7ced2eb7799a35375fb9022519282b5405e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/9130e1a0fc93cb0faadca4ee917171bd2ca9e5f4",
-                "reference": "9130e1a0fc93cb0faadca4ee917171bd2ca9e5f4",
+                "url": "https://api.github.com/repos/symfony/console/zipball/a2c6b7ced2eb7799a35375fb9022519282b5405e",
+                "reference": "a2c6b7ced2eb7799a35375fb9022519282b5405e",
                 "shasum": ""
             },
             "require": {
@@ -6035,7 +5859,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.4.1"
+                "source": "https://github.com/symfony/console/tree/v5.4.2"
             },
             "funding": [
                 {
@@ -6051,7 +5875,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-09T11:22:43+00:00"
+            "time": "2021-12-20T16:11:12+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -6420,16 +6244,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v5.4.0",
+            "version": "v5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "d2f29dac98e96a98be467627bd49c2efb1bc2590"
+                "reference": "e77046c252be48c48a40816187ed527703c8f76c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/d2f29dac98e96a98be467627bd49c2efb1bc2590",
-                "reference": "d2f29dac98e96a98be467627bd49c2efb1bc2590",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/e77046c252be48c48a40816187ed527703c8f76c",
+                "reference": "e77046c252be48c48a40816187ed527703c8f76c",
                 "shasum": ""
             },
             "require": {
@@ -6463,7 +6287,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v5.4.0"
+                "source": "https://github.com/symfony/finder/tree/v5.4.2"
             },
             "funding": [
                 {
@@ -6479,7 +6303,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-28T15:25:38+00:00"
+            "time": "2021-12-15T11:06:13+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -6668,16 +6492,16 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v5.4.0",
+            "version": "v5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "01b11a038293916ad52aab9ac7bd6b4e711d1f3e"
+                "reference": "ee6512e06b1307ed61b32d292ecd8ee9c10e034c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/01b11a038293916ad52aab9ac7bd6b4e711d1f3e",
-                "reference": "01b11a038293916ad52aab9ac7bd6b4e711d1f3e",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/ee6512e06b1307ed61b32d292ecd8ee9c10e034c",
+                "reference": "ee6512e06b1307ed61b32d292ecd8ee9c10e034c",
                 "shasum": ""
             },
             "require": {
@@ -6736,7 +6560,7 @@
                 "localization"
             ],
             "support": {
-                "source": "https://github.com/symfony/intl/tree/v5.4.0"
+                "source": "https://github.com/symfony/intl/tree/v5.4.2"
             },
             "funding": [
                 {
@@ -6752,7 +6576,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-28T15:25:38+00:00"
+            "time": "2021-12-16T21:58:21+00:00"
         },
         {
             "name": "symfony/mime",
@@ -7647,16 +7471,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.4.0",
+            "version": "v5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "5be20b3830f726e019162b26223110c8f47cf274"
+                "reference": "2b3ba8722c4aaf3e88011be5e7f48710088fb5e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/5be20b3830f726e019162b26223110c8f47cf274",
-                "reference": "5be20b3830f726e019162b26223110c8f47cf274",
+                "url": "https://api.github.com/repos/symfony/process/zipball/2b3ba8722c4aaf3e88011be5e7f48710088fb5e4",
+                "reference": "2b3ba8722c4aaf3e88011be5e7f48710088fb5e4",
                 "shasum": ""
             },
             "require": {
@@ -7689,7 +7513,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v5.4.0"
+                "source": "https://github.com/symfony/process/tree/v5.4.2"
             },
             "funding": [
                 {
@@ -7705,7 +7529,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-28T15:25:38+00:00"
+            "time": "2021-12-27T21:01:00+00:00"
         },
         {
             "name": "symfony/routing",
@@ -7881,16 +7705,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v6.0.1",
+            "version": "v6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "0cfed595758ec6e0a25591bdc8ca733c1896af32"
+                "reference": "bae261d0c3ac38a1f802b4dfed42094296100631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/0cfed595758ec6e0a25591bdc8ca733c1896af32",
-                "reference": "0cfed595758ec6e0a25591bdc8ca733c1896af32",
+                "url": "https://api.github.com/repos/symfony/string/zipball/bae261d0c3ac38a1f802b4dfed42094296100631",
+                "reference": "bae261d0c3ac38a1f802b4dfed42094296100631",
                 "shasum": ""
             },
             "require": {
@@ -7946,7 +7770,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v6.0.1"
+                "source": "https://github.com/symfony/string/tree/v6.0.2"
             },
             "funding": [
                 {
@@ -7962,7 +7786,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-08T15:13:44+00:00"
+            "time": "2021-12-16T22:13:01+00:00"
         },
         {
             "name": "symfony/translation",
@@ -12117,6 +11941,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "norman-huth/laravel-rapidapi-clients": 20,
         "norman-huth/laravel-trash-mail": 20
     },
     "prefer-stable": true,

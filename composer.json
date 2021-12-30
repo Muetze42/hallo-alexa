@@ -7,11 +7,11 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./packages/instagram-php-scraper-master"
+            "url": "./packages/nova"
         },
         {
-            "type": "path",
-            "url": "./packages/nova"
+            "type": "vcs",
+            "url": "https://github.com/Muetze42/laravel-rapidapi-clients"
         },
         {
             "type": "vcs",
@@ -36,10 +36,9 @@
         "laravelwebdev/responsive": "^1.0",
         "muetze/nova-icon-select": "^1.0",
         "muetze42/nova-charcounted-fields": "^1.0",
+        "norman-huth/laravel-rapidapi-clients": "dev-main",
         "norman-huth/laravel-trash-mail": "dev-main",
         "optimistdigital/nova-sortable": "^2.4",
-        "phpfastcache/phpfastcache": "^9.0",
-        "raiym/instagram-php-scraper": "*",
         "scssphp/scssphp": "^1.6",
         "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-activitylog": "^4.1",

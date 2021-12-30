@@ -5,23 +5,24 @@ namespace App\Helpers;
 use App\Notifications\Telegram\HtmlText;
 use App\Notifications\Telegram\HtmlTextWithImage;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
-use InstagramScraper\Exception\InstagramAuthException;
-use InstagramScraper\Exception\InstagramChallengeRecaptchaException;
-use InstagramScraper\Exception\InstagramChallengeSubmitPhoneNumberException;
-use InstagramScraper\Exception\InstagramException;
-use InstagramScraper\Exception\InstagramNotFoundException;
-use InstagramScraper\Instagram;
-use Phpfastcache\Exceptions\PhpfastcacheInvalidArgumentException;
-use Phpfastcache\Exceptions\PhpfastcacheInvalidConfigurationException;
-use Phpfastcache\Exceptions\PhpfastcacheInvalidTypeException;
-use Phpfastcache\Helper\Psr16Adapter;
-use Psr\SimpleCache\InvalidArgumentException;
-use Phpfastcache\CacheManager;
-use Phpfastcache\Config\ConfigurationOption;
+use NormanHuth\RapidAPI\Social\InstagramProfile;
 
 class Social
 {
+    public static function getReceiver()
+    {
+        //return config('services.telegram-bot-api.receiver'); // Debug
+        return config('services.telegram-bot-api.group_id');
+    }
+
+    public static function getStreamerName()
+    {
+        return config('muetze-site.streamer-name');
+    }
+
     public static function updateLatestYouTubeVideo()
     {
         $url = sprintf(
@@ -51,8 +52,8 @@ class Social
                         ['provider_id' => $videoId],
                     );
 
-                    Notification::send(config('services.telegram-bot-api.group_id'), new HtmlText(
-                        __('Neues Video von :name', ['name' => config('muetze-site.streamer-name')])."\n\n\nhttps://www.youtube.com/watch?v=".$videoId
+                    Notification::send(static::getReceiver(), new HtmlText(
+                        __('New video by :name', ['name' => static::getStreamerName()])."\n\n\nhttps://www.youtube.com/watch?v=".$videoId
                     ));
                 }
 
@@ -62,55 +63,101 @@ class Social
     }
 
     /**
-     * @throws InstagramAuthException
-     * @throws InstagramChallengeRecaptchaException
-     * @throws InstagramChallengeSubmitPhoneNumberException
-     * @throws InstagramException
-     * @throws InstagramNotFoundException
-     * @throws InvalidArgumentException
-     * @throws PhpfastcacheInvalidArgumentException
-     * @throws PhpfastcacheInvalidConfigurationException
-     * @throws PhpfastcacheInvalidTypeException
+     * @throws GuzzleException
      */
     public static function updateLatestInstagramPost()
     {
-        CacheManager::setDefaultConfig(new ConfigurationOption([
-            'path' => storage_path('temp')
-        ]));
+        if (static::instaMethod1()) {
+            return;
+        }
+        static::instaMethod2();
+    }
 
-        $instagram = Instagram::withCredentials(
-            new Client(),
-            config('services.instagram.login'),
-            config('services.instagram.password'),
-            new Psr16Adapter('Files')
-        );
-        $instagram->login();
-        $instagram->saveSession();
-        $medias = $instagram->getMedias(config('services.instagram.profile'), 1);
+    /**
+     * @throws GuzzleException
+     */
+    protected static function instaMethod1(): bool
+    {
+        $instagram = new InstagramProfile;
+        $data = $instagram->getFeed(config('services.instagram.profile'));
 
-        if (!empty($medias[0])) {
-            $shortCode = $medias[0]['shortCode'];
-            $link = $medias[0]['link'];
-            $image = $medias[0]['imageLowResolutionUrl'];
+        $content = json_decode($data, true);
+        if (!empty($content['media'][0]['shortcode'])) {
+            $shortcode = $content['media'][0]['shortcode'];
+            $image = $content['media'][0]['display_url'];
 
-            $instagram = \App\Models\Social::where([
-                'provider'    => 'instagram',
-                'provider_id' => $shortCode,
-            ])->first();
+            static::instaNotify($shortcode, $image);
 
-            if (!$instagram) {
-                \App\Models\Social::updateOrCreate(
-                    ['provider' => 'instagram'],
-                    [
-                        'provider_id' => $shortCode,
-                        'url'         => $image,
-                    ],
-                );
+            return true;
+        }
 
-                Notification::send(config('services.telegram-bot-api.group_id'), new HtmlTextWithImage(__("Neuer Instagram-Beitrag von Alexa\n\n".$link), $image));
+        return false;
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    protected static function instaMethod2(): bool
+    {
+        $client = new Client;
+
+        $url = sprintf('https://instagram.com/%s/channel/?__a=1', config('services.instagram.profile'));
+
+        $res = $client->request('GET', $url, [
+            'http_errors' => false,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36'
+            ]
+        ]);
+
+        $status = $res->getStatusCode();
+        $content = $res->getBody()->getContents();
+        $headers = $res->getHeaders();
+
+        if ($status >= 200 && $status < 300) {
+            $data = json_decode($content, true);
+
+            if (!empty($data['graphql']['user']['edge_owner_to_timeline_media']['edges'][0]['node'])) {
+                $lastMedia = $data['graphql']['user']['edge_owner_to_timeline_media']['edges'][0]['node'];
+
+                $shortcode = $lastMedia['shortcode'];
+                $image = $lastMedia['display_url'];
+
+                static::instaNotify($shortcode, $image);
+
+                return true;
             }
-        } else {
-            Notification::send(config('services.telegram-bot-api.receiver'), new HtmlText(__('Instagram scrapp not possible on '.config('app.url'))));
+        }
+
+        Log::error('Helper\\Social::instaMethod1() failed:'.print_r([
+                'status' => $status,
+                'content' => $content,
+                'headers' => $headers,
+            ], true));
+
+        return false;
+    }
+
+    protected static function instaNotify(string $shortCode, string $image)
+    {
+        $instagram = \App\Models\Social::where([
+            'provider'    => 'instagram',
+            'provider_id' => $shortCode,
+        ])->first();
+
+        if (!$instagram) {
+            \App\Models\Social::updateOrCreate(
+                ['provider' => 'instagram'],
+                [
+                    'provider_id' => $shortCode,
+                    'url'         => $image,
+                ],
+            );
+
+            Notification::send(static::getReceiver(), new HtmlTextWithImage(
+                    __('New Instagram Post by :name', ['name' => static::getStreamerName()])."\n\nhttps://www.instagram.com/p/".$shortCode
+                    , $image)
+            );
         }
     }
 }
