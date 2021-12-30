@@ -31,6 +31,14 @@ class FallbackController extends Controller
                 $insta = Social::where('provider', 'instagram')->firstOrFail();
 
                 return redirect('https://www.instagram.com/p/'.$insta->provider_id);
+            case 'latest-tiktok':
+                $tikTok = Social::where('provider', 'tiktok')->firstOrFail();
+
+                return redirect(sprintf(
+                    'https://www.tiktok.com/@%s/video/%d',
+                    config('services.tiktok.user_name'),
+                    $tikTok->provider_id,
+                ));
         }
 
         abort(404);

@@ -77,6 +77,7 @@ class Shorten extends Resource
                     ->onlyOnForms()->rules('required')->options([
                         'latest-youtube'   => __('Current YouTube Video'),
                         'latest-instagram' => __('Current Instagram Post'),
+                        'latest-tiktok'    => __('Current TikTok'),
                     ])->displayUsingLabels(),
             ])->if('external != 1')->onlyOnForms(),
 
