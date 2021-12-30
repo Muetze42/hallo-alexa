@@ -46,4 +46,8 @@ return [
         'id'      => env('INSTAGRAM_ID'),
     ],
 
+    'tiktok' => [
+        'user_id' => env('TIKTOK_USER_ID'),
+        'user_name' => env('TIKTOK_USER_NAME'),
+    ],
 ];

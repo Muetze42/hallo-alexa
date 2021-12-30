@@ -72,6 +72,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             (new HtmlCard)->view('nova.socials.youtube', ['youtube' => Social::find('youtube')]),
             (new HtmlCard)->view('nova.socials.instagram', ['instagram' => Social::find('instagram')]),
+            (new HtmlCard)->view('nova.socials.tiktok', ['tiktok' => Social::find('tiktok')]),
             new LinkCounts,
             new ReferrerDomain,
             new DeviceType,

@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Social;
 use App\Notifications\Telegram\HtmlText;
 use App\Notifications\Telegram\HtmlTextWithImage;
 use GuzzleHttp\Client;
@@ -9,8 +10,9 @@ use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use NormanHuth\RapidAPI\Social\InstagramProfile;
+use NormanHuth\RapidAPI\Social\TikTokAllInOne;
 
-class Social
+class Socials
 {
     public static function getReceiver()
     {
@@ -21,6 +23,52 @@ class Social
     public static function getStreamerName()
     {
         return config('muetze-site.streamer-name');
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public static function updateLatestTikTok()
+    {
+        $api = new TikTokAllInOne;
+        $data = $api->getUserVideos(config('services.tiktok.user_id'));
+
+        $content = json_decode($data, true);
+        $time = 0;
+        $latest = [];
+        $items = $content['aweme_list'];
+        foreach ($items as $item) {
+            if ($item['create_time'] < $time) {
+                continue;
+            }
+            $time = $item['create_time'];
+            $latest = $item;
+        }
+
+        $tikTok = Social::where([
+            'provider'    => 'tiktok',
+            'provider_id' => $latest['aweme_id'],
+        ])->first();
+
+        if (!$tikTok) {
+            Social::updateOrCreate(
+                ['provider' => 'tiktok'],
+                [
+                    'provider_id' => $latest['aweme_id'],
+                    'url' => $latest['video']['cover']['url_list'][0],
+                ]
+            );
+
+            $url = sprintf(
+                'https://www.tiktok.com/@%s/video/%d',
+                config('services.tiktok.user_name'),
+                $latest['aweme_id'],
+            );
+
+            Notification::send(static::getReceiver(), new HtmlText(
+                __('New TikTok by :name', ['name' => static::getStreamerName()])."\n\n\n".$url
+            ));
+        }
     }
 
     public static function updateLatestYouTubeVideo()
@@ -42,12 +90,12 @@ class Social
             #$title = $item['snippet']['title'];
 
             if ($liveBroadcastContent != 'upcoming') {
-                $youtube = \App\Models\Social::where([
+                $youtube = Social::where([
                     'provider'    => 'youtube',
                     'provider_id' => $videoId,
                 ])->first();
                 if (!$youtube) {
-                    \App\Models\Social::updateOrCreate(
+                    Social::updateOrCreate(
                         ['provider' => 'youtube'],
                         ['provider_id' => $videoId],
                     );
@@ -140,13 +188,13 @@ class Social
 
     protected static function instaNotify(string $shortCode, string $image)
     {
-        $instagram = \App\Models\Social::where([
+        $instagram = Social::where([
             'provider'    => 'instagram',
             'provider_id' => $shortCode,
         ])->first();
 
         if (!$instagram) {
-            \App\Models\Social::updateOrCreate(
+            Social::updateOrCreate(
                 ['provider' => 'instagram'],
                 [
                     'provider_id' => $shortCode,

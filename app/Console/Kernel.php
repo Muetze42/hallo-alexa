@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Helpers\Social;
+use App\Helpers\Socials;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
@@ -32,10 +32,13 @@ class Kernel extends ConsoleKernel
         $schedule->command('youtube:subscribe')->weekly();
 
         $schedule->call(function () {
-            Social::updateLatestYouTubeVideo();
+            Socials::updateLatestYouTubeVideo();
         })->hourly();
         $schedule->call(function () {
-            Social::updateLatestInstagramPost();
+            Socials::updateLatestInstagramPost();
+        })->everyThreeMinutes();
+        $schedule->call(function () {
+            Socials::updateLatestTikTok();
         })->everyThreeMinutes();
 
         $schedule->command('ip:clear')

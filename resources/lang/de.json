@@ -715,5 +715,6 @@
     "Target": "Ziel",
     "Description": "Beschreibung",
     "New video by :name": "Neues Video von :name",
-    "New Instagram Post by :name": "Neuer Instagram Post von :name"
+    "New Instagram Post by :name": "Neuer Instagram Post von :name",
+    "New TikTok by :name": "Neuer TikTok von :name"
 }

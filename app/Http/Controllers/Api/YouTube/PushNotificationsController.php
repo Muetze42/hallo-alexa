@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\YouTube;
 
 use App\Http\Controllers\Controller;
-use App\Helpers\Social;
+use App\Helpers\Socials;
 use App\Notifications\Telegram\HtmlText;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -44,7 +44,7 @@ class PushNotificationsController extends Controller
         $videoId = end($parts);
 
         if ($videoId) {
-            Social::updateLatestYouTubeVideo();
+            Socials::updateLatestYouTubeVideo();
         } else {
             Log::info('No Video ID - Payload: '.$payload);
             Notification::send(config('services.telegram-bot-api.receiver'), new HtmlText("No Video ID - Payload: \n\n".$payload));

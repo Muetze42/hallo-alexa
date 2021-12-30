@@ -24,14 +24,19 @@ Route::middleware([PageMeta::class, HandleInertiaRequests::class])->group(functi
 });
 Route::middleware('auth')->group(function () {
     Route::get('update/youtube/latest', function () {
-        \App\Helpers\Social::updateLatestYouTubeVideo();
+        \App\Helpers\Socials::updateLatestYouTubeVideo();
         return redirect(config('nova.path'));
     })->name('social.youtube.latest-video');
 
     Route::get('update/instagram/latest', function () {
-        \App\Helpers\Social::updateLatestInstagramPost();
+        \App\Helpers\Socials::updateLatestInstagramPost();
         return redirect(config('nova.path'));
     })->name('social.instagram.latest-post');
+
+    Route::get('update/tiktok/latest', function () {
+        \App\Helpers\Socials::updateLatestTikTok();
+        return redirect(config('nova.path'));
+    })->name('social.tiktok.latest-post');
 });
 Route::post('/link/{link}', [HomeController::class, 'count']);
 Route::get('{slug?}', [FallbackController::class, 'slug'])->name('slug')->where('slug', '^((?!ignition|nova|admin|api).)*$');
