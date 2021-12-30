@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api\YouTube;
 
 use App\Http\Controllers\Controller;
-use App\Models\Social;
+use App\Helpers\Social;
 use App\Notifications\Telegram\HtmlText;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
 class PushNotificationsController extends Controller
@@ -42,12 +43,12 @@ class PushNotificationsController extends Controller
         $parts = explode(':', $xml->entry->id);
         $videoId = end($parts);
 
-        Social::updateOrCreate(
-            ['provider' => 'youtube'],
-            ['provider_id' => $videoId],
-        );
-
-        Notification::send(config('services.telegram-bot-api.group_id'), new HtmlText(__("Neues YouTube Video von Alexa\n\nhttps://www.youtube.com/watch?v=".$videoId)));
+        if ($videoId) {
+            Social::updateLatestYouTubeVideo();
+        } else {
+            Log::info('No Video ID - Payload: '.$payload);
+            Notification::send(config('services.telegram-bot-api.receiver'), new HtmlText("No Video ID - Payload: \n\n".$payload));
+        }
 
         return '';
     }

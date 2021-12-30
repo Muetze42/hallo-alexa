@@ -34,9 +34,9 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             Social::updateLatestYouTubeVideo();
         })->hourly();
-        $schedule->call(function () {
-            Social::updateLatestInstagramPost();
-        })->everyTenMinutes();
+//        $schedule->call(function () {
+//            Social::updateLatestInstagramPost();
+//        })->everyTenMinutes();
 
         $schedule->command('ip:clear')
             ->everyMinute();

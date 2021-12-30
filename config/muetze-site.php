@@ -20,4 +20,5 @@ return [
     'error-report' => [
         'throttle' => 3600,
     ],
+    'streamer-name' => env('STREAMER_NAME', 'Alexa'),
 ];

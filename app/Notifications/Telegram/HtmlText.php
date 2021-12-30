@@ -43,7 +43,15 @@ class HtmlText extends Notification
     {
         return TelegramMessage::create()
             ->to($notifiable)
-            ->content($this->content)
+            ->content($this->parsedContent())
             ->options(['parse_mode' => 'html']);
+    }
+
+    /**
+     * @return array|string|null
+     */
+    protected function parsedContent(): array|string|null
+    {
+        return preg_replace('/`(.*?)`/', '<code>$1</code>', e($this->content));
     }
 }

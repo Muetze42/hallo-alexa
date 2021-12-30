@@ -25,7 +25,7 @@ class Social
     public static function updateLatestYouTubeVideo()
     {
         $url = sprintf(
-            'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=%s&maxResults=1&order=date&type=video&key=%s',
+            'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=%s&maxResults=50&order=date&type=video&key=%s',
             config('services.youtube.channel_id'),
             config('services.youtube.api_key')
         );
@@ -33,19 +33,31 @@ class Social
         $content = file_get_contents($url);
         $data = json_decode($content, true);
 
-        $videoId = $data['items'][0]['id']['videoId'];
+        $items = $data['items'];
 
-        $youtube = \App\Models\Social::where([
-            'provider'    => 'youtube',
-            'provider_id' => $videoId,
-        ])->first();
-        if (!$youtube) {
-            \App\Models\Social::updateOrCreate(
-                ['provider' => 'youtube'],
-                ['provider_id' => $videoId],
-            );
+        foreach ($items as $item) {
+            $videoId = $item['id']['videoId'];
+            $liveBroadcastContent = $item['snippet']['liveBroadcastContent'];
+            #$title = $item['snippet']['title'];
 
-            Notification::send(config('services.telegram-bot-api.group_id'), new HtmlText(__("Neues YouTube Video von Alexa\n\nhttps://www.youtube.com/watch?v=".$videoId)));
+            if ($liveBroadcastContent != 'upcoming') {
+                $youtube = \App\Models\Social::where([
+                    'provider'    => 'youtube',
+                    'provider_id' => $videoId,
+                ])->first();
+                if (!$youtube) {
+                    \App\Models\Social::updateOrCreate(
+                        ['provider' => 'youtube'],
+                        ['provider_id' => $videoId],
+                    );
+
+                    Notification::send(config('services.telegram-bot-api.group_id'), new HtmlText(
+                        __('Neues Video von :name', ['name' => config('muetze-site.streamer-name')])."\n\n\nhttps://www.youtube.com/watch?v=".$videoId
+                    ));
+                }
+
+                break;
+            }
         }
     }
 
