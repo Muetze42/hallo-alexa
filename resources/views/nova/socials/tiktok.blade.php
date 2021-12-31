@@ -3,7 +3,13 @@
         {{ __('Current TikTok') }}:
     </h3>
     <div class="text-center">
-        <a href="https://www.tiktok.com/@{{ config('services.tiktok.user_name')l }}/video/{{ $tiktok->provider_id }}" target="_blank"  rel="noopener">
+        @php
+        $url = 'https://www.tiktok.com/@';
+        $url.= config('services.tiktok.user_name');
+        $url.= '/video/';
+        $url.= $tiktok->provider_id;
+        @endphp
+        <a href="{{ $url }}" target="_blank"  rel="noopener">
             <img src="{{ $tiktok->url }}" alt="{{ $tiktok->provider_id }}" style="max-height: 20rem">
         </a>
     </div>
