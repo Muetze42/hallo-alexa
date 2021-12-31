@@ -47,7 +47,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('ip:clear')
             ->everyMinute();
 
-//         $schedule->command('queue:work --stop-when-empty --timeout=0')->everyMinute()->withoutOverlapping();
+         $schedule->command('queue:work --stop-when-empty --timeout=0')->everyMinute()->withoutOverlapping();
     }
 
     /**
