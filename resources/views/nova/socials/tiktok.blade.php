@@ -10,7 +10,7 @@
         $url.= $tiktok->provider_id;
         @endphp
         <a href="{{ $url }}" target="_blank"  rel="noopener">
-            <img src="{{ $tiktok->url }}" alt="{{ $tiktok->provider_id }}" style="max-height: 20rem">
+            <img src="{{ asset('storage/tiktok.jpg') }}?id={{ $tiktok->provider_id }}" alt="{{ $tiktok->provider_id }}" style="max-height: 20rem">
         </a>
     </div>
 @endif

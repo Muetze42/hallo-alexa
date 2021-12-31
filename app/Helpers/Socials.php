@@ -16,7 +16,7 @@ class Socials
 {
     public static function getReceiver()
     {
-        //return config('services.telegram-bot-api.receiver'); // Debug
+        return config('services.telegram-bot-api.receiver'); // Debug
         return config('services.telegram-bot-api.group_id');
     }
 
@@ -57,11 +57,15 @@ class Socials
 
             Social::updateOrCreate(
                 ['provider' => 'tiktok'],
-                [
-                    'provider_id' => $latest['aweme_id'],
-                    'url' => $latest['video']['cover']['url_list'][0],
-                ]
+                ['provider_id' => $latest['aweme_id']]
             );
+
+            foreach ($latest['video']['cover']['url_list'] as $image) {
+                if (str_contains($image, '.jpeg') || str_contains($image, '.jpg')) {
+                    $target = storage_path('app/public/tiktok.jpg');
+                    file_put_contents($target, file_get_contents($image));
+                }
+            }
 
             $url = sprintf(
                 'https://www.tiktok.com/@%s/video/%d',
