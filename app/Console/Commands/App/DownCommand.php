@@ -8,6 +8,13 @@ use Illuminate\Foundation\Exceptions\RegisterErrorViewPaths;
 class DownCommand extends Command
 {
     /**
+     * The default view for the maintenance mode
+     *
+     * @var string
+     */
+    protected string $defaultMaintenanceView = 'errors::503';
+
+    /**
      * Get the payload to be placed in the "down" file.
      *
      * @return array
@@ -34,7 +41,7 @@ class DownCommand extends Command
     {
         (new RegisterErrorViewPaths)();
 
-        return view(($this->option('render') ? $this->option('render') : 'errors::503'), [
+        return view(($this->option('render') ? $this->option('render') : $this->defaultMaintenanceView), [
             'retryAfter' => $this->option('retry'),
         ])->render();
     }

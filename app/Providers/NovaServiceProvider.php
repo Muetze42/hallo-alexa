@@ -70,9 +70,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards(): array
     {
         return [
-            (new HtmlCard)->view('nova.socials.youtube', ['youtube' => Social::find('youtube')]),
-            (new HtmlCard)->view('nova.socials.instagram', ['instagram' => Social::find('instagram')]),
-            (new HtmlCard)->view('nova.socials.tiktok', ['tiktok' => Social::find('tiktok')]),
+            (new HtmlCard)->view('nova.socials.youtube', ['youtube' => Social::provider('youtube')]),
+            (new HtmlCard)->view('nova.socials.instagram', ['instagram' => Social::provider('instagram')]),
+            (new HtmlCard)->view('nova.socials.tiktok', ['tiktok' => Social::provider('tiktok')]),
             new LinkCounts,
             new ReferrerDomain,
             new DeviceType,

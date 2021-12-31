@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('socials', function (Blueprint $table) {
-            $table->id();
-            $table->string('provider')->unique();
-            $table->string('provider_id');
-            $table->text('url')->nullable();
-            $table->timestamps();
+        Schema::table('shortens', function (Blueprint $table) {
+            $table->unsignedInteger('count')->default(0)->after('external');
+            $table->unsignedInteger('real_count')->default(0)->after('count');
         });
     }
 
@@ -29,6 +26,11 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('socials');
+        Schema::table('shortens', function (Blueprint $table) {
+            $table->dropColumn([
+                'count',
+                'real_count',
+            ]);
+        });
     }
 };

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\App;
 
 use App\Helpers\Sitemap;
 use Illuminate\Console\Command;

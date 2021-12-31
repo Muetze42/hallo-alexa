@@ -4,7 +4,7 @@ namespace App\Nova\Metrics\Link;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Partition;
-use App\Models\LinkCount;
+use App\Models\Click;
 use App\Models\Link;
 use Laravel\Nova\Metrics\PartitionResult;
 
@@ -18,7 +18,7 @@ class LinkCounts extends Partition
      */
     public function calculate(NovaRequest $request): PartitionResult
     {
-        $result = $this->count($request, LinkCount::class, 'link_id')->label(function ($id) {
+        $result = $this->count($request, Click::where('clickable_type', Link::class), 'clickable_id')->label(function ($id) {
             return Link::withTrashed()->find($id)->name;
         });
 

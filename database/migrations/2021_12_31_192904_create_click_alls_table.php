@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('link_counts', function (Blueprint $table) {
+        Schema::create('click_alls', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('link_id')->references('id')->on('links')->onDelete('cascade');
+            $table->morphs('clickable');
             $table->text('os');
             $table->text('client');
-            $table->string('ip')->nullable();
             $table->timestamp('created_at')->nullable();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('link_counts');
+        Schema::dropIfExists('click_alls');
     }
 };

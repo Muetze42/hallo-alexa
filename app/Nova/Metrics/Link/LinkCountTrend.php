@@ -6,7 +6,8 @@ use App\Traits\Nova\TrendMetric;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Trend;
 use Laravel\Nova\Metrics\TrendResult;
-use App\Models\LinkCount;
+use App\Models\Link;
+use App\Models\Click;
 
 class LinkCountTrend extends Trend
 {
@@ -20,7 +21,7 @@ class LinkCountTrend extends Trend
      */
     public function calculate(NovaRequest $request): TrendResult
     {
-        return $this->countByDays($request, LinkCount::where('link_id', $request->resourceId), 'created_at')
+        return $this->countByDays($request, Click::where('clickable_type', Link::class)->where('clickable_id', $request->input('resourceId')), 'created_at')
             ->showSumValue();
     }
 

@@ -51,6 +51,10 @@ class Socials
         ])->first();
 
         if (!$tikTok) {
+            if (!auth()->check()) {
+                activity()->disableLogging();
+            }
+
             Social::updateOrCreate(
                 ['provider' => 'tiktok'],
                 [
@@ -95,6 +99,9 @@ class Socials
                     'provider_id' => $videoId,
                 ])->first();
                 if (!$youtube) {
+                    if (!auth()->check()) {
+                        activity()->disableLogging();
+                    }
                     Social::updateOrCreate(
                         ['provider' => 'youtube'],
                         ['provider_id' => $videoId],
@@ -194,6 +201,9 @@ class Socials
         ])->first();
 
         if (!$instagram) {
+            if (!auth()->check()) {
+                activity()->disableLogging();
+            }
             Social::updateOrCreate(
                 ['provider' => 'instagram'],
                 [

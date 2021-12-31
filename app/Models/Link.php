@@ -4,10 +4,15 @@ namespace App\Models;
 
 use App\Helpers\Sitemap;
 use App\Traits\Model\ActivityLogging;
+use Eloquent;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -25,18 +30,18 @@ use Spatie\Activitylog\LogOptions;
  * @property int $real_count
  * @property string $color
  * @property int $order
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Activity[] $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LinkCount[] $counts
+ * @property-read Collection|LinkCount[] $counts
  * @property-read int|null $counts_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LinkRealCount[] $realCounts
+ * @property-read Collection|LinkRealCount[] $realCounts
  * @property-read int|null $real_counts_count
  * @method static \Illuminate\Database\Eloquent\Builder|Link newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Link newQuery()
- * @method static \Illuminate\Database\Query\Builder|Link onlyTrashed()
+ * @method static Builder|Link onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Link ordered(string $direction = 'asc')
  * @method static \Illuminate\Database\Eloquent\Builder|Link query()
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereActive($value)
@@ -51,9 +56,13 @@ use Spatie\Activitylog\LogOptions;
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereRealCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereTarget($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|Link withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Link withoutTrashed()
- * @mixin \Eloquent
+ * @method static Builder|Link withTrashed()
+ * @method static Builder|Link withoutTrashed()
+ * @mixin Eloquent
+ * @property-read Collection|\App\Models\Click[] $clicks
+ * @property-read int|null $clicks_count
+ * @property-read Collection|\App\Models\ClickAll[] $clicksAll
+ * @property-read int|null $clicks_all_count
  */
 class Link extends Model implements Sortable
 {
@@ -112,6 +121,22 @@ class Link extends Model implements Sortable
             }
             gerateAdditionalStylesheet();
         });
+    }
+
+    /**
+     * @return MorphMany
+     */
+    public function clicks(): MorphMany
+    {
+        return $this->morphMany(Click::class, 'clickable');
+    }
+
+    /**
+     * @return MorphMany
+     */
+    public function clicksAll(): MorphMany
+    {
+        return $this->morphMany(ClickAll::class, 'clickable');
     }
 
     /**
