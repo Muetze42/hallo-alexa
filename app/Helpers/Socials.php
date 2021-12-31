@@ -22,7 +22,7 @@ class Socials
 
     public static function getStreamerName()
     {
-        return config('muetze-site.streamer-name');
+        return config('site.streamer-name');
     }
 
     /**

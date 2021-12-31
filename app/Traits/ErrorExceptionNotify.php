@@ -24,7 +24,7 @@ trait ErrorExceptionNotify
             Notification::send(681791255, new ErrorReport($exception));
 
             if(!$status) {
-                Cache::add($this->cacheNotificationKey, 'send', config('muetze-site.error-report.throttle', 3600));
+                Cache::add($this->cacheNotificationKey, 'send', config('site.error-report.throttle', 3600));
             }
         }
     }

@@ -81,11 +81,11 @@ class ReferrerHost extends Resource
     {
         return [
             Text::make(__('Name'), 'name', function () {
-                return '<a href="https://'.e($this->name).'" class="'.config('muetze-site.nova.external_link_class').'" rel="noopener noreferrer" target="_blank">'.e($this->name).'</a><i class="'.config('muetze-site.nova.external_link_icon').'"></i>';
+                return '<a href="https://'.e($this->name).'" class="'.config('site.nova.external_link_class').'" rel="noopener noreferrer" target="_blank">'.e($this->name).'</a><i class="'.config('site.nova.external_link_icon').'"></i>';
             })->sortable()->asHtml(),
 
             Text::make(__('Referrers'), 'referrer_count', function () {
-                return '<a href="'.config('nova.path').'/resources/referrer-hosts/'.$this->id.'" class="'.config('muetze-site.nova.external_link_class').' font-bold">'.$this->referrer_count.'</a>';
+                return '<a href="'.config('nova.path').'/resources/referrer-hosts/'.$this->id.'" class="'.config('site.nova.external_link_class').' font-bold">'.$this->referrer_count.'</a>';
             })->sortable()->asHtml()->onlyOnIndex(),
 
             HasMany::make(__('Referrers'), 'referrers', Referrer::class),

@@ -83,7 +83,7 @@ class Shorten extends Resource
             ])->if('external != 1')->onlyOnForms(),
 
             Text::make(__('Target'), 'target', function () {
-                return '<a href="'.e($this->target).'" rel="noopener" class="'.config('muetze-site.nova.external_link_class').'">'.e($this->target).'</a><i class="'.config('muetze-site.nova.external_link_icon').'"></i>';
+                return '<a href="'.e($this->target).'" rel="noopener" class="'.config('site.nova.external_link_class').'">'.e($this->target).'</a><i class="'.config('site.nova.external_link_icon').'"></i>';
             })->sortable()->exceptOnForms()->canSee(function () {
                 return $this->external;
             })->asHtml(),
