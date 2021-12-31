@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3d2410c9f74f149bf42c08ca4f3ae5a",
+    "content-hash": "6789baf0f9a23784717e6fe4ee1c144a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3782,12 +3782,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Muetze42/laravel-rapidapi-clients.git",
-                "reference": "97f873e5bfd1d5489a65153333fb006e14b99f2f"
+                "reference": "912c94f20c5aff564ad1c85cf601bab124b00736"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Muetze42/laravel-rapidapi-clients/zipball/97f873e5bfd1d5489a65153333fb006e14b99f2f",
-                "reference": "97f873e5bfd1d5489a65153333fb006e14b99f2f",
+                "url": "https://api.github.com/repos/Muetze42/laravel-rapidapi-clients/zipball/912c94f20c5aff564ad1c85cf601bab124b00736",
+                "reference": "912c94f20c5aff564ad1c85cf601bab124b00736",
                 "shasum": ""
             },
             "require": {
@@ -3824,7 +3824,7 @@
                 "source": "https://github.com/Muetze42/laravel-rapidapi-clients/tree/main",
                 "issues": "https://github.com/Muetze42/laravel-rapidapi-clients/issues"
             },
-            "time": "2021-12-30T22:43:10+00:00"
+            "time": "2021-12-31T09:38:57+00:00"
         },
         {
             "name": "norman-huth/laravel-trash-mail",

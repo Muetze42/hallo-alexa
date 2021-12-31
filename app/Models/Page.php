@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\Sitemap;
 use App\Traits\ErrorExceptionNotify;
+use App\Traits\Model\ActivityLogging;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Artisan;
@@ -43,7 +44,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Page extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, ErrorExceptionNotify;
+    use HasFactory, InteractsWithMedia, ErrorExceptionNotify, ActivityLogging;
 
     const ROBOTS = [
         0 => 'noindex,nofollow',

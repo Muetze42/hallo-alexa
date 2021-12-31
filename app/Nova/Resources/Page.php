@@ -8,6 +8,7 @@ use ElevateDigital\CharcountedFields\TextareaCounted;
 use ElevateDigital\CharcountedFields\TextCounted;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Heading;
+use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -151,6 +152,8 @@ class Page extends Resource
                 })->single()
                 ->help(__('Die optimale Größe für ein OpenGraph Image beträgt 1200 x 600 Pixel'))
                 ->autouploading(),
+
+            MorphMany::make(__('Activities'), 'activities', Activity::class),
         ];
     }
 

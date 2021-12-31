@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Model\ActivityLogging;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -37,7 +38,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class ContactRequest extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, ActivityLogging;
 
     const STATUS_OPEN = 0;
     const STATUS_SENT = 1;

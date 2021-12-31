@@ -5,6 +5,7 @@ namespace App\Nova\Resources;
 use App\Nova\Actions\ContactRequest\ChangeStatus;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -97,6 +98,8 @@ class ContactRequest extends Resource
                 ->sortable(),
             DateTime::make(__('Updated at'), 'updated_at')
                 ->sortable(),
+
+            MorphMany::make(__('Activities'), 'activities', Activity::class),
         ];
     }
 

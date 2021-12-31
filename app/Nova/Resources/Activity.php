@@ -2,8 +2,13 @@
 
 namespace App\Nova\Resources;
 
+use App\Nova\Filters\Activity\CauserFilter;
+use App\Nova\Filters\Activity\EventFilter;
+use App\Nova\Filters\Activity\LogNameFilter;
+use App\Nova\Filters\Activity\ModelFilter;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Text;
 use Titasgailius\SearchRelations\SearchesRelations;
@@ -11,6 +16,16 @@ use Titasgailius\SearchRelations\SearchesRelations;
 class Activity extends Resource
 {
     use SearchesRelations;
+
+    /**
+     * Get the logical group associated with the resource.
+     *
+     * @return string
+     */
+    public static function group(): string
+    {
+        return __('System');
+    }
 
     /**
      * Custom priority level of the resource.
@@ -24,7 +39,7 @@ class Activity extends Resource
      *
      * @var bool
      */
-    public static $displayInNavigation = false;
+    public static $displayInNavigation = true;
 
     /**
      * The model the resource corresponds to.
@@ -70,13 +85,28 @@ class Activity extends Resource
      */
     public function subtitle(): ?string
     {
-        if (!empty($this->subject) && !empty($this->causer)) {
+        if (!empty($this->subject->name)) {
+            $title = $this->subject->name;
+        }
+        if (!empty($this->subject->title)) {
+            $title = $this->subject->title;
+        }
 
-            return __(class_basename($this->subject_type)).' „'.$this->subject->name.'“ '.__($this->description.' by :user', ['user' => $this->causer->name]);
+        if (!empty($this->subject) && !empty($this->causer)) {
+            if (!empty($title)) {
+                return __(':subject „:title“', [
+                        'subject' => __(class_basename($this->subject_type)),
+                        'title'   => $title
+                    ]).' '.__($this->description.' by :user', ['user' => $this->causer->name]);
+            }
+            return __($this->description.' by :user', ['user' => $this->causer->name]);
         }
 
         if (!empty($this->subject)) {
-            return __(class_basename($this->subject_type)).' „'.$this->subject->name.'“ '.__($this->description);
+            return __(':subject „:title“', [
+                'subject' => __(class_basename($this->subject_type)),
+                'title'   => $title
+            ]);
         }
 
         return null;
@@ -120,11 +150,17 @@ class Activity extends Resource
     public function fields(Request $request): array
     {
         return [
-            Text::make(__('Event'), 'event')->sortable(),
+            Text::make(__('Event'), 'event', function () {
+                return __($this->event);
+            })->sortable(),
 
-            Text::make(__('Causer Type'), 'causer_type')
+            Text::make(__('Model'), 'causer_type')
                 ->sortable(),
 
+            Text::make(__('Log Name'), 'log_name')
+                ->sortable(),
+
+            MorphTo::make(__('Subject'), 'subject'),
             MorphTo::make(__('Causer'), 'causer'),
 
             Code::make(__('Old Properties'), 'properties->old')
@@ -135,6 +171,8 @@ class Activity extends Resource
             Code::make(__('New Properties'), 'properties->attributes')
                 ->json(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
                 ->onlyOnDetail(),
+            DateTime::make(__('Created at'), 'created_at')
+                ->sortable()
         ];
     }
 
@@ -157,7 +195,12 @@ class Activity extends Resource
      */
     public function filters(Request $request): array
     {
-        return [];
+        return [
+            new LogNameFilter,
+            new EventFilter,
+            new ModelFilter,
+            new CauserFilter,
+        ];
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Nova\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use DigitalCreative\ConditionalContainer\ConditionalContainer;
@@ -98,7 +99,9 @@ class Shorten extends Resource
             })->asHtml(),
 
             Text::make(__('Description'), 'description')
-                ->sortable()->help(__('Optional'))
+                ->sortable()->help(__('Optional')),
+
+            MorphMany::make(__('Activities'), 'activities', Activity::class),
         ];
     }
 

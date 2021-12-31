@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Model\ActivityLogging;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -32,7 +33,7 @@ use Illuminate\Support\Str;
  */
 class Shorten extends Model
 {
-    use HasFactory;
+    use HasFactory, ActivityLogging;
 
     /**
      * The attributes that are mass assignable.

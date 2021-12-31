@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\Sitemap;
+use App\Traits\Model\ActivityLogging;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
 /**
@@ -57,7 +57,7 @@ use Spatie\Activitylog\LogOptions;
  */
 class Link extends Model implements Sortable
 {
-    use LogsActivity, HasFactory, SoftDeletes, SortableTrait;
+    use HasFactory, SoftDeletes, SortableTrait, ActivityLogging;
 
     /**
      * The attributes that are mass assignable.
@@ -93,27 +93,6 @@ class Link extends Model implements Sortable
     protected $attributes = [
         'active' => true,
     ];
-
-    /**
-     * @return LogOptions
-     */
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logOnlyDirty()
-            ->dontSubmitEmptyLogs()
-            ->dontLogIfAttributesChangedOnly([
-                'count',
-                'real_count',
-            ])->logOnly([
-                'active',
-                'name',
-                'target',
-                'icon',
-                'color',
-                'order',
-            ]);
-    }
 
     /**
      * Bootstrap the model and its traits.
