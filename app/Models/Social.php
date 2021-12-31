@@ -23,6 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string|null $url
  * @method static \Illuminate\Database\Eloquent\Builder|Social whereUrl($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Social extends Model
 {

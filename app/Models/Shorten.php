@@ -30,6 +30,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|Shorten whereUri($value)
  * @property string|null $description
  * @method static \Illuminate\Database\Eloquent\Builder|Shorten whereDescription($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Shorten extends Model
 {

@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|ContactRequest withTrashed()
  * @method static \Illuminate\Database\Query\Builder|ContactRequest withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class ContactRequest extends Model
 {

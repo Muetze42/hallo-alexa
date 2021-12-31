@@ -6,8 +6,8 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "path",
-            "url": "./packages/nova"
+            "type": "composer",
+            "url": "https://nova.laravel.com"
         },
         {
             "type": "vcs",
@@ -31,7 +31,6 @@
         "inertiajs/inertia-laravel": "^0.4.4",
         "laravel-notification-channels/telegram": "^0.5.1",
         "laravel/framework": "^8.54",
-        "laravel/nova": "^3.28",
         "laravel/tinker": "^2.5",
         "laravelwebdev/responsive": "^1.0",
         "muetze/nova-icon-select": "^1.0",

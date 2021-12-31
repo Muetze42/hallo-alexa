@@ -41,6 +41,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Page extends Model implements HasMedia
 {
