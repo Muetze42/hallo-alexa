@@ -53,6 +53,13 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'backup-ftp' => [
+            'driver'   => 'ftp',
+            'host'     => env('BACKUP_FPT_HOST'),
+            'username' => env('BACKUP_FTP_USER'),
+            'password' => env('BACKUP_FTP_PASSWORD'),
+        ],
+
     ],
 
     /*
