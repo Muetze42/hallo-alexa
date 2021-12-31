@@ -62,11 +62,11 @@ class Shorten extends Resource
                     return true;
 
                 })->onlyOnForms()->placeholder('my-uri')->help(__('Allowed characters: <strong>a-z</strong> and <strong>-</strong>')),
-            Text::make(__('URL'), 'url', function () {
-                return config('app.url').'/'.$this->uri;
-            })->sortable()->exceptOnForms(),
+            Text::make(__('URL'), 'uri', function () {
+                return '<span class="whitespace-no-wrap">'.e(config('app.url')).'/<span class="font-bold">'.e($this->uri).'</span></span>';
+            })->sortable()->exceptOnForms()->asHtml(),
 
-            Boolean::make(__('External link'), 'external'),
+            Boolean::make(__('External link'), 'external')->sortable(),
 
             ConditionalContainer::make([
                 Text::make(__('Link'), 'target')
@@ -81,14 +81,21 @@ class Shorten extends Resource
                     ])->displayUsingLabels(),
             ])->if('external != 1')->onlyOnForms(),
 
-            Text::make(__('Target'), 'target')
-                ->sortable()->exceptOnForms()->canSee(function () {
-                    return $this->external;
-                }),
-            Text::make(__('Target'), 'module')
-                ->sortable()->exceptOnForms()->canSee(function () {
-                    return !$this->external;
-                }),
+            Text::make(__('Target'), 'target', function () {
+                return '<a href="'.e($this->target).'" rel="noopener" class="'.config('muetze-site.nova.external_link_class').'">'.e($this->target).'</a><i class="'.config('muetze-site.nova.external_link_icon').'"></i>';
+            })->sortable()->exceptOnForms()->canSee(function () {
+                return $this->external;
+            })->asHtml(),
+            Text::make(__('Target'), 'module', function () {
+                return match ($this->module) {
+                    'latest-youtube' => '<span>'.__('Current YouTube Video').'</span>',
+                    'latest-instagram' => '<span>'.__('Current Instagram Post').'</span>',
+                    'latest-tiktok' => '<span>'.__('Current TikTok').'</span>',
+                    default => $this->module,
+                };
+            })->sortable()->exceptOnForms()->canSee(function () {
+                return !$this->external;
+            })->asHtml(),
 
             Text::make(__('Description'), 'description')
                 ->sortable()->help(__('Optional'))
