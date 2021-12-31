@@ -25,6 +25,13 @@
                     </router-link>
                 </li>
             @endforeach
+            @if($group == 'System')
+                    <li class="leading-tight mb-4 ml-8 text-sm">
+                        <router-link :to="{name: 'BackupTool'}" class="text-white text-justify no-underline dim" dusk="{{ $resource::uriKey() }}-resource-link">
+                            {{ __('Backups') }}
+                        </router-link>
+                    </li>
+            @endif
         </ul>
     @endforeach
 @endif

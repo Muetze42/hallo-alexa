@@ -18,6 +18,7 @@ use App\Nova\Metrics\Browser\MobileGrade;
 use App\Nova\Metrics\Browser\PlatformFamily;
 use App\Nova\Metrics\Browser\PlatformName;
 use App\Nova\Metrics\Referrer\ReferrerDomain;
+use Spatie\BackupTool\BackupTool;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -114,7 +115,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools(): array
     {
-        return [];
+        return [
+            new BackupTool,
+        ];
     }
 
     /**
