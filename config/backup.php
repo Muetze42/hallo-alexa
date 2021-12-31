@@ -8,7 +8,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => env('APP_NAME', 'backup'),
+        'name' => 'hallo-alexa-backup',
 
         'source' => [
 
@@ -216,7 +216,7 @@ return [
      */
     'monitor_backups' => [
         [
-            'name' => 'backup',
+            'name' => 'hallo-alexa-backup',
             'disks' => ['local'],
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
@@ -224,7 +224,7 @@ return [
             ],
         ],
         [
-            'name' => 'backup',
+            'name' => 'hallo-alexa-backup',
             'disks' => ['backup-ftp'],
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 2,
