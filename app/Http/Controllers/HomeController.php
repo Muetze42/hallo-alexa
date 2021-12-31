@@ -36,6 +36,8 @@ class HomeController extends Controller
     public function count(Link $link, Request $request)
     {
         if ($request->ajax() && $link->active) {
+            $link->disableLogging();
+            $link->timestamps = false;
             try {
                 $link->update(['real_count' => DB::raw('real_count+1')]);
 
