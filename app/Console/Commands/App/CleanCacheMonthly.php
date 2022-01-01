@@ -5,7 +5,7 @@ namespace App\Console\Commands\App;
 class CleanCacheMonthly extends CleanCacheDaily
 {
     protected array $cacheKeys = [
-        'instagram-best-experience'
+        'instagram-best-experience',
     ];
 
     /**

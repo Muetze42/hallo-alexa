@@ -158,23 +158,25 @@ class Socials
      */
     public static function instaMethod2(): bool
     {
-        $instagram = new InstagramBulkProfileScrapper;
+        if (static::cacheCheck('instagram-bulk-profile-scrapper', 250)) {
+            $instagram = new InstagramBulkProfileScrapper;
 
-        $data = $instagram->getFeedByUsername(config('services.instagram.profile'));
+            $data = $instagram->getFeedByUsername(config('services.instagram.profile'));
 
-        $content = json_decode($data, true);
+            $content = json_decode($data, true);
 
-        $last = $content[0]['feed']['data'][0];
-        $shortcode = $last['code'];
-        if (!empty($last['image_versions2']['candidates'][1]['url'])) {
-            $image = $last['image_versions2']['candidates'][1]['url'];
-        } else if (!empty($last['carousel_media'][0]['image_versions2']['candidates'][1]['url'])) {
-            $image = $last['carousel_media'][0]['image_versions2']['candidates'][1]['url'];
-        }
-        if ($image) {
-            static::instaNotify($shortcode, $image);
+            $last = $content[0]['feed']['data'][0];
+            $shortcode = $last['code'];
+            if (!empty($last['image_versions2']['candidates'][1]['url'])) {
+                $image = $last['image_versions2']['candidates'][1]['url'];
+            } else if (!empty($last['carousel_media'][0]['image_versions2']['candidates'][1]['url'])) {
+                $image = $last['carousel_media'][0]['image_versions2']['candidates'][1]['url'];
+            }
+            if ($image) {
+                static::instaNotify($shortcode, $image);
 
-            return true;
+                return true;
+            }
         }
 
         return false;

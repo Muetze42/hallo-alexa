@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Cache;
 class CleanCacheDaily extends Command
 {
     protected array $cacheKeys = [
-        'instagram28'
+        'instagram28',
+        'instagram-bulk-profile-scrapper',
     ];
 
     /**
