@@ -8,17 +8,15 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => 'hallo-alexa-backup',
+        'name' => 'backup',
 
         'source' => [
-
             'files' => [
-
                 /*
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => [
-                    base_path(),
+                    storage_path(),
                 ],
 
                 /*
@@ -27,8 +25,9 @@ return [
                  * Directories used by the backup process will automatically be excluded.
                  */
                 'exclude' => [
-                    base_path('vendor'),
-                    base_path('node_modules'),
+                    storage_path('framework'),
+                    storage_path('media-library'),
+                    storage_path('temp'),
                 ],
 
                 /*
@@ -46,7 +45,7 @@ return [
                  * Set to `null` to include complete absolute path
                  * Example: base_path()
                  */
-                'relative_path' => null,
+                'relative_path' => base_path(),
             ],
 
             /*
@@ -110,7 +109,7 @@ return [
             /*
              * The filename prefix used for the backup zip file.
              */
-            'filename_prefix' => '',
+            'filename_prefix' => 'hallo_alexa_',
 
             /*
              * The disk names on which the backups will be stored.
@@ -216,7 +215,7 @@ return [
      */
     'monitor_backups' => [
         [
-            'name' => 'hallo-alexa-backup',
+            'name' => 'backup',
             'disks' => ['local'],
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
@@ -224,7 +223,7 @@ return [
             ],
         ],
         [
-            'name' => 'hallo-alexa-backup',
+            'name' => 'backup',
             'disks' => ['backup-ftp'],
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 2,

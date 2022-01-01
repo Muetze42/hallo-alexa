@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use NormanHuth\RapidAPI\Social\InstagramProfile;
 use NormanHuth\RapidAPI\Social\TikTokAllInOne;
 
@@ -140,6 +141,8 @@ class Socials
         $instagram = new InstagramProfile;
         $data = $instagram->getFeed(config('services.instagram.profile'));
 
+        Log::debug($data);
+
         $content = json_decode($data, true);
         if (!empty($content['media'][0]['shortcode'])) {
             $shortcode = $content['media'][0]['shortcode'];
@@ -171,7 +174,7 @@ class Socials
 
         $status = $res->getStatusCode();
         $content = $res->getBody()->getContents();
-        $headers = $res->getHeaders();
+        //$headers = $res->getHeaders();
 
         if ($status >= 200 && $status < 300) {
             $data = json_decode($content, true);
@@ -188,10 +191,10 @@ class Socials
             }
         }
 
-        Log::error('Helper\\Social::instaMethod1() failed:'.print_r([
+        Log::error('Helper\\Social::instaMethod2() failed:'.print_r([
                 'status' => $status,
-                'content' => $content,
-                'headers' => $headers,
+                'content' => Str::limit($content),
+                //'headers' => $headers,
             ], true));
 
         return false;
