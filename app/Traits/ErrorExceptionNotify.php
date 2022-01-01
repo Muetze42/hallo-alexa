@@ -14,17 +14,24 @@ trait ErrorExceptionNotify
      *
      * @var string
      */
-    protected string $cacheNotificationKey = 'error-report-notification';
+    protected static string $cacheNotificationKey = 'error-report-notification';
 
-    protected function sendTelegramMessage($exception)
+    protected function sendTelegramErrorMessage($exception)
     {
-        $status = Cache::get($this->cacheNotificationKey);
+        static::sendErrorMessageViaTelegram($exception);
+    }
+
+    protected static function sendErrorMessageViaTelegram($exception)
+    {
+        $key = static::$cacheNotificationKey;
+
+        $status = Cache::get($key);
 
         if ($status != 'send') {
             Notification::send(681791255, new ErrorReport($exception));
 
             if(!$status) {
-                Cache::add($this->cacheNotificationKey, 'send', config('site.error-report.throttle', 3600));
+                Cache::add($key, 'send', config('site.error-report.throttle', 3600));
             }
         }
     }

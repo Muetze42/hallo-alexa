@@ -45,10 +45,12 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:clean')->dailyAt('4:25');
         $schedule->command('backup:monitor')->daily()->at('5:25');
 
-        $schedule->command('ip:clear')
-            ->everyMinute();
+        $schedule->command('ip:clear')->everyMinute();
 
-         $schedule->command('queue:work --stop-when-empty --timeout=0')->everyMinute()->withoutOverlapping();
+        $schedule->command('clear:cache:daily')->daily();
+        $schedule->command('clear:cache:monthly')->monthly();
+
+        $schedule->command('queue:work --stop-when-empty --timeout=0')->everyMinute()->withoutOverlapping();
     }
 
     /**

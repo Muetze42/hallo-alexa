@@ -5,19 +5,26 @@ namespace App\Helpers;
 use App\Models\Social;
 use App\Notifications\Telegram\HtmlText;
 use App\Notifications\Telegram\HtmlTextWithImage;
+use App\Traits\ErrorExceptionNotify;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Str;
+use NormanHuth\RapidAPI\Social\Instagram28;
+use NormanHuth\RapidAPI\Social\InstagramBestExperience;
+use NormanHuth\RapidAPI\Social\InstagramBulkProfileScrapper;
 use NormanHuth\RapidAPI\Social\InstagramProfile;
 use NormanHuth\RapidAPI\Social\TikTokAllInOne;
+use Illuminate\Support\Facades\Cache;
 
 class Socials
 {
+    use ErrorExceptionNotify;
+
     public static function getReceiver()
     {
-        return config('services.telegram-bot-api.receiver'); // Debug
+        if (config('app.env') == 'local') {
+            return config('services.telegram-bot-api.receiver');
+        }
         return config('services.telegram-bot-api.group_id');
     }
 
@@ -130,7 +137,115 @@ class Socials
         if (static::instaMethod1()) {
             return;
         }
-        static::instaMethod2();
+        if (static::instaMethod2()) {
+            return;
+        }
+        if (static::instaMethod3()) {
+            return;
+        }
+        if (static::instaMethod4()) {
+            return;
+        }
+        if (static::instaMethodLast()) {
+            return;
+        }
+
+        static::sendErrorMessageViaTelegram('Update last Instagram Post failed');
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public static function instaMethod2(): bool
+    {
+        $instagram = new InstagramBulkProfileScrapper;
+
+        $data = $instagram->getFeedByUsername(config('services.instagram.profile'));
+
+        $content = json_decode($data, true);
+
+        $last = $content[0]['feed']['data'][0];
+        $shortcode = $last['code'];
+        if (!empty($last['image_versions2']['candidates'][1]['url'])) {
+            $image = $last['image_versions2']['candidates'][1]['url'];
+        } else if (!empty($last['carousel_media'][0]['image_versions2']['candidates'][1]['url'])) {
+            $image = $last['carousel_media'][0]['image_versions2']['candidates'][1]['url'];
+        }
+        if ($image) {
+            static::instaNotify($shortcode, $image);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public static function instaMethod4(): bool
+    {
+        if (static::cacheCheck('instagram-best-experience', 50)) {
+            $instagram = new InstagramBestExperience;
+
+            $data = $instagram->getUserFeed(config('services.instagram.id'));
+
+            $content = json_decode($data, true);
+
+            $last = $content['items'][0];
+            $shortcode = $last['shortcode'];
+            $image = '';
+            if (!empty($last['image_versions2']['candidates'][1]['url'])) {
+                $image = $last['image_versions2']['candidates'][1]['url'];
+            } else if (!empty($last['carousel_media'][0]['image_versions2']['candidates'][1]['url'])) {
+                $image = $last['carousel_media'][0]['image_versions2']['candidates'][1]['url'];
+            }
+            if ($image) {
+                static::instaNotify($shortcode, $image);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @throws GuzzleException
+     */
+    public static function instaMethod3(): bool
+    {
+        if (static::cacheCheck('instagram28', 20)) {
+            $instagram = new Instagram28;
+
+            $data = $instagram->getMedias(config('services.instagram.id'));
+
+            $content = json_decode($data, true);
+
+            if (!empty($content['data']['user']['edge_owner_to_timeline_media']['edges'][0]['node'])) {
+                $last = $content['data']['user']['edge_owner_to_timeline_media']['edges'][0]['node'];
+                $shortcode = $last['shortcode'];
+                $image = $last['display_url'];
+
+                static::instaNotify($shortcode, $image);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $key
+     * @param int $max
+     * @return bool
+     */
+    protected static function cacheCheck(string $key, int $max): bool
+    {
+        $int = Cache::increment($key);
+
+        return $int <= $max;
     }
 
     /**
@@ -140,8 +255,6 @@ class Socials
     {
         $instagram = new InstagramProfile;
         $data = $instagram->getFeed(config('services.instagram.profile'));
-
-        Log::debug($data);
 
         $content = json_decode($data, true);
         if (!empty($content['media'][0]['shortcode'])) {
@@ -159,7 +272,7 @@ class Socials
     /**
      * @throws GuzzleException
      */
-    protected static function instaMethod2(): bool
+    protected static function instaMethodLast(): bool
     {
         $client = new Client;
 
@@ -190,12 +303,6 @@ class Socials
                 return true;
             }
         }
-
-        Log::error('Helper\\Social::instaMethod2() failed:'.print_r([
-                'status' => $status,
-                'content' => Str::limit($content),
-                //'headers' => $headers,
-            ], true));
 
         return false;
     }

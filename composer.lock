@@ -4085,12 +4085,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Muetze42/laravel-rapidapi-clients.git",
-                "reference": "26e6b9972086188c3e896456f51b1fbdf6c9d01e"
+                "reference": "922402d8396d2d062b55674fe607d9b78ba0a7bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Muetze42/laravel-rapidapi-clients/zipball/26e6b9972086188c3e896456f51b1fbdf6c9d01e",
-                "reference": "26e6b9972086188c3e896456f51b1fbdf6c9d01e",
+                "url": "https://api.github.com/repos/Muetze42/laravel-rapidapi-clients/zipball/922402d8396d2d062b55674fe607d9b78ba0a7bc",
+                "reference": "922402d8396d2d062b55674fe607d9b78ba0a7bc",
                 "shasum": ""
             },
             "require": {
@@ -4127,7 +4127,7 @@
                 "source": "https://github.com/Muetze42/laravel-rapidapi-clients/tree/main",
                 "issues": "https://github.com/Muetze42/laravel-rapidapi-clients/issues"
             },
-            "time": "2021-12-31T22:59:25+00:00"
+            "time": "2022-01-01T13:19:18+00:00"
         },
         {
             "name": "norman-huth/laravel-trash-mail",

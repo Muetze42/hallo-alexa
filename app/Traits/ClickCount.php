@@ -40,7 +40,7 @@ trait ClickCount
             }
         } catch (Exception $exception) {
             Log::error($exception);
-            $this->sendTelegramMessage($exception);
+            $this->sendTelegramErrorMessage($exception);
         }
     }
 }

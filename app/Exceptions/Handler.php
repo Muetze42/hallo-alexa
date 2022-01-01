@@ -59,7 +59,7 @@ class Handler extends ExceptionHandler
             !str_starts_with(trim($exception), 'Symfony\Component\Console\Exception\CommandNotFoundException') &&
             !str_starts_with(trim($exception), 'Symfony\Component\Console\Exception\NamespaceNotFoundException')) {
 
-            $this->sendTelegramMessage($exception);
+            $this->sendTelegramErrorMessage($exception);
         }
     }
 

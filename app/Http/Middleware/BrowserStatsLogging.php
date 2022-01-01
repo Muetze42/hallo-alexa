@@ -79,10 +79,10 @@ class BrowserStatsLogging
         } catch (\Exception $exception) {
             try {
                 systemLog('App\Http\Middleware\BrowserStatsLogging:'. $exception->__toString());
-                $this->sendTelegramMessage($exception);
+                $this->sendTelegramErrorMessage($exception);
             } catch (\Exception $exception) {
                 Log::error($exception);
-                $this->sendTelegramMessage($exception);
+                $this->sendTelegramErrorMessage($exception);
             }
         }
 
