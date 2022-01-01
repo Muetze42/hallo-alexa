@@ -41,8 +41,9 @@ class Kernel extends ConsoleKernel
             Socials::updateLatestTikTok();
         })->everyThreeMinutes();
 
-        $schedule->command('backup:run')->dailyAt('4:25');
-        $schedule->command('backup:clean')->dailyAt('6:25');
+        $schedule->command('backup:run')->dailyAt('3:25');
+        $schedule->command('backup:clean')->dailyAt('4:25');
+        $schedule->command('backup:monitor')->daily()->at('5:25');
 
         $schedule->command('ip:clear')
             ->everyMinute();
