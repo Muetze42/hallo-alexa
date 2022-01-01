@@ -115,6 +115,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
+                'local',
                 'backup-ftp',
                 's3',
             ],
@@ -214,14 +215,14 @@ return [
      * UnHealthyBackupWasFound event will be fired.
      */
     'monitor_backups' => [
-//        [
-//            'name' => 'backup-hallo-alexa',
-//            'disks' => ['local'],
-//            'health_checks' => [
-//                \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
-//                \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes::class => 10240,
-//            ],
-//        ],
+        [
+            'name' => 'backup-hallo-alexa',
+            'disks' => ['local'],
+            'health_checks' => [
+                \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
+                \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes::class => 10240,
+            ],
+        ],
         [
             'name' => 'backup-hallo-alexa',
             'disks' => ['backup-ftp'],
