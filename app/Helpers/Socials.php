@@ -16,6 +16,9 @@ use NormanHuth\RapidAPI\Social\InstagramProfile;
 use NormanHuth\RapidAPI\Social\TikTokAllInOne;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * Todo: Refactor OOP
+ */
 class Socials
 {
     use ErrorExceptionNotify;
@@ -167,6 +170,7 @@ class Socials
 
             $last = $content[0]['feed']['data'][0];
             $shortcode = $last['code'];
+            $image = '';
             if (!empty($last['image_versions2']['candidates'][1]['url'])) {
                 $image = $last['image_versions2']['candidates'][1]['url'];
             } else if (!empty($last['carousel_media'][0]['image_versions2']['candidates'][1]['url'])) {
