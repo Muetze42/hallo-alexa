@@ -37,6 +37,7 @@
         "laravel/framework": "^8.54",
         "laravel/tinker": "^2.5",
         "laravelwebdev/responsive": "^1.0",
+        "league/flysystem-aws-s3-v3": "~1.0",
         "muetze/nova-icon-select": "^1.0",
         "muetze42/nova-charcounted-fields": "^1.0",
         "norman-huth/laravel-backup-telegram": "dev-main",

@@ -53,6 +53,15 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'scaleway' => [
+            'driver' => 's3',
+            'key' => 'SCW241M5BXA9E0326RYB',
+            'secret' => '274fd8e8-47ca-40f8-8eab-fe1f70027d2f',
+            'region' => 'fr-par',
+            'bucket' => 'backup-huth',
+            'endpoint' => 'https://s3.fr-par.scw.cloud',
+        ],
+
         'backup-ftp' => [
             'driver'   => 'ftp',
             'host'     => env('BACKUP_FPT_HOST'),
