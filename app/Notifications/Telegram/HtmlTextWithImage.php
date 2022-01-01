@@ -4,13 +4,14 @@ namespace App\Notifications\Telegram;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramFile as TelegramMessage;
 
-class HtmlTextWithImage extends Notification
+class HtmlTextWithImage extends Notification implements ShouldQueue
 {
+    use Queueable;
+
     public string $content;
     public string $imageUrl;
 
