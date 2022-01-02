@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2fb8f61ae602941cf41535ee64c9b22e",
+    "content-hash": "6caefadbf20777fde0b693730e4a8701",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4038,16 +4038,16 @@
         },
         {
             "name": "norman-huth/api-laravel",
-            "version": "0.0.2",
+            "version": "0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Muetze42/api-laravel.git",
-                "reference": "0230f76840500427e82aa3f64280276229d90aa4"
+                "reference": "09b3c8b65c3c35df95327b3e087dcaa15219079c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Muetze42/api-laravel/zipball/0230f76840500427e82aa3f64280276229d90aa4",
-                "reference": "0230f76840500427e82aa3f64280276229d90aa4",
+                "url": "https://api.github.com/repos/Muetze42/api-laravel/zipball/09b3c8b65c3c35df95327b3e087dcaa15219079c",
+                "reference": "09b3c8b65c3c35df95327b3e087dcaa15219079c",
                 "shasum": ""
             },
             "require": {
@@ -4070,6 +4070,9 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
             "authors": [
                 {
                     "name": "Norman Huth",
@@ -4079,9 +4082,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Muetze42/api-laravel/issues",
-                "source": "https://github.com/Muetze42/api-laravel/tree/0.0.2"
+                "source": "https://github.com/Muetze42/api-laravel/tree/0.0.3"
             },
-            "time": "2022-01-02T07:07:58+00:00"
+            "time": "2022-01-02T07:47:10+00:00"
         },
         {
             "name": "norman-huth/laravel-backup-telegram",
