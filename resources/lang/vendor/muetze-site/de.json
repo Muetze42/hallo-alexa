@@ -1,0 +1,23 @@
+{
+    ":days Days": ":days Tage",
+    "1 Day": "1 Tag",
+    "Activity": "Aktivität",
+    "Activities": "Aktivitäten",
+    "Differences": "Unterschiede",
+    "New Properties": "Neue Eigenschaften",
+    "Old Properties": "Alte Eigenschaften",
+    "updated by :user": "aktualisiert von :user",
+    "created by :user": "erstellt von :user",
+    "deleted by :user": "gelöscht von :user",
+    "created": "erstellt",
+    "updated": "aktualisiert",
+    "deleted": "gelöscht",
+    "Device Type": "Gerätetyp",
+    "Unknown": "Unbekannt",
+    "People do not fill invisible fields": "Menschen füllen keine leeren Felder aus",
+    "The email provider „:provider“ is not allowed": "Der E-Mail-Anbieter „:provider“ ist nicht erlaubt",
+    "New message on :site": "Neue Nachricht auf :site",
+    "Subject": "Betreff",
+    "Created at": "Erstellt am",
+    "Updated at": "Aktuallisiert am"
+}
