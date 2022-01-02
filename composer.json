@@ -40,6 +40,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "muetze/nova-icon-select": "^1.0",
         "muetze42/nova-charcounted-fields": "^1.0",
+        "norman-huth/api-laravel": "^0.0.1",
         "norman-huth/laravel-backup-telegram": "dev-main",
         "norman-huth/laravel-rapidapi-clients": "dev-main",
         "norman-huth/laravel-trash-mail": "dev-main",

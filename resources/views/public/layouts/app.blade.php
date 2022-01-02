@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>@if($pageMeta['title']){{ $pageMeta['title'] }}@else{{ config('app.name') }}@endif</title>
     @include('public.layouts.meta')
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css', 'theme') }}" rel="stylesheet">
     <style>{!! trim(File::get(public_path('css/buttons.css'))) !!}</style>
     <script src="{{ mix('/js/app.js') }}" defer></script>
     @include('public.layouts.favicon')

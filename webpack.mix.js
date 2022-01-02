@@ -24,13 +24,4 @@ mix.js('resources/js/app.js', 'public/js').vue({
             }),
         ],
     };
-})
-    .sass('resources/scss/app.scss', 'public/css')
-    .options({
-        processCssUrls: false,
-        postCss: [tailwindcss('./tailwind.config.js')],
-    })
-    .setPublicPath('public')
-    .version([
-        'public/css/error-pages.css'
-    ])
+}).version()
