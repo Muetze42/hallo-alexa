@@ -4,7 +4,12 @@
     </h3>
     <div class="text-center">
         <a href="https://www.instagram.com/p/{{ $instagram->provider_id }}" target="_blank"  rel="noopener">
-            <img src="data:image/jpg;base64, {{ base64_encode(file_get_contents($instagram->url)) }}" alt="{{ $instagram->provider_id }}" style="max-height: 20rem">
+            @php $file = @file_get_contents($instagram->url) @endphp
+            @if($file)
+                <img src="data:image/jpg;base64, {{ base64_encode(file_get_contents($instagram->url)) }}" alt="{{ $instagram->provider_id }}" style="max-height: 20rem">
+            @else
+                Instgram erlaubt den Aufruf des Bildes nicht -_-
+            @endif
         </a>
     </div>
 @endif
