@@ -25,7 +25,6 @@ class PushNotificationsController extends Controller
         return '';
     }
 
-
     /**
      * @param Request $request
      * @return string
