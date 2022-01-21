@@ -71,6 +71,10 @@ trait Instagram
 
             $content = json_decode($data, true);
 
+            if (empty($content[0]['feed']['data'][0])) {
+                return false;
+            }
+
             $last = $content[0]['feed']['data'][0];
             $shortcode = $last['code'];
             $image = static::getImageByItems($last);
