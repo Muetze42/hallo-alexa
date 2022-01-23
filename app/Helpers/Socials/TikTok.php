@@ -4,13 +4,17 @@ namespace App\Helpers\Socials;
 
 use App\Models\Social;
 use App\Notifications\Telegram\HtmlText;
+use App\Traits\ErrorExceptionNotify;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use NormanHuth\RapidAPI\Social\TikTokAllInOne;
 
 trait TikTok
 {
+    use ErrorExceptionNotify;
+
     /**
      * @throws GuzzleException
      */
@@ -25,7 +29,14 @@ trait TikTok
 
         if (empty($content['aweme_list'])) {
             Log::error('Empty aweme_list');
+            $int = Cache::increment('social-tik-tok');
+
+            if ($int > 10) {
+                static::sendErrorMessageViaTelegram('TikTok Scrapper failed 10 times');
+            }
             return;
+        } else {
+            Cache::forget('social-tik-tok');
         }
 
         $items = $content['aweme_list'];

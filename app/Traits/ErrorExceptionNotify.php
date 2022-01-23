@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use App\Notifications\Telegram\ErrorReport;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Notification;
 
