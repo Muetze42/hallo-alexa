@@ -5,6 +5,7 @@ namespace App\Helpers\Socials;
 use App\Models\Social;
 use App\Notifications\Telegram\HtmlText;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use NormanHuth\RapidAPI\Social\TikTokAllInOne;
 
@@ -23,7 +24,8 @@ trait TikTok
         $latest = [];
 
         if (empty($content['aweme_list'])) {
-            // Todo: Notification
+            Log::error('Empty aweme_list');
+            return;
         }
 
         $items = $content['aweme_list'];
