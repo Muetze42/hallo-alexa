@@ -33,6 +33,7 @@ trait TikTok
 
             if ($int > 10) {
                 static::sendErrorMessageViaTelegram('TikTok Scrapper failed 10 times');
+                Cache::forget('social-tik-tok');
             }
             return;
         } else {
